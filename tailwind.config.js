@@ -9,12 +9,11 @@ export default {
       litegrey: "#D0D0D0",
       grey:"#959595",
       yellow:"#FEF563",
-      darkyellow:"FEF116",
+      darkyellow:"#FEF116",
       dark_red:"#7F0000",
       light_yellow:"#FCDE70",
       dark_gray: '#686D76',
       customBlue: '#2a4255',
-      'dark-yellow-gray': 'linear-gradient(90deg, #A67C00, #4A4A4A)',
 
     },
    

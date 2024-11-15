@@ -4,7 +4,6 @@ import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 export const ImageGrid = ({ images, title, color }) => {
     const location = useLocation();
-    // const { images, title, color } = location.state || { images: [], title: "Image title", color: "#F93131" };
 
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
