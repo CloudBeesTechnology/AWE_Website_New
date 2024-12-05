@@ -68,7 +68,7 @@ export const App = () => {
         </Route>
         <Route path="/organization" Component={Organization} />
         <Route path="/certification" Component={Achievements} />
-
+        {/* <Route path="*" element={<Navigatte to="/" />} /> */}
       </Routes>
       {!hideNavbar.includes(location.pathname) && <Footer />}
       {/* <Footer/> */}
