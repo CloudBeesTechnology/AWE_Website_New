@@ -2,10 +2,9 @@ import { HSDetail } from "../home/HomeDataDetails";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
-import 'swiper/css/pagination';
+import "swiper/css/pagination";
 
 export const HomeHeader = () => {
-
   return (
     <main>
       <section className="max-sm:pt-2 max-sm:pb-2 sm:center relative ">
@@ -26,14 +25,17 @@ export const HomeHeader = () => {
                     <SwiperSlide key={index}>
                       <div className=" ">
                         <div className="space-y-10 absolute bottom-3 left-2 sm:bottom-16 sm:left-7">
-                          <h1 id="headCrimson" className="font-crimson text-white bg-black bg-opacity-50  max-sm:center max-md:text-center max-sm:text-[20px] text-[50px] font-semibold max-sm:font-medium ">
-                            <i>"The Professional Contractor  Of Choice"</i>
+                          <h1
+                            id="headCrimson"
+                            className="font-crimson text-white bg-black bg-opacity-50  max-sm:center max-md:text-center max-sm:text-[20px] text-[50px] font-semibold max-sm:font-medium "
+                          >
+                            <i>"The Professional Contractor Of Choice"</i>
                           </h1>
                         </div>
                         <div className="w-full h-[300px] sm:h-[618px] overflow-hidden">
                           <img
                             className="object-cover w-full h-full "
-                            src={val.img}
+                            src={val}
                             alt={`${index} not found`}
                           />
                         </div>

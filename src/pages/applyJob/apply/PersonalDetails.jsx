@@ -1,11 +1,11 @@
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PersonalSchema } from "../../services/Validation";
-import { LuPlusSquare } from "react-icons/lu";
-import { useLocation, useNavigate} from "react-router-dom";
+import { FiPlusSquare } from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { generateClient } from "aws-amplify/api";
-// import { createPersona } from "../../graphql/mutations"; 
+// import { createPersona } from "../../graphql/mutations";
 const client = generateClient();
 
 export const PersonalDetails = () => {
@@ -53,7 +53,7 @@ export const PersonalDetails = () => {
   const navigate = useNavigate();
 
   // const { handleNext } = useOutletContext();
-  const onSubmit =  (data) => {
+  const onSubmit = (data) => {
     // const personalData = data;
     // console.log(data);
     const navigatingData = {
@@ -62,7 +62,7 @@ export const PersonalDetails = () => {
     };
     // setNavigateData(navigatingData);
     // handleNext();
-     navigate("/addCandidates/educationDetails", {
+    navigate("/addCandidates/educationDetails", {
       state: { FormData: navigatingData },
     });
     // console.log(navigatingData);
@@ -166,10 +166,7 @@ export const PersonalDetails = () => {
         </div>
         <div>
           <label className="block mb-1">Language Proficiency</label>
-          <select
-            {...register("language")}
-            className="input-field"
-          >
+          <select {...register("language")} className="input-field">
             <option value=""></option>
             <option value="English">English</option>
             <option value="Mandarin">Mandarin</option>
@@ -187,11 +184,7 @@ export const PersonalDetails = () => {
       <div className="grid sm:grid-cols-3 gap-4 mb-4 text_size_6">
         <div>
           <label className="block mb-1">Brunei I/C No</label>
-          <input
-            type="text"
-            {...register("icNo")}
-            className="input-field"
-          />
+          <input type="text" {...register("icNo")} className="input-field" />
           {errors.icNo && (
             <p className="text-[red] text-[12px] ">{errors.icNo.message}</p>
           )}
@@ -199,10 +192,7 @@ export const PersonalDetails = () => {
 
         <div>
           <label className="block mb-1">Brunei I/C Colour</label>
-          <select
-            {...register("icColour")}
-            className="input-field"
-          >
+          <select {...register("icColour")} className="input-field">
             <option value=""></option>
             <option value="yellow">Yellow</option>
             <option value="green">Green</option>
@@ -286,7 +276,10 @@ export const PersonalDetails = () => {
           Sisters)
         </label>
         {familyFields.map((family, index) => (
-          <div key={family.id} className="grid sm:grid-cols-3 md:grid-cols-5 gap-4 mb-2">
+          <div
+            key={family.id}
+            className="grid sm:grid-cols-3 md:grid-cols-5 gap-4 mb-2"
+          >
             <input
               type="text"
               {...register(`familyDetails.${index}.name`)}
@@ -324,7 +317,7 @@ export const PersonalDetails = () => {
           onClick={() => appendFamily({})}
           className="absolute top-11 -right-7 text-medium_grey text-[18px]"
         >
-          <LuPlusSquare />
+          <FiPlusSquare />
         </button>
       </div>
 
@@ -332,7 +325,10 @@ export const PersonalDetails = () => {
       <div className="mb-4 relative text_size_6">
         <label className="block mb-1">Education Details</label>
         {educationFields.map((education, index) => (
-          <div key={education.id} className="grid sm:grid-cols-2 md:grid-cols-4  gap-4 mb-2">
+          <div
+            key={education.id}
+            className="grid sm:grid-cols-2 md:grid-cols-4  gap-4 mb-2"
+          >
             <Controller
               name={`educationDetails.${index}.university`}
               control={control}
@@ -415,7 +411,7 @@ export const PersonalDetails = () => {
           onClick={() => appendEducation({})}
           className="absolute top-12 -right-7 text-medium_grey text-[18px]"
         >
-          <LuPlusSquare />
+          <FiPlusSquare />
         </button>
       </div>
 
@@ -425,7 +421,10 @@ export const PersonalDetails = () => {
           Previous Employment Including Temporary Work
         </label>
         {employmentFields.map((employment, index) => (
-          <div key={employment.id} className="grid sm:grid-cols-3 md:grid-cols-6 gap-4 mb-2">
+          <div
+            key={employment.id}
+            className="grid sm:grid-cols-3 md:grid-cols-6 gap-4 mb-2"
+          >
             <input
               type="text"
               {...register(`workExperience.${index}.name`)}
@@ -469,7 +468,7 @@ export const PersonalDetails = () => {
           onClick={() => appendEmployment({})}
           className="absolute top-11 -right-7 text-medium_grey text-[18px]"
         >
-          <LuPlusSquare />
+          <FiPlusSquare />
         </button>
       </div>
 

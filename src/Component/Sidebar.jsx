@@ -27,7 +27,7 @@ export const Sidebar = ({ showSidebar, toggleSidebar }) => {
   const toggleServiceList = () => {
     setServicesList(!showServicesList);
   };
-
+const location=useLocation()
   const closeServiceList = () => {
     setServicesList(false);
   };

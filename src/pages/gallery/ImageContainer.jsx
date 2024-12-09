@@ -1,4 +1,6 @@
-
+import slide29 from "../../assets/gallery/CHAIRMAN/img20.jpg"
+import slide46_6 from "../../assets/gallery/CHAIRMAN/img3.jpg"
+import slide47_7 from "../../assets/gallery/HariRayaCelebration2023/HariRaya_1.jpg"
 // Workers Slides
 const slide1 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/25Million+Hour+Without+LTI/LTI_1.JPG";
 const slide2 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/25Million+Hour+Without+LTI/LTI_2.jpg";
@@ -45,8 +47,6 @@ const slide25 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Cha
 const slide26 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(16).jpg";
 const slide27 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(17).jpg";
 const slide28 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(18).jpg";
-// const slide29 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(19).jpg";
-import slide29 from "../../assets/gallery/CHAIRMAN/img20.jpg"
 const slide30 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(20).jpg";
 const slide31 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(21).jpg";
 const slide32 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(22).jpg";
@@ -64,7 +64,7 @@ const slide43 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Cha
 const slide44 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(35).jpg";
 const slide45 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(36).jpg";
 const slide46 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Chairman+90+birthday/Chairman90Bir+(37).jpg";
-import slide46_6 from "../../assets/gallery/CHAIRMAN/img3.jpg"
+
 
 export const chairmanSlides = [
   slide46_6,
@@ -109,7 +109,7 @@ export const chairmanSlides = [
 
 
 // Hari Raya Celebration Slides
-import slide47_7 from "../../assets/gallery/HariRayaCelebration2023/HariRaya_1.jpg"
+
 const slide47 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Hari+Raya+Celebration+2023/Hari+Raya+Celebration_1.jpg";
 const slide48 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Hari+Raya+Celebration+2023/Hari+Raya+Celebration_2.jpg";
 const slide49 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/Hari+Raya+Celebration+2023/Hari+Raya+Celebration_3.jpg";
@@ -201,6 +201,8 @@ const slide86 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/His
 const slide87 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/His+Majesty+78th+Birthday/78th+Birthday_9.JPG";
 const slide88 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/His+Majesty+78th+Birthday/78th+Birthday_10.JPG";
 
+
+
 export const hisMajesty78Slides = [
   slide79,
   slide80,
@@ -214,3 +216,8 @@ export const hisMajesty78Slides = [
   slide88,
 ];
 
+const demoImage ="https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/AWE_DEMO/78th%2BBirthday_3.jpeg"
+
+export const demo=[
+  demoImage
+]

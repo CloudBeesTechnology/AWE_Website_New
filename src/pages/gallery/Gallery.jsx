@@ -9,7 +9,7 @@ import { HLP } from "./HLP";
 import { LtiMillion } from "./LtiMillion";
 import { Chairman } from "./Chairman";
 import { useNavigate } from 'react-router-dom';
-import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides } from "./ImageContainer";
+import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, demo } from "./ImageContainer";
 
 export const Gallery = () => {
   const navigate = useNavigate();
@@ -96,6 +96,17 @@ export const Gallery = () => {
           </>
         )}
       </div>
+
+      {/* <div>
+      {demo.map((val,index)=>{
+        return(
+          <div key={index}>
+            <p>Showing Demo for Image </p>
+            <img src={val} alt=" Demo not found" />
+          </div>
+        )
+      })}
+      </div> */}
     </section>
   );
 };

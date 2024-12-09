@@ -1,0 +1,8 @@
+{
+    "AppSyncApiName": "aweadininprod",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthModeLastUpdated": "2024-12-09T06:05:34.494Z",
+    "S3DeploymentBucket": "amplify-aweadininprod-dev-0d7e6-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/d0eb094525c80459b61324eadfe06e4fc0c37d27"
+}
