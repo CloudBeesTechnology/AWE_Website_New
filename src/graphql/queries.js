@@ -628,8 +628,12 @@ export const getWeldingInfo = /* GraphQL */ `
     getWeldingInfo(id: $id) {
       id
       empID
+      department
       diameterRange
+      empBadgeNo
+      empName
       fillerMetal
+      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -657,8 +661,12 @@ export const listWeldingInfos = /* GraphQL */ `
       items {
         id
         empID
+        department
         diameterRange
+        empBadgeNo
+        empName
         fillerMetal
+        position
         thicknessRange
         weldingStampNor
         wpsNumber
@@ -679,48 +687,6 @@ export const listWeldingInfos = /* GraphQL */ `
     }
   }
 `;
-export const getBastingPaint = /* GraphQL */ `
-  query GetBastingPaint($id: ID!) {
-    getBastingPaint(id: $id) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listBastingPaints = /* GraphQL */ `
-  query ListBastingPaints(
-    $filter: ModelBastingPaintFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listBastingPaints(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        empID
-        blastingRemarks
-        blastingEndDate
-        blastingStartDate
-        blastingBadgeNo
-        blastingQulifiExp
-        blastingUpload
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const getTrainingReq = /* GraphQL */ `
   query GetTrainingReq($id: ID!) {
     getTrainingReq(id: $id) {
@@ -731,14 +697,14 @@ export const getTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
+      purchaseONo
+      traineeCourseCode
+      traineeCourseName
+      traineeCompany
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      mediRequired
       createdAt
       updatedAt
       __typename
@@ -760,14 +726,14 @@ export const listTrainingReqs = /* GraphQL */ `
         medicalExpiry
         medicalAppointDate
         medicalReport
-        courseCode
-        courseName
-        company
+        purchaseONo
+        traineeCourseCode
+        traineeCourseName
+        traineeCompany
         traineeSD
         traineeED
         traineeStatus
         traineeCourseFee
-        mediRequired
         createdAt
         updatedAt
         __typename
@@ -782,12 +748,13 @@ export const getTrainingCertificates = /* GraphQL */ `
     getTrainingCertificates(id: $id) {
       id
       empID
+      courseCode
+      courseName
+      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
-      poNo
-      addDescretion
       createdAt
       updatedAt
       __typename
@@ -808,12 +775,13 @@ export const listTrainingCertificates = /* GraphQL */ `
       items {
         id
         empID
+        courseCode
+        courseName
+        company
         certifiExpiry
         eCertifiDate
         trainingUpCertifi
         orgiCertifiDate
-        poNo
-        addDescretion
         createdAt
         updatedAt
         __typename

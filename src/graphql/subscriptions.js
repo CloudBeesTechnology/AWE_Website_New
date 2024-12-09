@@ -815,8 +815,12 @@ export const onCreateWeldingInfo = /* GraphQL */ `
     onCreateWeldingInfo(filter: $filter) {
       id
       empID
+      department
       diameterRange
+      empBadgeNo
+      empName
       fillerMetal
+      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -841,8 +845,12 @@ export const onUpdateWeldingInfo = /* GraphQL */ `
     onUpdateWeldingInfo(filter: $filter) {
       id
       empID
+      department
       diameterRange
+      empBadgeNo
+      empName
       fillerMetal
+      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -867,8 +875,12 @@ export const onDeleteWeldingInfo = /* GraphQL */ `
     onDeleteWeldingInfo(filter: $filter) {
       id
       empID
+      department
       diameterRange
+      empBadgeNo
+      empName
       fillerMetal
+      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -880,63 +892,6 @@ export const onDeleteWeldingInfo = /* GraphQL */ `
       WQRNo
       weldingCode
       weldingMaterial
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onCreateBastingPaint = /* GraphQL */ `
-  subscription OnCreateBastingPaint(
-    $filter: ModelSubscriptionBastingPaintFilterInput
-  ) {
-    onCreateBastingPaint(filter: $filter) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateBastingPaint = /* GraphQL */ `
-  subscription OnUpdateBastingPaint(
-    $filter: ModelSubscriptionBastingPaintFilterInput
-  ) {
-    onUpdateBastingPaint(filter: $filter) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteBastingPaint = /* GraphQL */ `
-  subscription OnDeleteBastingPaint(
-    $filter: ModelSubscriptionBastingPaintFilterInput
-  ) {
-    onDeleteBastingPaint(filter: $filter) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
       createdAt
       updatedAt
       __typename
@@ -955,14 +910,14 @@ export const onCreateTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
+      purchaseONo
+      traineeCourseCode
+      traineeCourseName
+      traineeCompany
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      mediRequired
       createdAt
       updatedAt
       __typename
@@ -981,14 +936,14 @@ export const onUpdateTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
+      purchaseONo
+      traineeCourseCode
+      traineeCourseName
+      traineeCompany
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1007,14 +962,14 @@ export const onDeleteTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
+      purchaseONo
+      traineeCourseCode
+      traineeCourseName
+      traineeCompany
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1028,12 +983,13 @@ export const onCreateTrainingCertificates = /* GraphQL */ `
     onCreateTrainingCertificates(filter: $filter) {
       id
       empID
+      courseCode
+      courseName
+      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
-      poNo
-      addDescretion
       createdAt
       updatedAt
       __typename
@@ -1047,12 +1003,13 @@ export const onUpdateTrainingCertificates = /* GraphQL */ `
     onUpdateTrainingCertificates(filter: $filter) {
       id
       empID
+      courseCode
+      courseName
+      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
-      poNo
-      addDescretion
       createdAt
       updatedAt
       __typename
@@ -1066,12 +1023,13 @@ export const onDeleteTrainingCertificates = /* GraphQL */ `
     onDeleteTrainingCertificates(filter: $filter) {
       id
       empID
+      courseCode
+      courseName
+      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
-      poNo
-      addDescretion
       createdAt
       updatedAt
       __typename

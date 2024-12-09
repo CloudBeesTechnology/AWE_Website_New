@@ -85,7 +85,7 @@ export const CareerSection = () => {
               move!
             </p>
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-10 p-8">
+          <div className="flex flex-wrap justify-center items-center gap-10 sm:p-8">
             {validHiringData.length > 0 ? (
               validHiringData.map((val, index) => {
                 // if (!val?.uploadJobDetails) {
@@ -99,7 +99,7 @@ export const CareerSection = () => {
                 return (
                   <div
                     key={index}
-                    className="gap-7 space-y-4 p-2 rounded-md shadow-md max-w-lg w-[450px] border border-[red]"
+                    className="gap-7 space-y-4 p-2 rounded-md shadow-md max-w-lg w-full sm:w-[450px] border border-[red]"
                   >
                     <div className="flex justify-evenly items-center">
                       <p className="font-bold text-lg mt-2">{val.jobTitle}</p>

@@ -891,8 +891,12 @@ export const createWeldingInfo = /* GraphQL */ `
     createWeldingInfo(input: $input, condition: $condition) {
       id
       empID
+      department
       diameterRange
+      empBadgeNo
+      empName
       fillerMetal
+      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -918,8 +922,12 @@ export const updateWeldingInfo = /* GraphQL */ `
     updateWeldingInfo(input: $input, condition: $condition) {
       id
       empID
+      department
       diameterRange
+      empBadgeNo
+      empName
       fillerMetal
+      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -945,8 +953,12 @@ export const deleteWeldingInfo = /* GraphQL */ `
     deleteWeldingInfo(input: $input, condition: $condition) {
       id
       empID
+      department
       diameterRange
+      empBadgeNo
+      empName
       fillerMetal
+      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -958,66 +970,6 @@ export const deleteWeldingInfo = /* GraphQL */ `
       WQRNo
       weldingCode
       weldingMaterial
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createBastingPaint = /* GraphQL */ `
-  mutation CreateBastingPaint(
-    $input: CreateBastingPaintInput!
-    $condition: ModelBastingPaintConditionInput
-  ) {
-    createBastingPaint(input: $input, condition: $condition) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateBastingPaint = /* GraphQL */ `
-  mutation UpdateBastingPaint(
-    $input: UpdateBastingPaintInput!
-    $condition: ModelBastingPaintConditionInput
-  ) {
-    updateBastingPaint(input: $input, condition: $condition) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteBastingPaint = /* GraphQL */ `
-  mutation DeleteBastingPaint(
-    $input: DeleteBastingPaintInput!
-    $condition: ModelBastingPaintConditionInput
-  ) {
-    deleteBastingPaint(input: $input, condition: $condition) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
       createdAt
       updatedAt
       __typename
@@ -1037,14 +989,14 @@ export const createTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
+      purchaseONo
+      traineeCourseCode
+      traineeCourseName
+      traineeCompany
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1064,14 +1016,14 @@ export const updateTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
+      purchaseONo
+      traineeCourseCode
+      traineeCourseName
+      traineeCompany
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1091,14 +1043,14 @@ export const deleteTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
+      purchaseONo
+      traineeCourseCode
+      traineeCourseName
+      traineeCompany
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1113,12 +1065,13 @@ export const createTrainingCertificates = /* GraphQL */ `
     createTrainingCertificates(input: $input, condition: $condition) {
       id
       empID
+      courseCode
+      courseName
+      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
-      poNo
-      addDescretion
       createdAt
       updatedAt
       __typename
@@ -1133,12 +1086,13 @@ export const updateTrainingCertificates = /* GraphQL */ `
     updateTrainingCertificates(input: $input, condition: $condition) {
       id
       empID
+      courseCode
+      courseName
+      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
-      poNo
-      addDescretion
       createdAt
       updatedAt
       __typename
@@ -1153,12 +1107,13 @@ export const deleteTrainingCertificates = /* GraphQL */ `
     deleteTrainingCertificates(input: $input, condition: $condition) {
       id
       empID
+      courseCode
+      courseName
+      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
-      poNo
-      addDescretion
       createdAt
       updatedAt
       __typename

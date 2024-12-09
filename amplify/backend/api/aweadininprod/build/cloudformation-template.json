@@ -123,7 +123,7 @@
                     ]
                 },
                 "Description": "api key description",
-                "Expires": 1736337848
+                "Expires": 1736348983
             }
         },
         "GraphQLAPINONEDS95A13CF0": {
@@ -2057,118 +2057,6 @@
                                 "Ref": "S3DeploymentRootKey"
                             },
                             "/stacks/WeldingInfo.json"
-                        ]
-                    ]
-                }
-            },
-            "DependsOn": [
-                "GraphQLAPITransformerSchema3CB2AE18"
-            ]
-        },
-        "BastingPaint": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "Parameters": {
-                    "DynamoDBModelTableReadIOPS": {
-                        "Ref": "DynamoDBModelTableReadIOPS"
-                    },
-                    "DynamoDBModelTableWriteIOPS": {
-                        "Ref": "DynamoDBModelTableWriteIOPS"
-                    },
-                    "DynamoDBBillingMode": {
-                        "Ref": "DynamoDBBillingMode"
-                    },
-                    "DynamoDBEnablePointInTimeRecovery": {
-                        "Ref": "DynamoDBEnablePointInTimeRecovery"
-                    },
-                    "DynamoDBEnableServerSideEncryption": {
-                        "Ref": "DynamoDBEnableServerSideEncryption"
-                    },
-                    "referencetotransformerrootstackenv10C5A902Ref": {
-                        "Ref": "env"
-                    },
-                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
-                        "Fn::GetAtt": [
-                            "GraphQLAPI",
-                            "ApiId"
-                        ]
-                    },
-                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
-                        "Ref": "S3DeploymentBucket"
-                    },
-                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
-                        "Ref": "S3DeploymentRootKey"
-                    },
-                    "referencetotransformerrootstackHiringJobNestedStackHiringJobNestedStackResourceCFC75870OutputstransformerrootstackHiringJobQuerygetHiringJobauth0FunctionQuerygetHiringJobauth0FunctionAppSyncFunction8941716EFunctionId": {
-                        "Fn::GetAtt": [
-                            "HiringJob",
-                            "Outputs.transformerrootstackHiringJobQuerygetHiringJobauth0FunctionQuerygetHiringJobauth0FunctionAppSyncFunction8941716EFunctionId"
-                        ]
-                    },
-                    "referencetotransformerrootstackHiringJobNestedStackHiringJobNestedStackResourceCFC75870OutputstransformerrootstackHiringJobQuerygetHiringJobpostAuth0FunctionQuerygetHiringJobpostAuth0FunctionAppSyncFunction20353E51FunctionId": {
-                        "Fn::GetAtt": [
-                            "HiringJob",
-                            "Outputs.transformerrootstackHiringJobQuerygetHiringJobpostAuth0FunctionQuerygetHiringJobpostAuth0FunctionAppSyncFunction20353E51FunctionId"
-                        ]
-                    },
-                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
-                        "Ref": "authRoleName"
-                    },
-                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
-                        "Ref": "unauthRoleName"
-                    },
-                    "referencetotransformerrootstackHiringJobNestedStackHiringJobNestedStackResourceCFC75870OutputstransformerrootstackHiringJobMutationcreateHiringJobinit0FunctionMutationcreateHiringJobinit0FunctionAppSyncFunction09FDB38CFunctionId": {
-                        "Fn::GetAtt": [
-                            "HiringJob",
-                            "Outputs.transformerrootstackHiringJobMutationcreateHiringJobinit0FunctionMutationcreateHiringJobinit0FunctionAppSyncFunction09FDB38CFunctionId"
-                        ]
-                    },
-                    "referencetotransformerrootstackHiringJobNestedStackHiringJobNestedStackResourceCFC75870OutputstransformerrootstackHiringJobMutationcreateHiringJobauth0FunctionMutationcreateHiringJobauth0FunctionAppSyncFunctionB65AEBFEFunctionId": {
-                        "Fn::GetAtt": [
-                            "HiringJob",
-                            "Outputs.transformerrootstackHiringJobMutationcreateHiringJobauth0FunctionMutationcreateHiringJobauth0FunctionAppSyncFunctionB65AEBFEFunctionId"
-                        ]
-                    },
-                    "referencetotransformerrootstackHiringJobNestedStackHiringJobNestedStackResourceCFC75870OutputstransformerrootstackHiringJobMutationupdateHiringJobinit0FunctionMutationupdateHiringJobinit0FunctionAppSyncFunctionD57ABAAFFunctionId": {
-                        "Fn::GetAtt": [
-                            "HiringJob",
-                            "Outputs.transformerrootstackHiringJobMutationupdateHiringJobinit0FunctionMutationupdateHiringJobinit0FunctionAppSyncFunctionD57ABAAFFunctionId"
-                        ]
-                    },
-                    "referencetotransformerrootstackHiringJobNestedStackHiringJobNestedStackResourceCFC75870OutputstransformerrootstackHiringJobSubscriptiononCreateHiringJobauth0FunctionSubscriptiononCreateHiringJobauth0FunctionAppSyncFunctionB277D55EFunctionId": {
-                        "Fn::GetAtt": [
-                            "HiringJob",
-                            "Outputs.transformerrootstackHiringJobSubscriptiononCreateHiringJobauth0FunctionSubscriptiononCreateHiringJobauth0FunctionAppSyncFunctionB277D55EFunctionId"
-                        ]
-                    },
-                    "referencetotransformerrootstackHiringJobNestedStackHiringJobNestedStackResourceCFC75870OutputstransformerrootstackHiringJobSubscriptionOnCreateHiringJobDataResolverFnSubscriptionOnCreateHiringJobDataResolverFnAppSyncFunction23A58A85FunctionId": {
-                        "Fn::GetAtt": [
-                            "HiringJob",
-                            "Outputs.transformerrootstackHiringJobSubscriptionOnCreateHiringJobDataResolverFnSubscriptionOnCreateHiringJobDataResolverFnAppSyncFunction23A58A85FunctionId"
-                        ]
-                    }
-                },
-                "TemplateURL": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "https://s3.",
-                            {
-                                "Ref": "AWS::Region"
-                            },
-                            ".",
-                            {
-                                "Ref": "AWS::URLSuffix"
-                            },
-                            "/",
-                            {
-                                "Ref": "S3DeploymentBucket"
-                            },
-                            "/",
-                            {
-                                "Ref": "S3DeploymentRootKey"
-                            },
-                            "/stacks/BastingPaint.json"
                         ]
                     ]
                 }
@@ -5148,7 +5036,6 @@
                 "HeadOffice",
                 "EmpRequisition",
                 "WeldingInfo",
-                "BastingPaint",
                 "TrainingReq",
                 "TrainingCertificates",
                 "AddCourse",
