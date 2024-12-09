@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a0b8f444.css",
-    "main.js": "/static/js/main.7841ed64.js",
+    "main.js": "/static/js/main.75fa47b7.js",
     "static/js/453.aa966ee3.chunk.js": "/static/js/453.aa966ee3.chunk.js",
     "static/media/Head Office HLP 2024.JPG": "/static/media/Head Office HLP 2024.baa664943f6550024b98.JPG",
     "static/media/Home3.jpg": "/static/media/Home3.d036b9ee4be5bf9ad586.jpg",
@@ -87,11 +87,11 @@
     "static/media/Vector.svg": "/static/media/Vector.e90c407219aae1b209f91a5ca3412428.svg",
     "index.html": "/index.html",
     "main.a0b8f444.css.map": "/static/css/main.a0b8f444.css.map",
-    "main.7841ed64.js.map": "/static/js/main.7841ed64.js.map",
+    "main.75fa47b7.js.map": "/static/js/main.75fa47b7.js.map",
     "453.aa966ee3.chunk.js.map": "/static/js/453.aa966ee3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a0b8f444.css",
-    "static/js/main.7841ed64.js"
+    "static/js/main.75fa47b7.js"
   ]
 }

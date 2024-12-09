@@ -143,7 +143,7 @@ export const Navbar = () => {
 
           <div className="center">
             <Link
-              to="https://main.d3u6ge0j06uiob.amplifyapp.com/"
+              to="https://employee.adininworks.co/"
               className="btn font-medium"
               target="_blank"
               rel="noopener noreferrer"
