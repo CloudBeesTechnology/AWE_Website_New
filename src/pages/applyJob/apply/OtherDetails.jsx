@@ -16,13 +16,6 @@ export const OtherDetails = () => {
   // console.log("Received form data:", navigatingEducationData);
   const [formData, setFormData] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  const [updateResume, setUpdateResume] = useState("");
-  const [updateCertificate, setUpdateCertificate] = useState("");
-  const [updatePassport, setUpdatePassport] = useState("");
 
   useEffect(()=>{
     window.scrollTo({
@@ -44,72 +37,6 @@ export const OtherDetails = () => {
       perInterviewDescription: '',
     },
   });
-  const handleFileChange = async (e, type) => {
-    const file = e.target.files;
-    const uploadFiles = e.target.files[0];
-    setValue(type, file);
-
-    if (file) {
-      if (type === "uploadResume") {
-        await uploadResume(uploadFiles);
-        setValue(type, file); // Set the file value for validation
-      } else if (type === "uploadCertificate") {
-        await uploadCertificate(uploadFiles);
-        setValue(type, file); // Set the file value for validation
-      } else if (type === "uploadPassport") {
-        await uploadPassport(uploadFiles);
-        setValue(type, file); // Set the file value for validation
-      }
-    }
-  };
-
-  const uploadResume = async (file) => {
-    try {
-      const result = await uploadData({
-        path: `uploadResume/${file.name}`,
-        data: file,
-      }).result;
-      const filePath = result.path;
-      const encodedFilePath = encodeURIComponent(filePath);
-      const fileUrl = `https://awe-adinin-files-storage-1982502de-dev.s3.ap-southeast-1.amazonaws.com/${encodedFilePath}`;
-      console.log("Resume uploaded successfully. File URL:", fileUrl);
-      setUpdateResume(fileUrl);
-    } catch (error) {
-      console.log("Error uploading resume:", error);
-    }
-  };
-
-  const uploadCertificate = async (file) => {
-    try {
-      const result = await uploadData({
-        path: `uploadCertificate/${file.name}`,
-        data: file,
-      }).result;
-      const filePath = result.path;
-      const encodedFilePath = encodeURIComponent(filePath);
-      const fileUrl = `https://awe-adinin-files-storage-1982502de-dev.s3.ap-southeast-1.amazonaws.com/${encodedFilePath}`;
-      console.log("Certificate uploaded successfully. File URL:", fileUrl);
-      setUpdateCertificate(fileUrl);
-    } catch (error) {
-      console.log("Error uploading certificate:", error);
-    }
-  };
-
-  const uploadPassport = async (file) => {
-    try {
-      const result = await uploadData({
-        path: `uploadPassport/${file.name}`,
-        data: file,
-      }).result;
-      const filePath = result.path;
-      const encodedFilePath = encodeURIComponent(filePath);
-      const fileUrl = `https://awe-adinin-files-storage-1982502de-dev.s3.ap-southeast-1.amazonaws.com/${encodedFilePath}`;
-      console.log("Passport uploaded successfully. File URL:", fileUrl);
-      setUpdatePassport(fileUrl);
-    } catch (error) {
-      console.log("Error uploading passport:", error);
-    }
-  };
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -117,9 +44,7 @@ export const OtherDetails = () => {
     try {
       const updatedValue = {
         ...data,
-        uploadCertificate: updateCertificate,
-        uploadPassport: updatePassport,
-        uploadResume: updateResume,
+ 
       };
       // console.log(updatedValue);
       const storedData = {
@@ -215,33 +140,31 @@ export const OtherDetails = () => {
             ? storedData.perInterviewDescription || ""
             : "",
         supportInfo: storedData.supportInfo || "",
-        uploadResume: storedData.uploadResume,
-        uploadCertificate: storedData.uploadCertificate,
-        uploadPassport: storedData.uploadPassport,
+ 
       };
 
-      // console.log(totalData);
+      console.log(totalData);
 
       // Combine all form data
-      // const result = await client.graphql({
-      //   query: createCandidateApplicationForm,
-      //   variables: {
-      //     input: totalData ,
-      //   },
-      // }).then((res)=>{
-      //   console.log(res)
+      const result = await client.graphql({
+        query: createCandidateApplicationForm,
+        variables: {
+          input: totalData ,
+        },
+      }).then((res)=>{
+        console.log(res)
 
-      // }).catch((err)=>{
-      //   console.log(err);
-      // })
+      }).catch((err)=>{
+        console.log(err);
+      })
 
-      // console.log("Successfully submitted:", result);
+      console.log("Successfully submitted:", result);
 
       // Clear localStorage after successful submission
-      // localStorage.removeItem('navigatingEducationData.applicationData');
-      // localStorage.removeItem('personalDetails');
-      // localStorage.removeItem('educationDetails');
-      // localStorage.removeItem('updatedValue');
+      localStorage.removeItem('navigatingEducationData.applicationData');
+      localStorage.removeItem('personalDetails');
+      localStorage.removeItem('educationDetails');
+      localStorage.removeItem('updatedValue');
     } catch (error) {
       console.log(error);
 
@@ -251,20 +174,6 @@ export const OtherDetails = () => {
       );
     }
   };
-  // console.log("Successfully submitted Three Data:", navigateOtherData);
-
-  // const handleFileChange = async (e, type) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     if (type === "uploadResume") {
-  //       await uploadResume(file);
-  //     } else if (type === "uploadCertificate") {
-  //       await uploadCerficate(file);
-  //     } else if (type === "uploadPassport") {
-  //       await uploadPassport(file);
-  //     }
-  //   }
-  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="pt-5">
@@ -393,74 +302,6 @@ export const OtherDetails = () => {
         ></textarea>
       </div>
 
-      {/* File Uploads */}
-      <div className="my-5">
-        <label className="text_size_6">Choose file</label>
-        <div className="flex items-center justify-between mt-3 mb-10 max-sm:flex-wrap">
-          {/* Resume Upload */}
-          <div className="max-sm:w-full  mb-4">
-            <label className="flex justify-between items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
-              Upload Resume
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, "uploadResume")}
-                className="hidden"
-                accept=".pdf"
-              />
-              <span className="ml-2">
-                <GoUpload />
-              </span>
-            </label>
-            {errors.uploadResume && (
-              <p className="text-[red] text-xs mt-1">
-                {errors.uploadResume?.message}
-              </p>
-            )}
-          </div>
-
-          {/* Certificate Upload */}
-          <div className="max-sm:w-full mb-4">
-            <label className="flex justify-between items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
-              Qualification Certificate
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, "uploadCertificate")}
-                className="hidden"
-                accept=".jpg,.png"
-              />
-              <span className="ml-2">
-                <GoUpload />
-              </span>
-            </label>
-            {errors.uploadCertificate && (
-              <p className="text-[red] text-xs mt-1">
-                {errors.uploadCertificate?.message}
-              </p>
-            )}
-          </div>
-
-          {/* Passport Upload */}
-          <div className="max-sm:w-full">
-            <label className="flex justify-between items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
-              Upload IC / Passport
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, "uploadPassport")}
-                className="hidden"
-                accept=".jpg,.pdf"
-              />
-              <span className="ml-2">
-                <GoUpload />
-              </span>
-            </label>
-            {errors.uploadPassport && (
-              <p className="text-[red] text-xs mt-1">
-                {errors.uploadPassport.message}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
       <div className="flex items-start mb-4">
         <input
           type="checkbox"
