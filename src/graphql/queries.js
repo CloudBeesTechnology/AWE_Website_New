@@ -1,6 +1,228 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getContractForm = /* GraphQL */ `
+  query GetContractForm($id: ID!) {
+    getContractForm(id: $id) {
+      id
+      empID
+      conAttn
+      depHead
+      hrManager
+      genManager
+      remarks
+      contStatus
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listContractForms = /* GraphQL */ `
+  query ListContractForms(
+    $filter: ModelContractFormFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listContractForms(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        empID
+        conAttn
+        depHead
+        hrManager
+        genManager
+        remarks
+        contStatus
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getKeyValueStore = /* GraphQL */ `
+  query GetKeyValueStore($id: ID!) {
+    getKeyValueStore(id: $id) {
+      id
+      departmentDD
+      positionDD
+      jobCatDD
+      raceDD
+      religionDD
+      nationalityDD
+      countryORDD
+      educLevelDD
+      workStatusDD
+      relationshipDD
+      resignNotifProbDD
+      termiNotifProbDD
+      resignNotifConfDD
+      termiNotifConfDD
+      workPermitDD
+      insuHSDD
+      insuClaimDD
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listKeyValueStores = /* GraphQL */ `
+  query ListKeyValueStores(
+    $filter: ModelKeyValueStoreFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listKeyValueStores(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        departmentDD
+        positionDD
+        jobCatDD
+        raceDD
+        religionDD
+        nationalityDD
+        countryORDD
+        educLevelDD
+        workStatusDD
+        relationshipDD
+        resignNotifProbDD
+        termiNotifProbDD
+        resignNotifConfDD
+        termiNotifConfDD
+        workPermitDD
+        insuHSDD
+        insuClaimDD
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getTimeSheet = /* GraphQL */ `
+  query GetTimeSheet($id: ID!) {
+    getTimeSheet(id: $id) {
+      id
+      date
+      status
+      fileName
+      fileType
+      assignTo
+      assignBy
+      empName
+      empBadgeNo
+      empID
+      empDept
+      inTime
+      outTime
+      totalInOut
+      allDayHrs
+      totalHrs
+      remarks
+      otTime
+      netMins
+      actualWorkHrs
+      normalWorkHrs
+      fidNo
+      companyName
+      trade
+      tradeCode
+      onAM
+      offAM
+      onPM
+      offPM
+      ctr
+      rec
+      avgDailyTD
+      highlightDayTG
+      aweSDN
+      totalNT
+      totalOT
+      totalNTOT
+      empWorkInfo
+      fromDate
+      untilDate
+      location
+      mealAllow
+      verify
+      bpCompany
+      earliestEntryTime
+      latestEntryTime
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listTimeSheets = /* GraphQL */ `
+  query ListTimeSheets(
+    $filter: ModelTimeSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTimeSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        date
+        status
+        fileName
+        fileType
+        assignTo
+        assignBy
+        empName
+        empBadgeNo
+        empID
+        empDept
+        inTime
+        outTime
+        totalInOut
+        allDayHrs
+        totalHrs
+        remarks
+        otTime
+        netMins
+        actualWorkHrs
+        normalWorkHrs
+        fidNo
+        companyName
+        trade
+        tradeCode
+        onAM
+        offAM
+        onPM
+        offPM
+        ctr
+        rec
+        avgDailyTD
+        highlightDayTG
+        aweSDN
+        totalNT
+        totalOT
+        totalNTOT
+        empWorkInfo
+        fromDate
+        untilDate
+        location
+        mealAllow
+        verify
+        bpCompany
+        earliestEntryTime
+        latestEntryTime
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getHiringJob = /* GraphQL */ `
   query GetHiringJob($id: ID!) {
     getHiringJob(id: $id) {
@@ -263,31 +485,37 @@ export const getProbForm = /* GraphQL */ `
       commitment
       communication
       deadline
-      department
       diligent
-      doj
-      empBadgeNo
-      extendedProbationEndDate
       extensionPeriod
-      gmApproved
       gmDate
       hrDate
       hrName
       initiative
-      managerApproved
       managerDate
       managerName
-      name
       pace
-      position
-      probationEnd
       quality
       recommendation
       responsibility
-      supervisorApproved
       supervisorDate
       supervisorName
       teamwork
+      extendProbED
+      gmApproved
+      managerApproved
+      supervisorApproved
+      communicationDetails
+      qualityDetails
+      paceDetails
+      initiativeDetails
+      attitudeDetails
+      adaptabilityDetails
+      teamworkDetails
+      responsibilityDetails
+      diligentDetails
+      commitmentDetails
+      probStatus
+      gmName
       createdAt
       updatedAt
       __typename
@@ -311,31 +539,37 @@ export const listProbForms = /* GraphQL */ `
         commitment
         communication
         deadline
-        department
         diligent
-        doj
-        empBadgeNo
-        extendedProbationEndDate
         extensionPeriod
-        gmApproved
         gmDate
         hrDate
         hrName
         initiative
-        managerApproved
         managerDate
         managerName
-        name
         pace
-        position
-        probationEnd
         quality
         recommendation
         responsibility
-        supervisorApproved
         supervisorDate
         supervisorName
         teamwork
+        extendProbED
+        gmApproved
+        managerApproved
+        supervisorApproved
+        communicationDetails
+        qualityDetails
+        paceDetails
+        initiativeDetails
+        attitudeDetails
+        adaptabilityDetails
+        teamworkDetails
+        responsibilityDetails
+        diligentDetails
+        commitmentDetails
+        probStatus
+        gmName
         createdAt
         updatedAt
         __typename
@@ -387,186 +621,6 @@ export const listEmailNotifis = /* GraphQL */ `
     }
   }
 `;
-export const getOffshoreSheet = /* GraphQL */ `
-  query GetOffshoreSheet($id: ID!) {
-    getOffshoreSheet(id: $id) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listOffshoreSheets = /* GraphQL */ `
-  query ListOffshoreSheets(
-    $filter: ModelOffshoreSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listOffshoreSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        date
-        dailySheet
-        status
-        manager
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getORMCSheet = /* GraphQL */ `
-  query GetORMCSheet($id: ID!) {
-    getORMCSheet(id: $id) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listORMCSheets = /* GraphQL */ `
-  query ListORMCSheets(
-    $filter: ModelORMCSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listORMCSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        date
-        dailySheet
-        status
-        manager
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getSBWSheet = /* GraphQL */ `
-  query GetSBWSheet($id: ID!) {
-    getSBWSheet(id: $id) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listSBWSheets = /* GraphQL */ `
-  query ListSBWSheets(
-    $filter: ModelSBWSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSBWSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        date
-        dailySheet
-        status
-        manager
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getBlng = /* GraphQL */ `
-  query GetBlng($id: ID!) {
-    getBlng(id: $id) {
-      id
-      weeklySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listBlngs = /* GraphQL */ `
-  query ListBlngs(
-    $filter: ModelBlngFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listBlngs(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        weeklySheet
-        date
-        status
-        manager
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getHeadOffice = /* GraphQL */ `
-  query GetHeadOffice($id: ID!) {
-    getHeadOffice(id: $id) {
-      id
-      dailySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listHeadOffices = /* GraphQL */ `
-  query ListHeadOffices(
-    $filter: ModelHeadOfficeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listHeadOffices(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        dailySheet
-        date
-        status
-        manager
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const getEmpRequisition = /* GraphQL */ `
   query GetEmpRequisition($id: ID!) {
     getEmpRequisition(id: $id) {
@@ -585,6 +639,7 @@ export const getEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
+      requestDate
       createdAt
       updatedAt
       __typename
@@ -614,6 +669,7 @@ export const listEmpRequisitions = /* GraphQL */ `
         reqName
         requestorID
         approverID
+        requestDate
         createdAt
         updatedAt
         __typename
@@ -628,12 +684,8 @@ export const getWeldingInfo = /* GraphQL */ `
     getWeldingInfo(id: $id) {
       id
       empID
-      department
       diameterRange
-      empBadgeNo
-      empName
       fillerMetal
-      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -661,12 +713,8 @@ export const listWeldingInfos = /* GraphQL */ `
       items {
         id
         empID
-        department
         diameterRange
-        empBadgeNo
-        empName
         fillerMetal
-        position
         thicknessRange
         weldingStampNor
         wpsNumber
@@ -687,6 +735,48 @@ export const listWeldingInfos = /* GraphQL */ `
     }
   }
 `;
+export const getBastingPaint = /* GraphQL */ `
+  query GetBastingPaint($id: ID!) {
+    getBastingPaint(id: $id) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listBastingPaints = /* GraphQL */ `
+  query ListBastingPaints(
+    $filter: ModelBastingPaintFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBastingPaints(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        empID
+        blastingRemarks
+        blastingEndDate
+        blastingStartDate
+        blastingBadgeNo
+        blastingQulifiExp
+        blastingUpload
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getTrainingReq = /* GraphQL */ `
   query GetTrainingReq($id: ID!) {
     getTrainingReq(id: $id) {
@@ -697,14 +787,14 @@ export const getTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      purchaseONo
-      traineeCourseCode
-      traineeCourseName
-      traineeCompany
+      courseCode
+      courseName
+      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      mediRequired
       createdAt
       updatedAt
       __typename
@@ -726,14 +816,14 @@ export const listTrainingReqs = /* GraphQL */ `
         medicalExpiry
         medicalAppointDate
         medicalReport
-        purchaseONo
-        traineeCourseCode
-        traineeCourseName
-        traineeCompany
+        courseCode
+        courseName
+        company
         traineeSD
         traineeED
         traineeStatus
         traineeCourseFee
+        mediRequired
         createdAt
         updatedAt
         __typename
@@ -748,13 +838,12 @@ export const getTrainingCertificates = /* GraphQL */ `
     getTrainingCertificates(id: $id) {
       id
       empID
-      courseCode
-      courseName
-      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
+      poNo
+      addDescretion
       createdAt
       updatedAt
       __typename
@@ -775,13 +864,12 @@ export const listTrainingCertificates = /* GraphQL */ `
       items {
         id
         empID
-        courseCode
-        courseName
-        company
         certifiExpiry
         eCertifiDate
         trainingUpCertifi
         orgiCertifiDate
+        poNo
+        addDescretion
         createdAt
         updatedAt
         __typename
@@ -1161,6 +1249,15 @@ export const getWPTracking = /* GraphQL */ `
       agentname
       mobSignDate
       mobFile
+      doerefno
+      sawpDate
+      sawpRecivedDate
+      sawpFile
+      lbrDepoNum
+      lbrEndroseDate
+      lbrDepoAmount
+      lbrFile
+      remarkNLMob
       createdAt
       updatedAt
       __typename
@@ -1216,6 +1313,15 @@ export const listWPTrackings = /* GraphQL */ `
         agentname
         mobSignDate
         mobFile
+        doerefno
+        sawpDate
+        sawpRecivedDate
+        sawpFile
+        lbrDepoNum
+        lbrEndroseDate
+        lbrDepoAmount
+        lbrFile
+        remarkNLMob
         createdAt
         updatedAt
         __typename
@@ -1397,14 +1503,9 @@ export const getEmpLeaveDetails = /* GraphQL */ `
       sickLeave
       sickLeaveDate
       hospLeave
-      remainingAnualLeave
-      remainingSickLeave
-      remainingMateLeave
-      remainingMrageLeave
-      remainingPaternityLeave
-      remainingHosLeave
-      remainingCompasLeave
-      unPaidAuthorize
+      pervAnnualLeaveBal
+      sickLeaveTaken
+      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -1434,14 +1535,9 @@ export const listEmpLeaveDetails = /* GraphQL */ `
         sickLeave
         sickLeaveDate
         hospLeave
-        remainingAnualLeave
-        remainingSickLeave
-        remainingMateLeave
-        remainingMrageLeave
-        remainingPaternityLeave
-        remainingHosLeave
-        remainingCompasLeave
-        unPaidAuthorize
+        pervAnnualLeaveBal
+        sickLeaveTaken
+        remainAnnualLeave
         createdAt
         updatedAt
         __typename
@@ -1801,6 +1897,25 @@ export const getCandIToEMP = /* GraphQL */ `
       salaryExpectation
       supportInfo
       workExperience
+      mobSignDate
+      mobFile
+      paafApproveDate
+      paafFile
+      loiIssueDate
+      loiAcceptDate
+      loiDeclineDate
+      declineReason
+      loiFile
+      cvecApproveDate
+      cvecFile
+      uploadCertificate
+      pcNoticePeriod
+      venue
+      managerBadgeNo
+      message
+      interType
+      interTime
+      interDate
       createdAt
       updatedAt
       __typename
@@ -1834,6 +1949,25 @@ export const listCandIToEMPS = /* GraphQL */ `
         salaryExpectation
         supportInfo
         workExperience
+        mobSignDate
+        mobFile
+        paafApproveDate
+        paafFile
+        loiIssueDate
+        loiAcceptDate
+        loiDeclineDate
+        declineReason
+        loiFile
+        cvecApproveDate
+        cvecFile
+        uploadCertificate
+        pcNoticePeriod
+        venue
+        managerBadgeNo
+        message
+        interType
+        interTime
+        interDate
         createdAt
         updatedAt
         __typename
@@ -1915,6 +2049,7 @@ export const getInterviewSchedule = /* GraphQL */ `
       department
       otherDepartment
       status
+      empID
       createdAt
       updatedAt
       __typename
@@ -1946,6 +2081,7 @@ export const listInterviewSchedules = /* GraphQL */ `
         department
         otherDepartment
         status
+        empID
         createdAt
         updatedAt
         __typename
@@ -2186,6 +2322,10 @@ export const getTicketRequest = /* GraphQL */ `
       hrRemarks
       hrName
       hrEmpID
+      from
+      to
+      fromDate
+      toDate
       createdAt
       updatedAt
       __typename
@@ -2214,6 +2354,10 @@ export const listTicketRequests = /* GraphQL */ `
         hrRemarks
         hrName
         hrEmpID
+        from
+        to
+        fromDate
+        toDate
         createdAt
         updatedAt
         __typename
@@ -2248,6 +2392,10 @@ export const getLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
+      selectedFrom
+      selectedTo
+      startDate
+      endDate
       createdAt
       updatedAt
       __typename
@@ -2284,6 +2432,10 @@ export const listLeaveStatuses = /* GraphQL */ `
         empStatus
         empDate
         empRemarks
+        selectedFrom
+        selectedTo
+        startDate
+        endDate
         createdAt
         updatedAt
         __typename
