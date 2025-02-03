@@ -311,7 +311,7 @@ export default function EducationDetailsUpdateForm(props) {
     tempID: [{ type: "Required" }],
     crime: [],
     crimeDesc: [],
-    emgDetails: [{ type: "JSON" }],
+    emgDetails: [{ type: "Required" }, { type: "JSON" }],
     noExperience: [],
     empStatement: [],
     desc: [],
@@ -359,7 +359,7 @@ export default function EducationDetailsUpdateForm(props) {
           tempID,
           crime: crime ?? null,
           crimeDesc: crimeDesc ?? null,
-          emgDetails: emgDetails ?? null,
+          emgDetails,
           noExperience: noExperience ?? null,
           empStatement: empStatement ?? null,
           desc: desc ?? null,
@@ -607,7 +607,7 @@ export default function EducationDetailsUpdateForm(props) {
       >
         <TextAreaField
           label="Emg details"
-          isRequired={false}
+          isRequired={true}
           isReadOnly={false}
           value={currentEmgDetailsValue}
           onChange={(e) => {

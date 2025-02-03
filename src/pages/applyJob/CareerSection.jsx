@@ -9,42 +9,15 @@ export const CareerSection = () => {
   const { hiringData } = useContext(DataSupply);
   const [jobUrls, setJobUrls] = useState({});
 
-//   useEffect(() => {
-//     const fetchUrls = async () => {
-//       const urls = await Promise.all(
-//         hiringData.map(async (val) => {
-//           if (!val.uploadJobDetails) {
-//             console.error("Missing uploadJobDetails for:", val);
-//             return null;
-//           }
-
-//           const fileKey = val?.uploadJobDetails;
-//           const trimmedProfilePhotoString = fileKey?.replace(/^public\//, "");
-//           const result = await getUrl({ path: trimmedProfilePhotoString });
-//           console.log(result.url.toString());
-          
-//           return { id: val.id, url: result.url.toString() };
-//         })
-//       );
-
-//       const urlsMap = urls.reduce((acc, curr) => {
-//         if (curr) acc[curr.id] = curr.url;
-//         return acc;
-//       }, {});
-// // console.log(urlsMap);
-
-//       setJobUrls(urlsMap);
-//     };
-
-//     fetchUrls();
-//   }, [hiringData]);
-
   const latestData = hiringData.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
 
   const validHiringData = latestData.filter((job) => {
-    const normalizedDate = job.expiryDate.replace(/[-/]/g, "-");
+    if (!job.expiryDate) {
+      return;
+    }
+    const normalizedDate = job?.expiryDate?.replace(/[-/]/g, "-");
     const [day, month, year] = normalizedDate.split("-");
     const expiry = new Date(year, month - 1, day);
     const now = new Date();
@@ -53,7 +26,6 @@ export const CareerSection = () => {
 
     return expiry >= today;
   });
-
   return (
     <section>
       <CommonBanner background={bg} title="Apply Job" />
@@ -92,7 +64,7 @@ export const CareerSection = () => {
                 //   console.error("Missing uploadJobDetails for:", val);
                 //   return null;
                 // }
-                
+
                 // const fileKey = val.uploadJobDetails;
                 // const jobUrl = jobUrls[val.id];
 
@@ -102,42 +74,45 @@ export const CareerSection = () => {
                     className="gap-7 space-y-4 p-2 rounded-md shadow-md max-w-lg w-full sm:w-[450px] border border-[red]"
                   >
                     <div className="flex justify-evenly items-center">
-                      <p className="font-bold text-lg mt-2">{val.jobTitle}</p>
+                      <p className="font-bold text-lg mt-2">{val?.jobTitle}</p>
                     </div>
                     <h4 className="font-semibold">
                       Description:{" "}
                       <span className="font-normal text-sm">
-                        {val.jobContent}
+                        {val?.jobContent}
                       </span>
                     </h4>
 
                     <div className="">
                       <p className="py-1 px-2 text-sm">
                         <span className="text-sm">Experience:</span>{" "}
-                        {val.exper}
+                        {val?.exper}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Location: {val.location}
+                        Location: {val?.location}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Posted On: {val.startDate}
+                        Posted On: {val?.startDate}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Apply Until: {val.expiryDate}
+                        Apply Until: {val?.expiryDate}
                       </p>
                     </div>
-                    <section>
-                      <div>
-                        {/* {jobUrl ? (
-                          <button>Download PDF{jobUrl}</button>
-                        ) : (
-                          "Loading..."
-                        )} */}
+                    <section className="flex items-center justify-evenly">
+                      <div >
+                        <a
+                          href={val.uploadJobDetails}
+                          className={
+                            "bg-[#FEF116] text-black center font-bold py-1 px-4 rounded"
+                          }
+                        >
+                          {val.uploadJobDetails ? "Download" : "N/A"}
+                        </a>
                       </div>
                       <div className="center py-2">
                         <Link
                           to="/addCandidates"
-                          state={{ position: val.jobTitle }}
+                          state={{ position: val?.jobTitle }}
                           className="bg-[#FEF116] text-black center font-bold py-1 px-4 rounded"
                         >
                           APPLY JOB

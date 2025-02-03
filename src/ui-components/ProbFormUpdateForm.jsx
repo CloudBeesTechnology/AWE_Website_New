@@ -39,31 +39,37 @@ export default function ProbFormUpdateForm(props) {
     commitment: "",
     communication: "",
     deadline: "",
-    department: "",
     diligent: "",
-    doj: "",
-    empBadgeNo: "",
-    extendedProbationEndDate: "",
     extensionPeriod: "",
-    gmApproved: false,
     gmDate: "",
     hrDate: "",
     hrName: "",
     initiative: "",
-    managerApproved: false,
     managerDate: "",
     managerName: "",
-    name: "",
     pace: "",
-    position: "",
-    probationEnd: "",
     quality: "",
     recommendation: "",
     responsibility: "",
-    supervisorApproved: false,
     supervisorDate: "",
     supervisorName: "",
     teamwork: "",
+    extendProbED: "",
+    gmApproved: "",
+    managerApproved: "",
+    supervisorApproved: "",
+    communicationDetails: "",
+    qualityDetails: "",
+    paceDetails: "",
+    initiativeDetails: "",
+    attitudeDetails: "",
+    adaptabilityDetails: "",
+    teamworkDetails: "",
+    responsibilityDetails: "",
+    diligentDetails: "",
+    commitmentDetails: "",
+    probStatus: false,
+    gmName: "",
   };
   const [empID, setEmpID] = React.useState(initialValues.empID);
   const [adaptability, setAdaptability] = React.useState(
@@ -79,44 +85,27 @@ export default function ProbFormUpdateForm(props) {
     initialValues.communication
   );
   const [deadline, setDeadline] = React.useState(initialValues.deadline);
-  const [department, setDepartment] = React.useState(initialValues.department);
   const [diligent, setDiligent] = React.useState(initialValues.diligent);
-  const [doj, setDoj] = React.useState(initialValues.doj);
-  const [empBadgeNo, setEmpBadgeNo] = React.useState(initialValues.empBadgeNo);
-  const [extendedProbationEndDate, setExtendedProbationEndDate] =
-    React.useState(initialValues.extendedProbationEndDate);
   const [extensionPeriod, setExtensionPeriod] = React.useState(
     initialValues.extensionPeriod
   );
-  const [gmApproved, setGmApproved] = React.useState(initialValues.gmApproved);
   const [gmDate, setGmDate] = React.useState(initialValues.gmDate);
   const [hrDate, setHrDate] = React.useState(initialValues.hrDate);
   const [hrName, setHrName] = React.useState(initialValues.hrName);
   const [initiative, setInitiative] = React.useState(initialValues.initiative);
-  const [managerApproved, setManagerApproved] = React.useState(
-    initialValues.managerApproved
-  );
   const [managerDate, setManagerDate] = React.useState(
     initialValues.managerDate
   );
   const [managerName, setManagerName] = React.useState(
     initialValues.managerName
   );
-  const [name, setName] = React.useState(initialValues.name);
   const [pace, setPace] = React.useState(initialValues.pace);
-  const [position, setPosition] = React.useState(initialValues.position);
-  const [probationEnd, setProbationEnd] = React.useState(
-    initialValues.probationEnd
-  );
   const [quality, setQuality] = React.useState(initialValues.quality);
   const [recommendation, setRecommendation] = React.useState(
     initialValues.recommendation
   );
   const [responsibility, setResponsibility] = React.useState(
     initialValues.responsibility
-  );
-  const [supervisorApproved, setSupervisorApproved] = React.useState(
-    initialValues.supervisorApproved
   );
   const [supervisorDate, setSupervisorDate] = React.useState(
     initialValues.supervisorDate
@@ -125,6 +114,48 @@ export default function ProbFormUpdateForm(props) {
     initialValues.supervisorName
   );
   const [teamwork, setTeamwork] = React.useState(initialValues.teamwork);
+  const [extendProbED, setExtendProbED] = React.useState(
+    initialValues.extendProbED
+  );
+  const [gmApproved, setGmApproved] = React.useState(initialValues.gmApproved);
+  const [managerApproved, setManagerApproved] = React.useState(
+    initialValues.managerApproved
+  );
+  const [supervisorApproved, setSupervisorApproved] = React.useState(
+    initialValues.supervisorApproved
+  );
+  const [communicationDetails, setCommunicationDetails] = React.useState(
+    initialValues.communicationDetails
+  );
+  const [qualityDetails, setQualityDetails] = React.useState(
+    initialValues.qualityDetails
+  );
+  const [paceDetails, setPaceDetails] = React.useState(
+    initialValues.paceDetails
+  );
+  const [initiativeDetails, setInitiativeDetails] = React.useState(
+    initialValues.initiativeDetails
+  );
+  const [attitudeDetails, setAttitudeDetails] = React.useState(
+    initialValues.attitudeDetails
+  );
+  const [adaptabilityDetails, setAdaptabilityDetails] = React.useState(
+    initialValues.adaptabilityDetails
+  );
+  const [teamworkDetails, setTeamworkDetails] = React.useState(
+    initialValues.teamworkDetails
+  );
+  const [responsibilityDetails, setResponsibilityDetails] = React.useState(
+    initialValues.responsibilityDetails
+  );
+  const [diligentDetails, setDiligentDetails] = React.useState(
+    initialValues.diligentDetails
+  );
+  const [commitmentDetails, setCommitmentDetails] = React.useState(
+    initialValues.commitmentDetails
+  );
+  const [probStatus, setProbStatus] = React.useState(initialValues.probStatus);
+  const [gmName, setGmName] = React.useState(initialValues.gmName);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = probFormRecord
@@ -138,31 +169,37 @@ export default function ProbFormUpdateForm(props) {
     setCommitment(cleanValues.commitment);
     setCommunication(cleanValues.communication);
     setDeadline(cleanValues.deadline);
-    setDepartment(cleanValues.department);
     setDiligent(cleanValues.diligent);
-    setDoj(cleanValues.doj);
-    setEmpBadgeNo(cleanValues.empBadgeNo);
-    setExtendedProbationEndDate(cleanValues.extendedProbationEndDate);
     setExtensionPeriod(cleanValues.extensionPeriod);
-    setGmApproved(cleanValues.gmApproved);
     setGmDate(cleanValues.gmDate);
     setHrDate(cleanValues.hrDate);
     setHrName(cleanValues.hrName);
     setInitiative(cleanValues.initiative);
-    setManagerApproved(cleanValues.managerApproved);
     setManagerDate(cleanValues.managerDate);
     setManagerName(cleanValues.managerName);
-    setName(cleanValues.name);
     setPace(cleanValues.pace);
-    setPosition(cleanValues.position);
-    setProbationEnd(cleanValues.probationEnd);
     setQuality(cleanValues.quality);
     setRecommendation(cleanValues.recommendation);
     setResponsibility(cleanValues.responsibility);
-    setSupervisorApproved(cleanValues.supervisorApproved);
     setSupervisorDate(cleanValues.supervisorDate);
     setSupervisorName(cleanValues.supervisorName);
     setTeamwork(cleanValues.teamwork);
+    setExtendProbED(cleanValues.extendProbED);
+    setGmApproved(cleanValues.gmApproved);
+    setManagerApproved(cleanValues.managerApproved);
+    setSupervisorApproved(cleanValues.supervisorApproved);
+    setCommunicationDetails(cleanValues.communicationDetails);
+    setQualityDetails(cleanValues.qualityDetails);
+    setPaceDetails(cleanValues.paceDetails);
+    setInitiativeDetails(cleanValues.initiativeDetails);
+    setAttitudeDetails(cleanValues.attitudeDetails);
+    setAdaptabilityDetails(cleanValues.adaptabilityDetails);
+    setTeamworkDetails(cleanValues.teamworkDetails);
+    setResponsibilityDetails(cleanValues.responsibilityDetails);
+    setDiligentDetails(cleanValues.diligentDetails);
+    setCommitmentDetails(cleanValues.commitmentDetails);
+    setProbStatus(cleanValues.probStatus);
+    setGmName(cleanValues.gmName);
     setErrors({});
   };
   const [probFormRecord, setProbFormRecord] = React.useState(probFormModelProp);
@@ -190,31 +227,37 @@ export default function ProbFormUpdateForm(props) {
     commitment: [],
     communication: [],
     deadline: [],
-    department: [],
     diligent: [],
-    doj: [],
-    empBadgeNo: [],
-    extendedProbationEndDate: [],
     extensionPeriod: [],
-    gmApproved: [],
     gmDate: [],
     hrDate: [],
     hrName: [],
     initiative: [],
-    managerApproved: [],
     managerDate: [],
     managerName: [],
-    name: [],
     pace: [],
-    position: [],
-    probationEnd: [],
     quality: [],
     recommendation: [],
     responsibility: [],
-    supervisorApproved: [],
     supervisorDate: [],
     supervisorName: [],
     teamwork: [],
+    extendProbED: [],
+    gmApproved: [],
+    managerApproved: [],
+    supervisorApproved: [],
+    communicationDetails: [],
+    qualityDetails: [],
+    paceDetails: [],
+    initiativeDetails: [],
+    attitudeDetails: [],
+    adaptabilityDetails: [],
+    teamworkDetails: [],
+    responsibilityDetails: [],
+    diligentDetails: [],
+    commitmentDetails: [],
+    probStatus: [],
+    gmName: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -250,31 +293,37 @@ export default function ProbFormUpdateForm(props) {
           commitment: commitment ?? null,
           communication: communication ?? null,
           deadline: deadline ?? null,
-          department: department ?? null,
           diligent: diligent ?? null,
-          doj: doj ?? null,
-          empBadgeNo: empBadgeNo ?? null,
-          extendedProbationEndDate: extendedProbationEndDate ?? null,
           extensionPeriod: extensionPeriod ?? null,
-          gmApproved: gmApproved ?? null,
           gmDate: gmDate ?? null,
           hrDate: hrDate ?? null,
           hrName: hrName ?? null,
           initiative: initiative ?? null,
-          managerApproved: managerApproved ?? null,
           managerDate: managerDate ?? null,
           managerName: managerName ?? null,
-          name: name ?? null,
           pace: pace ?? null,
-          position: position ?? null,
-          probationEnd: probationEnd ?? null,
           quality: quality ?? null,
           recommendation: recommendation ?? null,
           responsibility: responsibility ?? null,
-          supervisorApproved: supervisorApproved ?? null,
           supervisorDate: supervisorDate ?? null,
           supervisorName: supervisorName ?? null,
           teamwork: teamwork ?? null,
+          extendProbED: extendProbED ?? null,
+          gmApproved: gmApproved ?? null,
+          managerApproved: managerApproved ?? null,
+          supervisorApproved: supervisorApproved ?? null,
+          communicationDetails: communicationDetails ?? null,
+          qualityDetails: qualityDetails ?? null,
+          paceDetails: paceDetails ?? null,
+          initiativeDetails: initiativeDetails ?? null,
+          attitudeDetails: attitudeDetails ?? null,
+          adaptabilityDetails: adaptabilityDetails ?? null,
+          teamworkDetails: teamworkDetails ?? null,
+          responsibilityDetails: responsibilityDetails ?? null,
+          diligentDetails: diligentDetails ?? null,
+          commitmentDetails: commitmentDetails ?? null,
+          probStatus: probStatus ?? null,
+          gmName: gmName ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -343,31 +392,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.empID ?? value;
@@ -399,31 +454,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.adaptability ?? value;
@@ -455,31 +516,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.additionalInfo ?? value;
@@ -511,31 +578,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.attention ?? value;
@@ -567,31 +640,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.attitude ?? value;
@@ -623,31 +702,37 @@ export default function ProbFormUpdateForm(props) {
               commitment: value,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.commitment ?? value;
@@ -679,31 +764,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication: value,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.communication ?? value;
@@ -735,31 +826,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline: value,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.deadline ?? value;
@@ -773,62 +870,6 @@ export default function ProbFormUpdateForm(props) {
         errorMessage={errors.deadline?.errorMessage}
         hasError={errors.deadline?.hasError}
         {...getOverrideProps(overrides, "deadline")}
-      ></TextField>
-      <TextField
-        label="Department"
-        isRequired={false}
-        isReadOnly={false}
-        value={department}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department: value,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.department ?? value;
-          }
-          if (errors.department?.hasError) {
-            runValidationTasks("department", value);
-          }
-          setDepartment(value);
-        }}
-        onBlur={() => runValidationTasks("department", department)}
-        errorMessage={errors.department?.errorMessage}
-        hasError={errors.department?.hasError}
-        {...getOverrideProps(overrides, "department")}
       ></TextField>
       <TextField
         label="Diligent"
@@ -847,31 +888,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent: value,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.diligent ?? value;
@@ -885,179 +932,6 @@ export default function ProbFormUpdateForm(props) {
         errorMessage={errors.diligent?.errorMessage}
         hasError={errors.diligent?.hasError}
         {...getOverrideProps(overrides, "diligent")}
-      ></TextField>
-      <TextField
-        label="Doj"
-        isRequired={false}
-        isReadOnly={false}
-        value={doj}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj: value,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.doj ?? value;
-          }
-          if (errors.doj?.hasError) {
-            runValidationTasks("doj", value);
-          }
-          setDoj(value);
-        }}
-        onBlur={() => runValidationTasks("doj", doj)}
-        errorMessage={errors.doj?.errorMessage}
-        hasError={errors.doj?.hasError}
-        {...getOverrideProps(overrides, "doj")}
-      ></TextField>
-      <TextField
-        label="Emp badge no"
-        isRequired={false}
-        isReadOnly={false}
-        value={empBadgeNo}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo: value,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.empBadgeNo ?? value;
-          }
-          if (errors.empBadgeNo?.hasError) {
-            runValidationTasks("empBadgeNo", value);
-          }
-          setEmpBadgeNo(value);
-        }}
-        onBlur={() => runValidationTasks("empBadgeNo", empBadgeNo)}
-        errorMessage={errors.empBadgeNo?.errorMessage}
-        hasError={errors.empBadgeNo?.hasError}
-        {...getOverrideProps(overrides, "empBadgeNo")}
-      ></TextField>
-      <TextField
-        label="Extended probation end date"
-        isRequired={false}
-        isReadOnly={false}
-        value={extendedProbationEndDate}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate: value,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.extendedProbationEndDate ?? value;
-          }
-          if (errors.extendedProbationEndDate?.hasError) {
-            runValidationTasks("extendedProbationEndDate", value);
-          }
-          setExtendedProbationEndDate(value);
-        }}
-        onBlur={() =>
-          runValidationTasks(
-            "extendedProbationEndDate",
-            extendedProbationEndDate
-          )
-        }
-        errorMessage={errors.extendedProbationEndDate?.errorMessage}
-        hasError={errors.extendedProbationEndDate?.hasError}
-        {...getOverrideProps(overrides, "extendedProbationEndDate")}
       ></TextField>
       <TextField
         label="Extension period"
@@ -1076,31 +950,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod: value,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.extensionPeriod ?? value;
@@ -1115,62 +995,6 @@ export default function ProbFormUpdateForm(props) {
         hasError={errors.extensionPeriod?.hasError}
         {...getOverrideProps(overrides, "extensionPeriod")}
       ></TextField>
-      <SwitchField
-        label="Gm approved"
-        defaultChecked={false}
-        isDisabled={false}
-        isChecked={gmApproved}
-        onChange={(e) => {
-          let value = e.target.checked;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved: value,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.gmApproved ?? value;
-          }
-          if (errors.gmApproved?.hasError) {
-            runValidationTasks("gmApproved", value);
-          }
-          setGmApproved(value);
-        }}
-        onBlur={() => runValidationTasks("gmApproved", gmApproved)}
-        errorMessage={errors.gmApproved?.errorMessage}
-        hasError={errors.gmApproved?.hasError}
-        {...getOverrideProps(overrides, "gmApproved")}
-      ></SwitchField>
       <TextField
         label="Gm date"
         isRequired={false}
@@ -1188,31 +1012,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate: value,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.gmDate ?? value;
@@ -1244,31 +1074,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate: value,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.hrDate ?? value;
@@ -1300,31 +1136,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName: value,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.hrName ?? value;
@@ -1356,31 +1198,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative: value,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.initiative ?? value;
@@ -1395,62 +1243,6 @@ export default function ProbFormUpdateForm(props) {
         hasError={errors.initiative?.hasError}
         {...getOverrideProps(overrides, "initiative")}
       ></TextField>
-      <SwitchField
-        label="Manager approved"
-        defaultChecked={false}
-        isDisabled={false}
-        isChecked={managerApproved}
-        onChange={(e) => {
-          let value = e.target.checked;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved: value,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.managerApproved ?? value;
-          }
-          if (errors.managerApproved?.hasError) {
-            runValidationTasks("managerApproved", value);
-          }
-          setManagerApproved(value);
-        }}
-        onBlur={() => runValidationTasks("managerApproved", managerApproved)}
-        errorMessage={errors.managerApproved?.errorMessage}
-        hasError={errors.managerApproved?.hasError}
-        {...getOverrideProps(overrides, "managerApproved")}
-      ></SwitchField>
       <TextField
         label="Manager date"
         isRequired={false}
@@ -1468,31 +1260,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate: value,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.managerDate ?? value;
@@ -1524,31 +1322,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName: value,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.managerName ?? value;
@@ -1562,62 +1366,6 @@ export default function ProbFormUpdateForm(props) {
         errorMessage={errors.managerName?.errorMessage}
         hasError={errors.managerName?.hasError}
         {...getOverrideProps(overrides, "managerName")}
-      ></TextField>
-      <TextField
-        label="Name"
-        isRequired={false}
-        isReadOnly={false}
-        value={name}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name: value,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.name ?? value;
-          }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
-          }
-          setName(value);
-        }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
         label="Pace"
@@ -1636,31 +1384,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace: value,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.pace ?? value;
@@ -1674,118 +1428,6 @@ export default function ProbFormUpdateForm(props) {
         errorMessage={errors.pace?.errorMessage}
         hasError={errors.pace?.hasError}
         {...getOverrideProps(overrides, "pace")}
-      ></TextField>
-      <TextField
-        label="Position"
-        isRequired={false}
-        isReadOnly={false}
-        value={position}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position: value,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.position ?? value;
-          }
-          if (errors.position?.hasError) {
-            runValidationTasks("position", value);
-          }
-          setPosition(value);
-        }}
-        onBlur={() => runValidationTasks("position", position)}
-        errorMessage={errors.position?.errorMessage}
-        hasError={errors.position?.hasError}
-        {...getOverrideProps(overrides, "position")}
-      ></TextField>
-      <TextField
-        label="Probation end"
-        isRequired={false}
-        isReadOnly={false}
-        value={probationEnd}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd: value,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.probationEnd ?? value;
-          }
-          if (errors.probationEnd?.hasError) {
-            runValidationTasks("probationEnd", value);
-          }
-          setProbationEnd(value);
-        }}
-        onBlur={() => runValidationTasks("probationEnd", probationEnd)}
-        errorMessage={errors.probationEnd?.errorMessage}
-        hasError={errors.probationEnd?.hasError}
-        {...getOverrideProps(overrides, "probationEnd")}
       ></TextField>
       <TextField
         label="Quality"
@@ -1804,31 +1446,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality: value,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.quality ?? value;
@@ -1860,31 +1508,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation: value,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.recommendation ?? value;
@@ -1916,31 +1570,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility: value,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.responsibility ?? value;
@@ -1955,64 +1615,6 @@ export default function ProbFormUpdateForm(props) {
         hasError={errors.responsibility?.hasError}
         {...getOverrideProps(overrides, "responsibility")}
       ></TextField>
-      <SwitchField
-        label="Supervisor approved"
-        defaultChecked={false}
-        isDisabled={false}
-        isChecked={supervisorApproved}
-        onChange={(e) => {
-          let value = e.target.checked;
-          if (onChange) {
-            const modelFields = {
-              empID,
-              adaptability,
-              additionalInfo,
-              attention,
-              attitude,
-              commitment,
-              communication,
-              deadline,
-              department,
-              diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
-              extensionPeriod,
-              gmApproved,
-              gmDate,
-              hrDate,
-              hrName,
-              initiative,
-              managerApproved,
-              managerDate,
-              managerName,
-              name,
-              pace,
-              position,
-              probationEnd,
-              quality,
-              recommendation,
-              responsibility,
-              supervisorApproved: value,
-              supervisorDate,
-              supervisorName,
-              teamwork,
-            };
-            const result = onChange(modelFields);
-            value = result?.supervisorApproved ?? value;
-          }
-          if (errors.supervisorApproved?.hasError) {
-            runValidationTasks("supervisorApproved", value);
-          }
-          setSupervisorApproved(value);
-        }}
-        onBlur={() =>
-          runValidationTasks("supervisorApproved", supervisorApproved)
-        }
-        errorMessage={errors.supervisorApproved?.errorMessage}
-        hasError={errors.supervisorApproved?.hasError}
-        {...getOverrideProps(overrides, "supervisorApproved")}
-      ></SwitchField>
       <TextField
         label="Supervisor date"
         isRequired={false}
@@ -2030,31 +1632,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate: value,
               supervisorName,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.supervisorDate ?? value;
@@ -2086,31 +1694,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName: value,
               teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.supervisorName ?? value;
@@ -2142,31 +1756,37 @@ export default function ProbFormUpdateForm(props) {
               commitment,
               communication,
               deadline,
-              department,
               diligent,
-              doj,
-              empBadgeNo,
-              extendedProbationEndDate,
               extensionPeriod,
-              gmApproved,
               gmDate,
               hrDate,
               hrName,
               initiative,
-              managerApproved,
               managerDate,
               managerName,
-              name,
               pace,
-              position,
-              probationEnd,
               quality,
               recommendation,
               responsibility,
-              supervisorApproved,
               supervisorDate,
               supervisorName,
               teamwork: value,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
             };
             const result = onChange(modelFields);
             value = result?.teamwork ?? value;
@@ -2180,6 +1800,1010 @@ export default function ProbFormUpdateForm(props) {
         errorMessage={errors.teamwork?.errorMessage}
         hasError={errors.teamwork?.hasError}
         {...getOverrideProps(overrides, "teamwork")}
+      ></TextField>
+      <TextField
+        label="Extend prob ed"
+        isRequired={false}
+        isReadOnly={false}
+        value={extendProbED}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED: value,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.extendProbED ?? value;
+          }
+          if (errors.extendProbED?.hasError) {
+            runValidationTasks("extendProbED", value);
+          }
+          setExtendProbED(value);
+        }}
+        onBlur={() => runValidationTasks("extendProbED", extendProbED)}
+        errorMessage={errors.extendProbED?.errorMessage}
+        hasError={errors.extendProbED?.hasError}
+        {...getOverrideProps(overrides, "extendProbED")}
+      ></TextField>
+      <TextField
+        label="Gm approved"
+        isRequired={false}
+        isReadOnly={false}
+        value={gmApproved}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved: value,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.gmApproved ?? value;
+          }
+          if (errors.gmApproved?.hasError) {
+            runValidationTasks("gmApproved", value);
+          }
+          setGmApproved(value);
+        }}
+        onBlur={() => runValidationTasks("gmApproved", gmApproved)}
+        errorMessage={errors.gmApproved?.errorMessage}
+        hasError={errors.gmApproved?.hasError}
+        {...getOverrideProps(overrides, "gmApproved")}
+      ></TextField>
+      <TextField
+        label="Manager approved"
+        isRequired={false}
+        isReadOnly={false}
+        value={managerApproved}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved: value,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.managerApproved ?? value;
+          }
+          if (errors.managerApproved?.hasError) {
+            runValidationTasks("managerApproved", value);
+          }
+          setManagerApproved(value);
+        }}
+        onBlur={() => runValidationTasks("managerApproved", managerApproved)}
+        errorMessage={errors.managerApproved?.errorMessage}
+        hasError={errors.managerApproved?.hasError}
+        {...getOverrideProps(overrides, "managerApproved")}
+      ></TextField>
+      <TextField
+        label="Supervisor approved"
+        isRequired={false}
+        isReadOnly={false}
+        value={supervisorApproved}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved: value,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.supervisorApproved ?? value;
+          }
+          if (errors.supervisorApproved?.hasError) {
+            runValidationTasks("supervisorApproved", value);
+          }
+          setSupervisorApproved(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("supervisorApproved", supervisorApproved)
+        }
+        errorMessage={errors.supervisorApproved?.errorMessage}
+        hasError={errors.supervisorApproved?.hasError}
+        {...getOverrideProps(overrides, "supervisorApproved")}
+      ></TextField>
+      <TextField
+        label="Communication details"
+        isRequired={false}
+        isReadOnly={false}
+        value={communicationDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails: value,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.communicationDetails ?? value;
+          }
+          if (errors.communicationDetails?.hasError) {
+            runValidationTasks("communicationDetails", value);
+          }
+          setCommunicationDetails(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("communicationDetails", communicationDetails)
+        }
+        errorMessage={errors.communicationDetails?.errorMessage}
+        hasError={errors.communicationDetails?.hasError}
+        {...getOverrideProps(overrides, "communicationDetails")}
+      ></TextField>
+      <TextField
+        label="Quality details"
+        isRequired={false}
+        isReadOnly={false}
+        value={qualityDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails: value,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.qualityDetails ?? value;
+          }
+          if (errors.qualityDetails?.hasError) {
+            runValidationTasks("qualityDetails", value);
+          }
+          setQualityDetails(value);
+        }}
+        onBlur={() => runValidationTasks("qualityDetails", qualityDetails)}
+        errorMessage={errors.qualityDetails?.errorMessage}
+        hasError={errors.qualityDetails?.hasError}
+        {...getOverrideProps(overrides, "qualityDetails")}
+      ></TextField>
+      <TextField
+        label="Pace details"
+        isRequired={false}
+        isReadOnly={false}
+        value={paceDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails: value,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.paceDetails ?? value;
+          }
+          if (errors.paceDetails?.hasError) {
+            runValidationTasks("paceDetails", value);
+          }
+          setPaceDetails(value);
+        }}
+        onBlur={() => runValidationTasks("paceDetails", paceDetails)}
+        errorMessage={errors.paceDetails?.errorMessage}
+        hasError={errors.paceDetails?.hasError}
+        {...getOverrideProps(overrides, "paceDetails")}
+      ></TextField>
+      <TextField
+        label="Initiative details"
+        isRequired={false}
+        isReadOnly={false}
+        value={initiativeDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails: value,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.initiativeDetails ?? value;
+          }
+          if (errors.initiativeDetails?.hasError) {
+            runValidationTasks("initiativeDetails", value);
+          }
+          setInitiativeDetails(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("initiativeDetails", initiativeDetails)
+        }
+        errorMessage={errors.initiativeDetails?.errorMessage}
+        hasError={errors.initiativeDetails?.hasError}
+        {...getOverrideProps(overrides, "initiativeDetails")}
+      ></TextField>
+      <TextField
+        label="Attitude details"
+        isRequired={false}
+        isReadOnly={false}
+        value={attitudeDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails: value,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.attitudeDetails ?? value;
+          }
+          if (errors.attitudeDetails?.hasError) {
+            runValidationTasks("attitudeDetails", value);
+          }
+          setAttitudeDetails(value);
+        }}
+        onBlur={() => runValidationTasks("attitudeDetails", attitudeDetails)}
+        errorMessage={errors.attitudeDetails?.errorMessage}
+        hasError={errors.attitudeDetails?.hasError}
+        {...getOverrideProps(overrides, "attitudeDetails")}
+      ></TextField>
+      <TextField
+        label="Adaptability details"
+        isRequired={false}
+        isReadOnly={false}
+        value={adaptabilityDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails: value,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.adaptabilityDetails ?? value;
+          }
+          if (errors.adaptabilityDetails?.hasError) {
+            runValidationTasks("adaptabilityDetails", value);
+          }
+          setAdaptabilityDetails(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("adaptabilityDetails", adaptabilityDetails)
+        }
+        errorMessage={errors.adaptabilityDetails?.errorMessage}
+        hasError={errors.adaptabilityDetails?.hasError}
+        {...getOverrideProps(overrides, "adaptabilityDetails")}
+      ></TextField>
+      <TextField
+        label="Teamwork details"
+        isRequired={false}
+        isReadOnly={false}
+        value={teamworkDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails: value,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.teamworkDetails ?? value;
+          }
+          if (errors.teamworkDetails?.hasError) {
+            runValidationTasks("teamworkDetails", value);
+          }
+          setTeamworkDetails(value);
+        }}
+        onBlur={() => runValidationTasks("teamworkDetails", teamworkDetails)}
+        errorMessage={errors.teamworkDetails?.errorMessage}
+        hasError={errors.teamworkDetails?.hasError}
+        {...getOverrideProps(overrides, "teamworkDetails")}
+      ></TextField>
+      <TextField
+        label="Responsibility details"
+        isRequired={false}
+        isReadOnly={false}
+        value={responsibilityDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails: value,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.responsibilityDetails ?? value;
+          }
+          if (errors.responsibilityDetails?.hasError) {
+            runValidationTasks("responsibilityDetails", value);
+          }
+          setResponsibilityDetails(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("responsibilityDetails", responsibilityDetails)
+        }
+        errorMessage={errors.responsibilityDetails?.errorMessage}
+        hasError={errors.responsibilityDetails?.hasError}
+        {...getOverrideProps(overrides, "responsibilityDetails")}
+      ></TextField>
+      <TextField
+        label="Diligent details"
+        isRequired={false}
+        isReadOnly={false}
+        value={diligentDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails: value,
+              commitmentDetails,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.diligentDetails ?? value;
+          }
+          if (errors.diligentDetails?.hasError) {
+            runValidationTasks("diligentDetails", value);
+          }
+          setDiligentDetails(value);
+        }}
+        onBlur={() => runValidationTasks("diligentDetails", diligentDetails)}
+        errorMessage={errors.diligentDetails?.errorMessage}
+        hasError={errors.diligentDetails?.hasError}
+        {...getOverrideProps(overrides, "diligentDetails")}
+      ></TextField>
+      <TextField
+        label="Commitment details"
+        isRequired={false}
+        isReadOnly={false}
+        value={commitmentDetails}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails: value,
+              probStatus,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.commitmentDetails ?? value;
+          }
+          if (errors.commitmentDetails?.hasError) {
+            runValidationTasks("commitmentDetails", value);
+          }
+          setCommitmentDetails(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("commitmentDetails", commitmentDetails)
+        }
+        errorMessage={errors.commitmentDetails?.errorMessage}
+        hasError={errors.commitmentDetails?.hasError}
+        {...getOverrideProps(overrides, "commitmentDetails")}
+      ></TextField>
+      <SwitchField
+        label="Prob status"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={probStatus}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus: value,
+              gmName,
+            };
+            const result = onChange(modelFields);
+            value = result?.probStatus ?? value;
+          }
+          if (errors.probStatus?.hasError) {
+            runValidationTasks("probStatus", value);
+          }
+          setProbStatus(value);
+        }}
+        onBlur={() => runValidationTasks("probStatus", probStatus)}
+        errorMessage={errors.probStatus?.errorMessage}
+        hasError={errors.probStatus?.hasError}
+        {...getOverrideProps(overrides, "probStatus")}
+      ></SwitchField>
+      <TextField
+        label="Gm name"
+        isRequired={false}
+        isReadOnly={false}
+        value={gmName}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              empID,
+              adaptability,
+              additionalInfo,
+              attention,
+              attitude,
+              commitment,
+              communication,
+              deadline,
+              diligent,
+              extensionPeriod,
+              gmDate,
+              hrDate,
+              hrName,
+              initiative,
+              managerDate,
+              managerName,
+              pace,
+              quality,
+              recommendation,
+              responsibility,
+              supervisorDate,
+              supervisorName,
+              teamwork,
+              extendProbED,
+              gmApproved,
+              managerApproved,
+              supervisorApproved,
+              communicationDetails,
+              qualityDetails,
+              paceDetails,
+              initiativeDetails,
+              attitudeDetails,
+              adaptabilityDetails,
+              teamworkDetails,
+              responsibilityDetails,
+              diligentDetails,
+              commitmentDetails,
+              probStatus,
+              gmName: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.gmName ?? value;
+          }
+          if (errors.gmName?.hasError) {
+            runValidationTasks("gmName", value);
+          }
+          setGmName(value);
+        }}
+        onBlur={() => runValidationTasks("gmName", gmName)}
+        errorMessage={errors.gmName?.errorMessage}
+        hasError={errors.gmName?.hasError}
+        {...getOverrideProps(overrides, "gmName")}
       ></TextField>
       <Flex
         justifyContent="space-between"

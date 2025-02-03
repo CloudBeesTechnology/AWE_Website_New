@@ -62,6 +62,15 @@ export declare type WPTrackingUpdateFormInputValues = {
     agentname?: string;
     mobSignDate?: string;
     mobFile?: string;
+    doerefno?: string;
+    sawpDate?: string;
+    sawpRecivedDate?: string;
+    sawpFile?: string;
+    lbrDepoNum?: string;
+    lbrEndroseDate?: string;
+    lbrDepoAmount?: string;
+    lbrFile?: string;
+    remarkNLMob?: string;
 };
 export declare type WPTrackingUpdateFormValidationValues = {
     tempID?: ValidationFunction<string>;
@@ -104,6 +113,15 @@ export declare type WPTrackingUpdateFormValidationValues = {
     agentname?: ValidationFunction<string>;
     mobSignDate?: ValidationFunction<string>;
     mobFile?: ValidationFunction<string>;
+    doerefno?: ValidationFunction<string>;
+    sawpDate?: ValidationFunction<string>;
+    sawpRecivedDate?: ValidationFunction<string>;
+    sawpFile?: ValidationFunction<string>;
+    lbrDepoNum?: ValidationFunction<string>;
+    lbrEndroseDate?: ValidationFunction<string>;
+    lbrDepoAmount?: ValidationFunction<string>;
+    lbrFile?: ValidationFunction<string>;
+    remarkNLMob?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type WPTrackingUpdateFormOverridesProps = {
@@ -148,6 +166,15 @@ export declare type WPTrackingUpdateFormOverridesProps = {
     agentname?: PrimitiveOverrideProps<TextFieldProps>;
     mobSignDate?: PrimitiveOverrideProps<TextFieldProps>;
     mobFile?: PrimitiveOverrideProps<TextFieldProps>;
+    doerefno?: PrimitiveOverrideProps<TextFieldProps>;
+    sawpDate?: PrimitiveOverrideProps<TextFieldProps>;
+    sawpRecivedDate?: PrimitiveOverrideProps<TextFieldProps>;
+    sawpFile?: PrimitiveOverrideProps<TextFieldProps>;
+    lbrDepoNum?: PrimitiveOverrideProps<TextFieldProps>;
+    lbrEndroseDate?: PrimitiveOverrideProps<TextFieldProps>;
+    lbrDepoAmount?: PrimitiveOverrideProps<TextFieldProps>;
+    lbrFile?: PrimitiveOverrideProps<TextFieldProps>;
+    remarkNLMob?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type WPTrackingUpdateFormProps = React.PropsWithChildren<{
     overrides?: WPTrackingUpdateFormOverridesProps | undefined | null;

@@ -1,6 +1,330 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createContractForm = /* GraphQL */ `
+  mutation CreateContractForm(
+    $input: CreateContractFormInput!
+    $condition: ModelContractFormConditionInput
+  ) {
+    createContractForm(input: $input, condition: $condition) {
+      id
+      empID
+      conAttn
+      depHead
+      hrManager
+      genManager
+      remarks
+      contStatus
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateContractForm = /* GraphQL */ `
+  mutation UpdateContractForm(
+    $input: UpdateContractFormInput!
+    $condition: ModelContractFormConditionInput
+  ) {
+    updateContractForm(input: $input, condition: $condition) {
+      id
+      empID
+      conAttn
+      depHead
+      hrManager
+      genManager
+      remarks
+      contStatus
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteContractForm = /* GraphQL */ `
+  mutation DeleteContractForm(
+    $input: DeleteContractFormInput!
+    $condition: ModelContractFormConditionInput
+  ) {
+    deleteContractForm(input: $input, condition: $condition) {
+      id
+      empID
+      conAttn
+      depHead
+      hrManager
+      genManager
+      remarks
+      contStatus
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createKeyValueStore = /* GraphQL */ `
+  mutation CreateKeyValueStore(
+    $input: CreateKeyValueStoreInput!
+    $condition: ModelKeyValueStoreConditionInput
+  ) {
+    createKeyValueStore(input: $input, condition: $condition) {
+      id
+      departmentDD
+      positionDD
+      jobCatDD
+      raceDD
+      religionDD
+      nationalityDD
+      countryORDD
+      educLevelDD
+      workStatusDD
+      relationshipDD
+      resignNotifProbDD
+      termiNotifProbDD
+      resignNotifConfDD
+      termiNotifConfDD
+      workPermitDD
+      insuHSDD
+      insuClaimDD
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateKeyValueStore = /* GraphQL */ `
+  mutation UpdateKeyValueStore(
+    $input: UpdateKeyValueStoreInput!
+    $condition: ModelKeyValueStoreConditionInput
+  ) {
+    updateKeyValueStore(input: $input, condition: $condition) {
+      id
+      departmentDD
+      positionDD
+      jobCatDD
+      raceDD
+      religionDD
+      nationalityDD
+      countryORDD
+      educLevelDD
+      workStatusDD
+      relationshipDD
+      resignNotifProbDD
+      termiNotifProbDD
+      resignNotifConfDD
+      termiNotifConfDD
+      workPermitDD
+      insuHSDD
+      insuClaimDD
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteKeyValueStore = /* GraphQL */ `
+  mutation DeleteKeyValueStore(
+    $input: DeleteKeyValueStoreInput!
+    $condition: ModelKeyValueStoreConditionInput
+  ) {
+    deleteKeyValueStore(input: $input, condition: $condition) {
+      id
+      departmentDD
+      positionDD
+      jobCatDD
+      raceDD
+      religionDD
+      nationalityDD
+      countryORDD
+      educLevelDD
+      workStatusDD
+      relationshipDD
+      resignNotifProbDD
+      termiNotifProbDD
+      resignNotifConfDD
+      termiNotifConfDD
+      workPermitDD
+      insuHSDD
+      insuClaimDD
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createTimeSheet = /* GraphQL */ `
+  mutation CreateTimeSheet(
+    $input: CreateTimeSheetInput!
+    $condition: ModelTimeSheetConditionInput
+  ) {
+    createTimeSheet(input: $input, condition: $condition) {
+      id
+      date
+      status
+      fileName
+      fileType
+      assignTo
+      assignBy
+      empName
+      empBadgeNo
+      empID
+      empDept
+      inTime
+      outTime
+      totalInOut
+      allDayHrs
+      totalHrs
+      remarks
+      otTime
+      netMins
+      actualWorkHrs
+      normalWorkHrs
+      fidNo
+      companyName
+      trade
+      tradeCode
+      onAM
+      offAM
+      onPM
+      offPM
+      ctr
+      rec
+      avgDailyTD
+      highlightDayTG
+      aweSDN
+      totalNT
+      totalOT
+      totalNTOT
+      empWorkInfo
+      fromDate
+      untilDate
+      location
+      mealAllow
+      verify
+      bpCompany
+      earliestEntryTime
+      latestEntryTime
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateTimeSheet = /* GraphQL */ `
+  mutation UpdateTimeSheet(
+    $input: UpdateTimeSheetInput!
+    $condition: ModelTimeSheetConditionInput
+  ) {
+    updateTimeSheet(input: $input, condition: $condition) {
+      id
+      date
+      status
+      fileName
+      fileType
+      assignTo
+      assignBy
+      empName
+      empBadgeNo
+      empID
+      empDept
+      inTime
+      outTime
+      totalInOut
+      allDayHrs
+      totalHrs
+      remarks
+      otTime
+      netMins
+      actualWorkHrs
+      normalWorkHrs
+      fidNo
+      companyName
+      trade
+      tradeCode
+      onAM
+      offAM
+      onPM
+      offPM
+      ctr
+      rec
+      avgDailyTD
+      highlightDayTG
+      aweSDN
+      totalNT
+      totalOT
+      totalNTOT
+      empWorkInfo
+      fromDate
+      untilDate
+      location
+      mealAllow
+      verify
+      bpCompany
+      earliestEntryTime
+      latestEntryTime
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteTimeSheet = /* GraphQL */ `
+  mutation DeleteTimeSheet(
+    $input: DeleteTimeSheetInput!
+    $condition: ModelTimeSheetConditionInput
+  ) {
+    deleteTimeSheet(input: $input, condition: $condition) {
+      id
+      date
+      status
+      fileName
+      fileType
+      assignTo
+      assignBy
+      empName
+      empBadgeNo
+      empID
+      empDept
+      inTime
+      outTime
+      totalInOut
+      allDayHrs
+      totalHrs
+      remarks
+      otTime
+      netMins
+      actualWorkHrs
+      normalWorkHrs
+      fidNo
+      companyName
+      trade
+      tradeCode
+      onAM
+      offAM
+      onPM
+      offPM
+      ctr
+      rec
+      avgDailyTD
+      highlightDayTG
+      aweSDN
+      totalNT
+      totalOT
+      totalNTOT
+      empWorkInfo
+      fromDate
+      untilDate
+      location
+      mealAllow
+      verify
+      bpCompany
+      earliestEntryTime
+      latestEntryTime
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createHiringJob = /* GraphQL */ `
   mutation CreateHiringJob(
     $input: CreateHiringJobInput!
@@ -364,31 +688,37 @@ export const createProbForm = /* GraphQL */ `
       commitment
       communication
       deadline
-      department
       diligent
-      doj
-      empBadgeNo
-      extendedProbationEndDate
       extensionPeriod
-      gmApproved
       gmDate
       hrDate
       hrName
       initiative
-      managerApproved
       managerDate
       managerName
-      name
       pace
-      position
-      probationEnd
       quality
       recommendation
       responsibility
-      supervisorApproved
       supervisorDate
       supervisorName
       teamwork
+      extendProbED
+      gmApproved
+      managerApproved
+      supervisorApproved
+      communicationDetails
+      qualityDetails
+      paceDetails
+      initiativeDetails
+      attitudeDetails
+      adaptabilityDetails
+      teamworkDetails
+      responsibilityDetails
+      diligentDetails
+      commitmentDetails
+      probStatus
+      gmName
       createdAt
       updatedAt
       __typename
@@ -410,31 +740,37 @@ export const updateProbForm = /* GraphQL */ `
       commitment
       communication
       deadline
-      department
       diligent
-      doj
-      empBadgeNo
-      extendedProbationEndDate
       extensionPeriod
-      gmApproved
       gmDate
       hrDate
       hrName
       initiative
-      managerApproved
       managerDate
       managerName
-      name
       pace
-      position
-      probationEnd
       quality
       recommendation
       responsibility
-      supervisorApproved
       supervisorDate
       supervisorName
       teamwork
+      extendProbED
+      gmApproved
+      managerApproved
+      supervisorApproved
+      communicationDetails
+      qualityDetails
+      paceDetails
+      initiativeDetails
+      attitudeDetails
+      adaptabilityDetails
+      teamworkDetails
+      responsibilityDetails
+      diligentDetails
+      commitmentDetails
+      probStatus
+      gmName
       createdAt
       updatedAt
       __typename
@@ -456,31 +792,37 @@ export const deleteProbForm = /* GraphQL */ `
       commitment
       communication
       deadline
-      department
       diligent
-      doj
-      empBadgeNo
-      extendedProbationEndDate
       extensionPeriod
-      gmApproved
       gmDate
       hrDate
       hrName
       initiative
-      managerApproved
       managerDate
       managerName
-      name
       pace
-      position
-      probationEnd
       quality
       recommendation
       responsibility
-      supervisorApproved
       supervisorDate
       supervisorName
       teamwork
+      extendProbED
+      gmApproved
+      managerApproved
+      supervisorApproved
+      communicationDetails
+      qualityDetails
+      paceDetails
+      initiativeDetails
+      attitudeDetails
+      adaptabilityDetails
+      teamworkDetails
+      responsibilityDetails
+      diligentDetails
+      commitmentDetails
+      probStatus
+      gmName
       createdAt
       updatedAt
       __typename
@@ -547,261 +889,6 @@ export const deleteEmailNotifi = /* GraphQL */ `
     }
   }
 `;
-export const createOffshoreSheet = /* GraphQL */ `
-  mutation CreateOffshoreSheet(
-    $input: CreateOffshoreSheetInput!
-    $condition: ModelOffshoreSheetConditionInput
-  ) {
-    createOffshoreSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateOffshoreSheet = /* GraphQL */ `
-  mutation UpdateOffshoreSheet(
-    $input: UpdateOffshoreSheetInput!
-    $condition: ModelOffshoreSheetConditionInput
-  ) {
-    updateOffshoreSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteOffshoreSheet = /* GraphQL */ `
-  mutation DeleteOffshoreSheet(
-    $input: DeleteOffshoreSheetInput!
-    $condition: ModelOffshoreSheetConditionInput
-  ) {
-    deleteOffshoreSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createORMCSheet = /* GraphQL */ `
-  mutation CreateORMCSheet(
-    $input: CreateORMCSheetInput!
-    $condition: ModelORMCSheetConditionInput
-  ) {
-    createORMCSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateORMCSheet = /* GraphQL */ `
-  mutation UpdateORMCSheet(
-    $input: UpdateORMCSheetInput!
-    $condition: ModelORMCSheetConditionInput
-  ) {
-    updateORMCSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteORMCSheet = /* GraphQL */ `
-  mutation DeleteORMCSheet(
-    $input: DeleteORMCSheetInput!
-    $condition: ModelORMCSheetConditionInput
-  ) {
-    deleteORMCSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createSBWSheet = /* GraphQL */ `
-  mutation CreateSBWSheet(
-    $input: CreateSBWSheetInput!
-    $condition: ModelSBWSheetConditionInput
-  ) {
-    createSBWSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateSBWSheet = /* GraphQL */ `
-  mutation UpdateSBWSheet(
-    $input: UpdateSBWSheetInput!
-    $condition: ModelSBWSheetConditionInput
-  ) {
-    updateSBWSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteSBWSheet = /* GraphQL */ `
-  mutation DeleteSBWSheet(
-    $input: DeleteSBWSheetInput!
-    $condition: ModelSBWSheetConditionInput
-  ) {
-    deleteSBWSheet(input: $input, condition: $condition) {
-      id
-      date
-      dailySheet
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createBlng = /* GraphQL */ `
-  mutation CreateBlng(
-    $input: CreateBlngInput!
-    $condition: ModelBlngConditionInput
-  ) {
-    createBlng(input: $input, condition: $condition) {
-      id
-      weeklySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateBlng = /* GraphQL */ `
-  mutation UpdateBlng(
-    $input: UpdateBlngInput!
-    $condition: ModelBlngConditionInput
-  ) {
-    updateBlng(input: $input, condition: $condition) {
-      id
-      weeklySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteBlng = /* GraphQL */ `
-  mutation DeleteBlng(
-    $input: DeleteBlngInput!
-    $condition: ModelBlngConditionInput
-  ) {
-    deleteBlng(input: $input, condition: $condition) {
-      id
-      weeklySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createHeadOffice = /* GraphQL */ `
-  mutation CreateHeadOffice(
-    $input: CreateHeadOfficeInput!
-    $condition: ModelHeadOfficeConditionInput
-  ) {
-    createHeadOffice(input: $input, condition: $condition) {
-      id
-      dailySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateHeadOffice = /* GraphQL */ `
-  mutation UpdateHeadOffice(
-    $input: UpdateHeadOfficeInput!
-    $condition: ModelHeadOfficeConditionInput
-  ) {
-    updateHeadOffice(input: $input, condition: $condition) {
-      id
-      dailySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteHeadOffice = /* GraphQL */ `
-  mutation DeleteHeadOffice(
-    $input: DeleteHeadOfficeInput!
-    $condition: ModelHeadOfficeConditionInput
-  ) {
-    deleteHeadOffice(input: $input, condition: $condition) {
-      id
-      dailySheet
-      date
-      status
-      manager
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const createEmpRequisition = /* GraphQL */ `
   mutation CreateEmpRequisition(
     $input: CreateEmpRequisitionInput!
@@ -823,6 +910,7 @@ export const createEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
+      requestDate
       createdAt
       updatedAt
       __typename
@@ -850,6 +938,7 @@ export const updateEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
+      requestDate
       createdAt
       updatedAt
       __typename
@@ -877,6 +966,7 @@ export const deleteEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
+      requestDate
       createdAt
       updatedAt
       __typename
@@ -891,12 +981,8 @@ export const createWeldingInfo = /* GraphQL */ `
     createWeldingInfo(input: $input, condition: $condition) {
       id
       empID
-      department
       diameterRange
-      empBadgeNo
-      empName
       fillerMetal
-      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -922,12 +1008,8 @@ export const updateWeldingInfo = /* GraphQL */ `
     updateWeldingInfo(input: $input, condition: $condition) {
       id
       empID
-      department
       diameterRange
-      empBadgeNo
-      empName
       fillerMetal
-      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -953,12 +1035,8 @@ export const deleteWeldingInfo = /* GraphQL */ `
     deleteWeldingInfo(input: $input, condition: $condition) {
       id
       empID
-      department
       diameterRange
-      empBadgeNo
-      empName
       fillerMetal
-      position
       thicknessRange
       weldingStampNor
       wpsNumber
@@ -970,6 +1048,66 @@ export const deleteWeldingInfo = /* GraphQL */ `
       WQRNo
       weldingCode
       weldingMaterial
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createBastingPaint = /* GraphQL */ `
+  mutation CreateBastingPaint(
+    $input: CreateBastingPaintInput!
+    $condition: ModelBastingPaintConditionInput
+  ) {
+    createBastingPaint(input: $input, condition: $condition) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateBastingPaint = /* GraphQL */ `
+  mutation UpdateBastingPaint(
+    $input: UpdateBastingPaintInput!
+    $condition: ModelBastingPaintConditionInput
+  ) {
+    updateBastingPaint(input: $input, condition: $condition) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteBastingPaint = /* GraphQL */ `
+  mutation DeleteBastingPaint(
+    $input: DeleteBastingPaintInput!
+    $condition: ModelBastingPaintConditionInput
+  ) {
+    deleteBastingPaint(input: $input, condition: $condition) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
       createdAt
       updatedAt
       __typename
@@ -989,14 +1127,14 @@ export const createTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      purchaseONo
-      traineeCourseCode
-      traineeCourseName
-      traineeCompany
+      courseCode
+      courseName
+      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1016,14 +1154,14 @@ export const updateTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      purchaseONo
-      traineeCourseCode
-      traineeCourseName
-      traineeCompany
+      courseCode
+      courseName
+      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1043,14 +1181,14 @@ export const deleteTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      purchaseONo
-      traineeCourseCode
-      traineeCourseName
-      traineeCompany
+      courseCode
+      courseName
+      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      mediRequired
       createdAt
       updatedAt
       __typename
@@ -1065,13 +1203,12 @@ export const createTrainingCertificates = /* GraphQL */ `
     createTrainingCertificates(input: $input, condition: $condition) {
       id
       empID
-      courseCode
-      courseName
-      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
+      poNo
+      addDescretion
       createdAt
       updatedAt
       __typename
@@ -1086,13 +1223,12 @@ export const updateTrainingCertificates = /* GraphQL */ `
     updateTrainingCertificates(input: $input, condition: $condition) {
       id
       empID
-      courseCode
-      courseName
-      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
+      poNo
+      addDescretion
       createdAt
       updatedAt
       __typename
@@ -1107,13 +1243,12 @@ export const deleteTrainingCertificates = /* GraphQL */ `
     deleteTrainingCertificates(input: $input, condition: $condition) {
       id
       empID
-      courseCode
-      courseName
-      company
       certifiExpiry
       eCertifiDate
       trainingUpCertifi
       orgiCertifiDate
+      poNo
+      addDescretion
       createdAt
       updatedAt
       __typename
@@ -1629,6 +1764,15 @@ export const createWPTracking = /* GraphQL */ `
       agentname
       mobSignDate
       mobFile
+      doerefno
+      sawpDate
+      sawpRecivedDate
+      sawpFile
+      lbrDepoNum
+      lbrEndroseDate
+      lbrDepoAmount
+      lbrFile
+      remarkNLMob
       createdAt
       updatedAt
       __typename
@@ -1682,6 +1826,15 @@ export const updateWPTracking = /* GraphQL */ `
       agentname
       mobSignDate
       mobFile
+      doerefno
+      sawpDate
+      sawpRecivedDate
+      sawpFile
+      lbrDepoNum
+      lbrEndroseDate
+      lbrDepoAmount
+      lbrFile
+      remarkNLMob
       createdAt
       updatedAt
       __typename
@@ -1735,6 +1888,15 @@ export const deleteWPTracking = /* GraphQL */ `
       agentname
       mobSignDate
       mobFile
+      doerefno
+      sawpDate
+      sawpRecivedDate
+      sawpFile
+      lbrDepoNum
+      lbrEndroseDate
+      lbrDepoAmount
+      lbrFile
+      remarkNLMob
       createdAt
       updatedAt
       __typename
@@ -1972,14 +2134,9 @@ export const createEmpLeaveDetails = /* GraphQL */ `
       sickLeave
       sickLeaveDate
       hospLeave
-      remainingAnualLeave
-      remainingSickLeave
-      remainingMateLeave
-      remainingMrageLeave
-      remainingPaternityLeave
-      remainingHosLeave
-      remainingCompasLeave
-      unPaidAuthorize
+      pervAnnualLeaveBal
+      sickLeaveTaken
+      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -2007,14 +2164,9 @@ export const updateEmpLeaveDetails = /* GraphQL */ `
       sickLeave
       sickLeaveDate
       hospLeave
-      remainingAnualLeave
-      remainingSickLeave
-      remainingMateLeave
-      remainingMrageLeave
-      remainingPaternityLeave
-      remainingHosLeave
-      remainingCompasLeave
-      unPaidAuthorize
+      pervAnnualLeaveBal
+      sickLeaveTaken
+      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -2042,14 +2194,9 @@ export const deleteEmpLeaveDetails = /* GraphQL */ `
       sickLeave
       sickLeaveDate
       hospLeave
-      remainingAnualLeave
-      remainingSickLeave
-      remainingMateLeave
-      remainingMrageLeave
-      remainingPaternityLeave
-      remainingHosLeave
-      remainingCompasLeave
-      unPaidAuthorize
+      pervAnnualLeaveBal
+      sickLeaveTaken
+      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -2549,6 +2696,25 @@ export const createCandIToEMP = /* GraphQL */ `
       salaryExpectation
       supportInfo
       workExperience
+      mobSignDate
+      mobFile
+      paafApproveDate
+      paafFile
+      loiIssueDate
+      loiAcceptDate
+      loiDeclineDate
+      declineReason
+      loiFile
+      cvecApproveDate
+      cvecFile
+      uploadCertificate
+      pcNoticePeriod
+      venue
+      managerBadgeNo
+      message
+      interType
+      interTime
+      interDate
       createdAt
       updatedAt
       __typename
@@ -2580,6 +2746,25 @@ export const updateCandIToEMP = /* GraphQL */ `
       salaryExpectation
       supportInfo
       workExperience
+      mobSignDate
+      mobFile
+      paafApproveDate
+      paafFile
+      loiIssueDate
+      loiAcceptDate
+      loiDeclineDate
+      declineReason
+      loiFile
+      cvecApproveDate
+      cvecFile
+      uploadCertificate
+      pcNoticePeriod
+      venue
+      managerBadgeNo
+      message
+      interType
+      interTime
+      interDate
       createdAt
       updatedAt
       __typename
@@ -2611,6 +2796,25 @@ export const deleteCandIToEMP = /* GraphQL */ `
       salaryExpectation
       supportInfo
       workExperience
+      mobSignDate
+      mobFile
+      paafApproveDate
+      paafFile
+      loiIssueDate
+      loiAcceptDate
+      loiDeclineDate
+      declineReason
+      loiFile
+      cvecApproveDate
+      cvecFile
+      uploadCertificate
+      pcNoticePeriod
+      venue
+      managerBadgeNo
+      message
+      interType
+      interTime
+      interDate
       createdAt
       updatedAt
       __typename
@@ -2711,6 +2915,7 @@ export const createInterviewSchedule = /* GraphQL */ `
       department
       otherDepartment
       status
+      empID
       createdAt
       updatedAt
       __typename
@@ -2736,6 +2941,7 @@ export const updateInterviewSchedule = /* GraphQL */ `
       department
       otherDepartment
       status
+      empID
       createdAt
       updatedAt
       __typename
@@ -2761,6 +2967,7 @@ export const deleteInterviewSchedule = /* GraphQL */ `
       department
       otherDepartment
       status
+      empID
       createdAt
       updatedAt
       __typename
@@ -3093,6 +3300,10 @@ export const createTicketRequest = /* GraphQL */ `
       hrRemarks
       hrName
       hrEmpID
+      from
+      to
+      fromDate
+      toDate
       createdAt
       updatedAt
       __typename
@@ -3119,6 +3330,10 @@ export const updateTicketRequest = /* GraphQL */ `
       hrRemarks
       hrName
       hrEmpID
+      from
+      to
+      fromDate
+      toDate
       createdAt
       updatedAt
       __typename
@@ -3145,6 +3360,10 @@ export const deleteTicketRequest = /* GraphQL */ `
       hrRemarks
       hrName
       hrEmpID
+      from
+      to
+      fromDate
+      toDate
       createdAt
       updatedAt
       __typename
@@ -3179,6 +3398,10 @@ export const createLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
+      selectedFrom
+      selectedTo
+      startDate
+      endDate
       createdAt
       updatedAt
       __typename
@@ -3213,6 +3436,10 @@ export const updateLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
+      selectedFrom
+      selectedTo
+      startDate
+      endDate
       createdAt
       updatedAt
       __typename
@@ -3247,6 +3474,10 @@ export const deleteLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
+      selectedFrom
+      selectedTo
+      startDate
+      endDate
       createdAt
       updatedAt
       __typename

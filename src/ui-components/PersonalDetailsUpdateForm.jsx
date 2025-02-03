@@ -388,7 +388,7 @@ export default function PersonalDetailsUpdateForm(props) {
     gender: [],
     lang: [],
     marital: [],
-    name: [],
+    name: [{ type: "Required" }],
     nationality: [],
     otherNation: [],
     otherRace: [],
@@ -400,7 +400,7 @@ export default function PersonalDetailsUpdateForm(props) {
     presentAddress: [],
     permanentAddress: [],
     profilePhoto: [],
-    position: [],
+    position: [{ type: "Required" }],
     race: [],
     religion: [],
     status: [],
@@ -452,7 +452,7 @@ export default function PersonalDetailsUpdateForm(props) {
           gender: gender ?? null,
           lang: lang ?? null,
           marital: marital ?? null,
-          name: name ?? null,
+          name,
           nationality: nationality ?? null,
           otherNation: otherNation ?? null,
           otherRace: otherRace ?? null,
@@ -464,7 +464,7 @@ export default function PersonalDetailsUpdateForm(props) {
           presentAddress: presentAddress ?? null,
           permanentAddress: permanentAddress ?? null,
           profilePhoto: profilePhoto ?? null,
-          position: position ?? null,
+          position,
           race: race ?? null,
           religion: religion ?? null,
           status: status ?? null,
@@ -1772,7 +1772,7 @@ export default function PersonalDetailsUpdateForm(props) {
       ></TextField>
       <TextField
         label="Name"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={name}
         onChange={(e) => {
@@ -2492,7 +2492,7 @@ export default function PersonalDetailsUpdateForm(props) {
       ></TextField>
       <TextField
         label="Position"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={position}
         onChange={(e) => {

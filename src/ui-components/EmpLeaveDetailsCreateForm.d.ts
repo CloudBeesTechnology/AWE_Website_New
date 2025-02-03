@@ -36,14 +36,9 @@ export declare type EmpLeaveDetailsCreateFormInputValues = {
     sickLeave?: string;
     sickLeaveDate?: string;
     hospLeave?: string;
-    remainingAnualLeave?: string;
-    remainingSickLeave?: string;
-    remainingMateLeave?: string;
-    remainingMrageLeave?: string;
-    remainingPaternityLeave?: string;
-    remainingHosLeave?: string;
-    remainingCompasLeave?: string;
-    unPaidAuthorize?: string;
+    pervAnnualLeaveBal?: string;
+    sickLeaveTaken?: string;
+    remainAnnualLeave?: string;
 };
 export declare type EmpLeaveDetailsCreateFormValidationValues = {
     empID?: ValidationFunction<string>;
@@ -60,14 +55,9 @@ export declare type EmpLeaveDetailsCreateFormValidationValues = {
     sickLeave?: ValidationFunction<string>;
     sickLeaveDate?: ValidationFunction<string>;
     hospLeave?: ValidationFunction<string>;
-    remainingAnualLeave?: ValidationFunction<string>;
-    remainingSickLeave?: ValidationFunction<string>;
-    remainingMateLeave?: ValidationFunction<string>;
-    remainingMrageLeave?: ValidationFunction<string>;
-    remainingPaternityLeave?: ValidationFunction<string>;
-    remainingHosLeave?: ValidationFunction<string>;
-    remainingCompasLeave?: ValidationFunction<string>;
-    unPaidAuthorize?: ValidationFunction<string>;
+    pervAnnualLeaveBal?: ValidationFunction<string>;
+    sickLeaveTaken?: ValidationFunction<string>;
+    remainAnnualLeave?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type EmpLeaveDetailsCreateFormOverridesProps = {
@@ -86,14 +76,9 @@ export declare type EmpLeaveDetailsCreateFormOverridesProps = {
     sickLeave?: PrimitiveOverrideProps<TextFieldProps>;
     sickLeaveDate?: PrimitiveOverrideProps<TextFieldProps>;
     hospLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    remainingAnualLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    remainingSickLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    remainingMateLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    remainingMrageLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    remainingPaternityLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    remainingHosLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    remainingCompasLeave?: PrimitiveOverrideProps<TextFieldProps>;
-    unPaidAuthorize?: PrimitiveOverrideProps<TextFieldProps>;
+    pervAnnualLeaveBal?: PrimitiveOverrideProps<TextFieldProps>;
+    sickLeaveTaken?: PrimitiveOverrideProps<TextFieldProps>;
+    remainAnnualLeave?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type EmpLeaveDetailsCreateFormProps = React.PropsWithChildren<{
     overrides?: EmpLeaveDetailsCreateFormOverridesProps | undefined | null;

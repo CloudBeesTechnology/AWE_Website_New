@@ -365,7 +365,7 @@ export default function PersonalDetailsCreateForm(props) {
     gender: [],
     lang: [],
     marital: [],
-    name: [],
+    name: [{ type: "Required" }],
     nationality: [],
     otherNation: [],
     otherRace: [],
@@ -377,7 +377,7 @@ export default function PersonalDetailsCreateForm(props) {
     presentAddress: [],
     permanentAddress: [],
     profilePhoto: [],
-    position: [],
+    position: [{ type: "Required" }],
     race: [],
     religion: [],
     status: [],
@@ -1751,7 +1751,7 @@ export default function PersonalDetailsCreateForm(props) {
       ></TextField>
       <TextField
         label="Name"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={name}
         onChange={(e) => {
@@ -2471,7 +2471,7 @@ export default function PersonalDetailsCreateForm(props) {
       ></TextField>
       <TextField
         label="Position"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={position}
         onChange={(e) => {
