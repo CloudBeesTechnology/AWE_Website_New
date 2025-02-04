@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 import { ImageGrid } from './pages/gallery/ImageGrid';
 import Achievements from './Component/Organization/Achievements';
 import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides } from "./pages/gallery/ImageContainer"; // Ensure the correct path
+import { CheckingUpload } from './Component/CheckingUpload';
 
 
 
@@ -43,6 +44,7 @@ export const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" Component={Home} />
+        <Route path="/checkingUpload" Component={CheckingUpload} />
         {/* <Route path="/ourWorkForce" Component={OurWorkForce} /> */}
         <Route path="/about" Component={About} />
         <Route path="/ourVision" Component={OurVision} />
