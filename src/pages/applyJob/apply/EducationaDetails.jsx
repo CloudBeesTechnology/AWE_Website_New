@@ -12,7 +12,7 @@ export const EducationDetails = () => {
   const location = useLocation();
   const [navigateEduData,setNavigateEduData]=useState("")
   const navigatingPersonalData = location.state?.FormData;
-  // console.log("Received form data:", navigatingPersonalData );
+  console.log("Received form data:", navigatingPersonalData );
   useEffect(()=>{
     window.scrollTo({
       top:0,

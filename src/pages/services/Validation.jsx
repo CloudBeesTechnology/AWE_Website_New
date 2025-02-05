@@ -1,16 +1,16 @@
 import * as Yup from "yup";
 
 export const ApplicantSchema = Yup.object({
-  profilePhoto: Yup.mixed()
-    .required("Upload Photo is mandatory")
-    .test("fileType", "Profile photo must be a JPG or PNG file", (value) =>
-      value ? /\.(jpg|jpeg|png)$/.test(value.name) : false
-    ),
-    agent: Yup.string().notRequired(),
+  // profilePhoto: Yup.mixed()
+  //   .required("Upload Photo is mandatory")
+  //   .test("fileType", "Profile photo must be a JPG or PNG file", (value) =>
+  //     value ? /\.(jpg|jpeg|png)$/.test(value.name) : false
+  //   ),
+    // agent: Yup.string().notRequired(),
 
-  position: Yup.string().required("Position is mandatory"),
-  contractType: Yup.string().required("Contract Type mandatory"),
-  employeeType: Yup.string().required("Employee Type mandatory"),
+  // position: Yup.string().required("Position is mandatory"),
+  // contractType: Yup.string().required("Contract Type mandatory"),
+  // employeeType: Yup.string().required("Employee Type mandatory"),
   name: Yup.string()
     .min(3, "Name must be at least 3 characters")
     .required("Name is mandatory"),
