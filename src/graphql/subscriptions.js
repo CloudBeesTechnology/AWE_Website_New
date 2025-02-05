@@ -145,63 +145,6 @@ export const onDeleteKeyValueStore = /* GraphQL */ `
     }
   }
 `;
-export const onCreateBastingPaint = /* GraphQL */ `
-  subscription OnCreateBastingPaint(
-    $filter: ModelSubscriptionBastingPaintFilterInput
-  ) {
-    onCreateBastingPaint(filter: $filter) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateBastingPaint = /* GraphQL */ `
-  subscription OnUpdateBastingPaint(
-    $filter: ModelSubscriptionBastingPaintFilterInput
-  ) {
-    onUpdateBastingPaint(filter: $filter) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteBastingPaint = /* GraphQL */ `
-  subscription OnDeleteBastingPaint(
-    $filter: ModelSubscriptionBastingPaintFilterInput
-  ) {
-    onDeleteBastingPaint(filter: $filter) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const onCreateTimeSheet = /* GraphQL */ `
   subscription OnCreateTimeSheet(
     $filter: ModelSubscriptionTimeSheetFilterInput
@@ -250,6 +193,9 @@ export const onCreateTimeSheet = /* GraphQL */ `
       location
       mealAllow
       verify
+      bpCompany
+      earliestEntryTime
+      latestEntryTime
       createdAt
       updatedAt
       __typename
@@ -304,6 +250,9 @@ export const onUpdateTimeSheet = /* GraphQL */ `
       location
       mealAllow
       verify
+      bpCompany
+      earliestEntryTime
+      latestEntryTime
       createdAt
       updatedAt
       __typename
@@ -358,6 +307,9 @@ export const onDeleteTimeSheet = /* GraphQL */ `
       location
       mealAllow
       verify
+      bpCompany
+      earliestEntryTime
+      latestEntryTime
       createdAt
       updatedAt
       __typename
@@ -903,6 +855,7 @@ export const onCreateEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
+      requestDate
       createdAt
       updatedAt
       __typename
@@ -929,6 +882,7 @@ export const onUpdateEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
+      requestDate
       createdAt
       updatedAt
       __typename
@@ -955,6 +909,7 @@ export const onDeleteEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
+      requestDate
       createdAt
       updatedAt
       __typename
@@ -1039,6 +994,63 @@ export const onDeleteWeldingInfo = /* GraphQL */ `
     }
   }
 `;
+export const onCreateBastingPaint = /* GraphQL */ `
+  subscription OnCreateBastingPaint(
+    $filter: ModelSubscriptionBastingPaintFilterInput
+  ) {
+    onCreateBastingPaint(filter: $filter) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateBastingPaint = /* GraphQL */ `
+  subscription OnUpdateBastingPaint(
+    $filter: ModelSubscriptionBastingPaintFilterInput
+  ) {
+    onUpdateBastingPaint(filter: $filter) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteBastingPaint = /* GraphQL */ `
+  subscription OnDeleteBastingPaint(
+    $filter: ModelSubscriptionBastingPaintFilterInput
+  ) {
+    onDeleteBastingPaint(filter: $filter) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onCreateTrainingReq = /* GraphQL */ `
   subscription OnCreateTrainingReq(
     $filter: ModelSubscriptionTrainingReqFilterInput
@@ -1051,13 +1063,13 @@ export const onCreateTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
+      courseCode
+      courseName
+      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      courseCode
-      courseName
-      company
       mediRequired
       createdAt
       updatedAt
@@ -1077,13 +1089,13 @@ export const onUpdateTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
+      courseCode
+      courseName
+      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      courseCode
-      courseName
-      company
       mediRequired
       createdAt
       updatedAt
@@ -1103,13 +1115,13 @@ export const onDeleteTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
+      courseCode
+      courseName
+      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
-      courseCode
-      courseName
-      company
       mediRequired
       createdAt
       updatedAt
@@ -2020,6 +2032,8 @@ export const onCreateEmpLeaveDetails = /* GraphQL */ `
       sickLeaveDate
       hospLeave
       pervAnnualLeaveBal
+      sickLeaveTaken
+      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -2047,6 +2061,8 @@ export const onUpdateEmpLeaveDetails = /* GraphQL */ `
       sickLeaveDate
       hospLeave
       pervAnnualLeaveBal
+      sickLeaveTaken
+      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -2074,6 +2090,8 @@ export const onDeleteEmpLeaveDetails = /* GraphQL */ `
       sickLeaveDate
       hospLeave
       pervAnnualLeaveBal
+      sickLeaveTaken
+      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -3235,8 +3253,8 @@ export const onCreateLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
-      selectedTo
       selectedFrom
+      selectedTo
       startDate
       endDate
       createdAt
@@ -3272,8 +3290,8 @@ export const onUpdateLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
-      selectedTo
       selectedFrom
+      selectedTo
       startDate
       endDate
       createdAt
@@ -3309,8 +3327,8 @@ export const onDeleteLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
-      selectedTo
       selectedFrom
+      selectedTo
       startDate
       endDate
       createdAt

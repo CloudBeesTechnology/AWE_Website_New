@@ -1,14 +1,14 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-aweadininprod-prod-954b8-authRole",
-      "UnauthRoleArn": "arn:aws:iam::050451362111:role/amplify-aweadininprod-prod-954b8-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::050451362111:role/amplify-aweadininprod-prod-954b8-authRole",
+      "AuthRoleName": "amplify-aweadininprod-dev-0d7e6-authRole",
+      "UnauthRoleArn": "arn:aws:iam::050451362111:role/amplify-aweadininprod-dev-0d7e6-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::050451362111:role/amplify-aweadininprod-dev-0d7e6-authRole",
       "Region": "ap-southeast-1",
-      "DeploymentBucketName": "amplify-aweadininprod-prod-954b8-deployment",
-      "UnauthRoleName": "amplify-aweadininprod-prod-954b8-unauthRole",
-      "StackName": "amplify-aweadininprod-prod-954b8",
-      "StackId": "arn:aws:cloudformation:ap-southeast-1:050451362111:stack/amplify-aweadininprod-prod-954b8/e96ed290-b304-11ef-acbb-06cd33205309",
+      "DeploymentBucketName": "amplify-aweadininprod-dev-0d7e6-deployment",
+      "UnauthRoleName": "amplify-aweadininprod-dev-0d7e6-unauthRole",
+      "StackName": "amplify-aweadininprod-dev-0d7e6",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:050451362111:stack/amplify-aweadininprod-dev-0d7e6/e3f77240-b205-11ef-a4c6-0a2587cef6eb",
       "AmplifyAppId": "d2hzijaif5orcr"
     }
   },
@@ -30,18 +30,18 @@
             }
           }
         },
-        "GraphQLAPIIdOutput": "itr6t57p4rbqtn7tnqmc42thby",
-        "GraphQLAPIEndpointOutput": "https://se7jlrezlbfqtbhgbur2ho7nve.appsync-api.ap-southeast-1.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-sozeonqiyngqlfvqerog7rsnvm"
+        "GraphQLAPIIdOutput": "4lx6ecjkhvgn3lpj7lfam6varu",
+        "GraphQLAPIEndpointOutput": "https://kdrzlqqlura3fo46tnrlggahom.appsync-api.ap-southeast-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-sspe2vai35byznwqjdbrdk4azi"
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2025-02-04T09:23:29.740Z",
+      "lastPushTimeStamp": "2025-02-04T09:30:45.127Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-prod-954b8-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-dev-0d7e6-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiaweadininprod"
       },
-      "lastPushDirHash": "sIrXSr6zUIOhpH8ICfSeJsnv1Zc="
+      "lastPushDirHash": "lPvm+bak41alI4oqk3Gvhn+nV14="
     }
   },
   "auth": {
@@ -69,17 +69,17 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito",
       "output": {
-        "UserPoolId": "ap-southeast-1_G6lnUXy44",
-        "AppClientIDWeb": "73hgijbc7ar7kb2f06ooah6bbo",
-        "AppClientID": "5dos8iptgpcoc5krbqsh57sb4t",
-        "IdentityPoolId": "ap-southeast-1:a7922744-4c59-4979-b386-13e05591c7cd",
-        "UserPoolArn": "arn:aws:cognito-idp:ap-southeast-1:050451362111:userpool/ap-southeast-1_G6lnUXy44",
-        "IdentityPoolName": "aweadininprod215ef038_identitypool_215ef038__prod",
+        "UserPoolId": "ap-southeast-1_9QTjupyAC",
+        "AppClientIDWeb": "6se1gnmd35t8pnno4m0uuoh8hn",
+        "AppClientID": "7l7m8e7cdj3qamfjfoia3f40ti",
+        "IdentityPoolId": "ap-southeast-1:e56cfd27-033f-43fb-adde-11fd9ef2aeda",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-southeast-1:050451362111:userpool/ap-southeast-1_9QTjupyAC",
+        "IdentityPoolName": "aweadininprod215ef038_identitypool_215ef038__dev",
         "UserPoolName": "aweadininprod215ef038_userpool_215ef038"
       },
-      "lastPushTimeStamp": "2025-02-04T09:23:29.615Z",
+      "lastPushTimeStamp": "2025-02-04T09:30:44.985Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-prod-954b8-deployment/amplify-cfn-templates/auth/aweadininprod215ef038-cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-dev-0d7e6-deployment/amplify-cfn-templates/auth/aweadininprod215ef038-cloudformation-template.json",
         "logicalId": "authaweadininprod215ef038"
       }
     }
@@ -90,12 +90,12 @@
       "providerPlugin": "awscloudformation",
       "service": "S3",
       "output": {
-        "BucketName": "aweadininprod2024954b8-prod",
+        "BucketName": "aweadininprod20240d7e6-dev",
         "Region": "ap-southeast-1"
       },
-      "lastPushTimeStamp": "2025-02-04T09:23:29.617Z",
+      "lastPushTimeStamp": "2025-02-04T09:30:44.986Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-prod-954b8-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-dev-0d7e6-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageaweAdininProd"
       }
     }
