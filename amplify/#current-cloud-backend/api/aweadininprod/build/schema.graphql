@@ -27,9 +27,22 @@ type KeyValueStore @aws_iam @aws_api_key {
   termiNotifProbDD: [String]
   resignNotifConfDD: [String]
   termiNotifConfDD: [String]
-  workPermitDD: [String]
   insuHSDD: [String]
   insuClaimDD: [String]
+  permitWorkDD: [String]
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type BastingPaint @aws_iam @aws_api_key {
+  id: ID!
+  empID: String!
+  blastingRemarks: String
+  blastingEndDate: String
+  blastingStartDate: String
+  blastingBadgeNo: String
+  blastingQulifiExp: String
+  blastingUpload: [AWSJSON]
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -78,9 +91,6 @@ type TimeSheet @aws_iam @aws_api_key {
   location: String
   mealAllow: String
   verify: String
-  bpCompany: String
-  earliestEntryTime: String
-  latestEntryTime: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -226,7 +236,6 @@ type EmpRequisition @aws_iam @aws_api_key {
   reqName: String
   requestorID: String
   approverID: String
-  requestDate: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -251,19 +260,6 @@ type WeldingInfo @aws_iam @aws_api_key {
   updatedAt: AWSDateTime!
 }
 
-type BastingPaint @aws_iam @aws_api_key {
-  id: ID!
-  empID: String!
-  blastingRemarks: String
-  blastingEndDate: String
-  blastingStartDate: String
-  blastingBadgeNo: String
-  blastingQulifiExp: String
-  blastingUpload: [AWSJSON]
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
-}
-
 type TrainingReq @aws_iam @aws_api_key {
   id: ID!
   empID: String!
@@ -272,13 +268,13 @@ type TrainingReq @aws_iam @aws_api_key {
   medicalExpiry: String
   medicalAppointDate: String
   medicalReport: [AWSJSON]
-  courseCode: [String]
-  courseName: [String]
-  company: [String]
   traineeSD: String
   traineeED: String
   traineeStatus: String
   traineeCourseFee: String
+  courseCode: [String]
+  courseName: [String]
+  company: [String]
   mediRequired: Boolean
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -523,8 +519,6 @@ type EmpLeaveDetails @aws_iam @aws_api_key {
   sickLeaveDate: String
   hospLeave: String
   pervAnnualLeaveBal: String
-  sickLeaveTaken: String
-  remainAnnualLeave: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -742,7 +736,7 @@ type EducationDetails @aws_iam @aws_api_key {
   tempID: String!
   crime: String
   crimeDesc: String
-  emgDetails: [AWSJSON!]
+  emgDetails: [AWSJSON]
   noExperience: String
   empStatement: String
   desc: String
@@ -786,7 +780,7 @@ type PersonalDetails @aws_iam @aws_api_key {
   gender: String
   lang: String
   marital: String
-  name: String!
+  name: String
   nationality: String
   otherNation: String
   otherRace: String
@@ -798,7 +792,7 @@ type PersonalDetails @aws_iam @aws_api_key {
   presentAddress: String
   permanentAddress: String
   profilePhoto: String
-  position: String!
+  position: String
   race: String
   religion: String
   status: String
@@ -864,8 +858,8 @@ type LeaveStatus @aws_iam @aws_api_key {
   empStatus: String
   empDate: AWSDateTime
   empRemarks: String
-  selectedFrom: String
   selectedTo: String
+  selectedFrom: String
   startDate: AWSDate
   endDate: AWSDate
   createdAt: AWSDateTime!
@@ -1048,6 +1042,8 @@ type Query {
   listContractForms(filter: ModelContractFormFilterInput, limit: Int, nextToken: String): ModelContractFormConnection @aws_api_key @aws_iam
   getKeyValueStore(id: ID!): KeyValueStore @aws_api_key @aws_iam
   listKeyValueStores(filter: ModelKeyValueStoreFilterInput, limit: Int, nextToken: String): ModelKeyValueStoreConnection @aws_api_key @aws_iam
+  getBastingPaint(id: ID!): BastingPaint @aws_api_key @aws_iam
+  listBastingPaints(filter: ModelBastingPaintFilterInput, limit: Int, nextToken: String): ModelBastingPaintConnection @aws_api_key @aws_iam
   getTimeSheet(id: ID!): TimeSheet @aws_api_key @aws_iam
   listTimeSheets(filter: ModelTimeSheetFilterInput, limit: Int, nextToken: String): ModelTimeSheetConnection @aws_api_key @aws_iam
   getHiringJob(id: ID!): HiringJob @aws_api_key @aws_iam
@@ -1072,8 +1068,6 @@ type Query {
   listEmpRequisitions(filter: ModelEmpRequisitionFilterInput, limit: Int, nextToken: String): ModelEmpRequisitionConnection @aws_api_key @aws_iam
   getWeldingInfo(id: ID!): WeldingInfo @aws_api_key @aws_iam
   listWeldingInfos(filter: ModelWeldingInfoFilterInput, limit: Int, nextToken: String): ModelWeldingInfoConnection @aws_api_key @aws_iam
-  getBastingPaint(id: ID!): BastingPaint @aws_api_key @aws_iam
-  listBastingPaints(filter: ModelBastingPaintFilterInput, limit: Int, nextToken: String): ModelBastingPaintConnection @aws_api_key @aws_iam
   getTrainingReq(id: ID!): TrainingReq @aws_api_key @aws_iam
   listTrainingReqs(filter: ModelTrainingReqFilterInput, limit: Int, nextToken: String): ModelTrainingReqConnection @aws_api_key @aws_iam
   getTrainingCertificates(id: ID!): TrainingCertificates @aws_api_key @aws_iam
@@ -1176,6 +1170,9 @@ type Mutation {
   createKeyValueStore(input: CreateKeyValueStoreInput!, condition: ModelKeyValueStoreConditionInput): KeyValueStore @aws_api_key @aws_iam
   updateKeyValueStore(input: UpdateKeyValueStoreInput!, condition: ModelKeyValueStoreConditionInput): KeyValueStore @aws_api_key @aws_iam
   deleteKeyValueStore(input: DeleteKeyValueStoreInput!, condition: ModelKeyValueStoreConditionInput): KeyValueStore @aws_api_key @aws_iam
+  createBastingPaint(input: CreateBastingPaintInput!, condition: ModelBastingPaintConditionInput): BastingPaint @aws_api_key @aws_iam
+  updateBastingPaint(input: UpdateBastingPaintInput!, condition: ModelBastingPaintConditionInput): BastingPaint @aws_api_key @aws_iam
+  deleteBastingPaint(input: DeleteBastingPaintInput!, condition: ModelBastingPaintConditionInput): BastingPaint @aws_api_key @aws_iam
   createTimeSheet(input: CreateTimeSheetInput!, condition: ModelTimeSheetConditionInput): TimeSheet @aws_api_key @aws_iam
   updateTimeSheet(input: UpdateTimeSheetInput!, condition: ModelTimeSheetConditionInput): TimeSheet @aws_api_key @aws_iam
   deleteTimeSheet(input: DeleteTimeSheetInput!, condition: ModelTimeSheetConditionInput): TimeSheet @aws_api_key @aws_iam
@@ -1212,9 +1209,6 @@ type Mutation {
   createWeldingInfo(input: CreateWeldingInfoInput!, condition: ModelWeldingInfoConditionInput): WeldingInfo @aws_api_key @aws_iam
   updateWeldingInfo(input: UpdateWeldingInfoInput!, condition: ModelWeldingInfoConditionInput): WeldingInfo @aws_api_key @aws_iam
   deleteWeldingInfo(input: DeleteWeldingInfoInput!, condition: ModelWeldingInfoConditionInput): WeldingInfo @aws_api_key @aws_iam
-  createBastingPaint(input: CreateBastingPaintInput!, condition: ModelBastingPaintConditionInput): BastingPaint @aws_api_key @aws_iam
-  updateBastingPaint(input: UpdateBastingPaintInput!, condition: ModelBastingPaintConditionInput): BastingPaint @aws_api_key @aws_iam
-  deleteBastingPaint(input: DeleteBastingPaintInput!, condition: ModelBastingPaintConditionInput): BastingPaint @aws_api_key @aws_iam
   createTrainingReq(input: CreateTrainingReqInput!, condition: ModelTrainingReqConditionInput): TrainingReq @aws_api_key @aws_iam
   updateTrainingReq(input: UpdateTrainingReqInput!, condition: ModelTrainingReqConditionInput): TrainingReq @aws_api_key @aws_iam
   deleteTrainingReq(input: DeleteTrainingReqInput!, condition: ModelTrainingReqConditionInput): TrainingReq @aws_api_key @aws_iam
@@ -1317,6 +1311,9 @@ type Subscription {
   onCreateKeyValueStore(filter: ModelSubscriptionKeyValueStoreFilterInput): KeyValueStore @aws_subscribe(mutations: ["createKeyValueStore"]) @aws_api_key @aws_iam
   onUpdateKeyValueStore(filter: ModelSubscriptionKeyValueStoreFilterInput): KeyValueStore @aws_subscribe(mutations: ["updateKeyValueStore"]) @aws_api_key @aws_iam
   onDeleteKeyValueStore(filter: ModelSubscriptionKeyValueStoreFilterInput): KeyValueStore @aws_subscribe(mutations: ["deleteKeyValueStore"]) @aws_api_key @aws_iam
+  onCreateBastingPaint(filter: ModelSubscriptionBastingPaintFilterInput): BastingPaint @aws_subscribe(mutations: ["createBastingPaint"]) @aws_api_key @aws_iam
+  onUpdateBastingPaint(filter: ModelSubscriptionBastingPaintFilterInput): BastingPaint @aws_subscribe(mutations: ["updateBastingPaint"]) @aws_api_key @aws_iam
+  onDeleteBastingPaint(filter: ModelSubscriptionBastingPaintFilterInput): BastingPaint @aws_subscribe(mutations: ["deleteBastingPaint"]) @aws_api_key @aws_iam
   onCreateTimeSheet(filter: ModelSubscriptionTimeSheetFilterInput): TimeSheet @aws_subscribe(mutations: ["createTimeSheet"]) @aws_api_key @aws_iam
   onUpdateTimeSheet(filter: ModelSubscriptionTimeSheetFilterInput): TimeSheet @aws_subscribe(mutations: ["updateTimeSheet"]) @aws_api_key @aws_iam
   onDeleteTimeSheet(filter: ModelSubscriptionTimeSheetFilterInput): TimeSheet @aws_subscribe(mutations: ["deleteTimeSheet"]) @aws_api_key @aws_iam
@@ -1353,9 +1350,6 @@ type Subscription {
   onCreateWeldingInfo(filter: ModelSubscriptionWeldingInfoFilterInput): WeldingInfo @aws_subscribe(mutations: ["createWeldingInfo"]) @aws_api_key @aws_iam
   onUpdateWeldingInfo(filter: ModelSubscriptionWeldingInfoFilterInput): WeldingInfo @aws_subscribe(mutations: ["updateWeldingInfo"]) @aws_api_key @aws_iam
   onDeleteWeldingInfo(filter: ModelSubscriptionWeldingInfoFilterInput): WeldingInfo @aws_subscribe(mutations: ["deleteWeldingInfo"]) @aws_api_key @aws_iam
-  onCreateBastingPaint(filter: ModelSubscriptionBastingPaintFilterInput): BastingPaint @aws_subscribe(mutations: ["createBastingPaint"]) @aws_api_key @aws_iam
-  onUpdateBastingPaint(filter: ModelSubscriptionBastingPaintFilterInput): BastingPaint @aws_subscribe(mutations: ["updateBastingPaint"]) @aws_api_key @aws_iam
-  onDeleteBastingPaint(filter: ModelSubscriptionBastingPaintFilterInput): BastingPaint @aws_subscribe(mutations: ["deleteBastingPaint"]) @aws_api_key @aws_iam
   onCreateTrainingReq(filter: ModelSubscriptionTrainingReqFilterInput): TrainingReq @aws_subscribe(mutations: ["createTrainingReq"]) @aws_api_key @aws_iam
   onUpdateTrainingReq(filter: ModelSubscriptionTrainingReqFilterInput): TrainingReq @aws_subscribe(mutations: ["updateTrainingReq"]) @aws_api_key @aws_iam
   onDeleteTrainingReq(filter: ModelSubscriptionTrainingReqFilterInput): TrainingReq @aws_subscribe(mutations: ["deleteTrainingReq"]) @aws_api_key @aws_iam
@@ -1457,9 +1451,9 @@ input ModelKeyValueStoreFilterInput {
   termiNotifProbDD: ModelStringInput
   resignNotifConfDD: ModelStringInput
   termiNotifConfDD: ModelStringInput
-  workPermitDD: ModelStringInput
   insuHSDD: ModelStringInput
   insuClaimDD: ModelStringInput
+  permitWorkDD: ModelStringInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
   and: [ModelKeyValueStoreFilterInput]
@@ -1482,9 +1476,9 @@ input ModelKeyValueStoreConditionInput {
   termiNotifProbDD: ModelStringInput
   resignNotifConfDD: ModelStringInput
   termiNotifConfDD: ModelStringInput
-  workPermitDD: ModelStringInput
   insuHSDD: ModelStringInput
   insuClaimDD: ModelStringInput
+  permitWorkDD: ModelStringInput
   and: [ModelKeyValueStoreConditionInput]
   or: [ModelKeyValueStoreConditionInput]
   not: ModelKeyValueStoreConditionInput
@@ -1508,9 +1502,9 @@ input CreateKeyValueStoreInput {
   termiNotifProbDD: [String]
   resignNotifConfDD: [String]
   termiNotifConfDD: [String]
-  workPermitDD: [String]
   insuHSDD: [String]
   insuClaimDD: [String]
+  permitWorkDD: [String]
 }
 
 input UpdateKeyValueStoreInput {
@@ -1529,9 +1523,9 @@ input UpdateKeyValueStoreInput {
   termiNotifProbDD: [String]
   resignNotifConfDD: [String]
   termiNotifConfDD: [String]
-  workPermitDD: [String]
   insuHSDD: [String]
   insuClaimDD: [String]
+  permitWorkDD: [String]
 }
 
 input DeleteKeyValueStoreInput {
@@ -1554,13 +1548,90 @@ input ModelSubscriptionKeyValueStoreFilterInput {
   termiNotifProbDD: ModelSubscriptionStringInput
   resignNotifConfDD: ModelSubscriptionStringInput
   termiNotifConfDD: ModelSubscriptionStringInput
-  workPermitDD: ModelSubscriptionStringInput
   insuHSDD: ModelSubscriptionStringInput
   insuClaimDD: ModelSubscriptionStringInput
+  permitWorkDD: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
   updatedAt: ModelSubscriptionStringInput
   and: [ModelSubscriptionKeyValueStoreFilterInput]
   or: [ModelSubscriptionKeyValueStoreFilterInput]
+}
+
+type ModelBastingPaintConnection @aws_api_key @aws_iam {
+  items: [BastingPaint]!
+  nextToken: String
+}
+
+input ModelBastingPaintFilterInput {
+  id: ModelIDInput
+  empID: ModelStringInput
+  blastingRemarks: ModelStringInput
+  blastingEndDate: ModelStringInput
+  blastingStartDate: ModelStringInput
+  blastingBadgeNo: ModelStringInput
+  blastingQulifiExp: ModelStringInput
+  blastingUpload: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelBastingPaintFilterInput]
+  or: [ModelBastingPaintFilterInput]
+  not: ModelBastingPaintFilterInput
+}
+
+input ModelBastingPaintConditionInput {
+  empID: ModelStringInput
+  blastingRemarks: ModelStringInput
+  blastingEndDate: ModelStringInput
+  blastingStartDate: ModelStringInput
+  blastingBadgeNo: ModelStringInput
+  blastingQulifiExp: ModelStringInput
+  blastingUpload: ModelStringInput
+  and: [ModelBastingPaintConditionInput]
+  or: [ModelBastingPaintConditionInput]
+  not: ModelBastingPaintConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+}
+
+input CreateBastingPaintInput {
+  id: ID
+  empID: String!
+  blastingRemarks: String
+  blastingEndDate: String
+  blastingStartDate: String
+  blastingBadgeNo: String
+  blastingQulifiExp: String
+  blastingUpload: [AWSJSON]
+}
+
+input UpdateBastingPaintInput {
+  id: ID!
+  empID: String
+  blastingRemarks: String
+  blastingEndDate: String
+  blastingStartDate: String
+  blastingBadgeNo: String
+  blastingQulifiExp: String
+  blastingUpload: [AWSJSON]
+}
+
+input DeleteBastingPaintInput {
+  id: ID!
+}
+
+input ModelSubscriptionBastingPaintFilterInput {
+  id: ModelSubscriptionIDInput
+  empID: ModelSubscriptionStringInput
+  blastingRemarks: ModelSubscriptionStringInput
+  blastingEndDate: ModelSubscriptionStringInput
+  blastingStartDate: ModelSubscriptionStringInput
+  blastingBadgeNo: ModelSubscriptionStringInput
+  blastingQulifiExp: ModelSubscriptionStringInput
+  blastingUpload: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionBastingPaintFilterInput]
+  or: [ModelSubscriptionBastingPaintFilterInput]
 }
 
 type ModelTimeSheetConnection @aws_api_key @aws_iam {
@@ -1612,9 +1683,6 @@ input ModelTimeSheetFilterInput {
   location: ModelStringInput
   mealAllow: ModelStringInput
   verify: ModelStringInput
-  bpCompany: ModelStringInput
-  earliestEntryTime: ModelStringInput
-  latestEntryTime: ModelStringInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
   and: [ModelTimeSheetFilterInput]
@@ -1665,9 +1733,6 @@ input ModelTimeSheetConditionInput {
   location: ModelStringInput
   mealAllow: ModelStringInput
   verify: ModelStringInput
-  bpCompany: ModelStringInput
-  earliestEntryTime: ModelStringInput
-  latestEntryTime: ModelStringInput
   and: [ModelTimeSheetConditionInput]
   or: [ModelTimeSheetConditionInput]
   not: ModelTimeSheetConditionInput
@@ -1719,9 +1784,6 @@ input CreateTimeSheetInput {
   location: String
   mealAllow: String
   verify: String
-  bpCompany: String
-  earliestEntryTime: String
-  latestEntryTime: String
 }
 
 input UpdateTimeSheetInput {
@@ -1768,9 +1830,6 @@ input UpdateTimeSheetInput {
   location: String
   mealAllow: String
   verify: String
-  bpCompany: String
-  earliestEntryTime: String
-  latestEntryTime: String
 }
 
 input DeleteTimeSheetInput {
@@ -1821,9 +1880,6 @@ input ModelSubscriptionTimeSheetFilterInput {
   location: ModelSubscriptionStringInput
   mealAllow: ModelSubscriptionStringInput
   verify: ModelSubscriptionStringInput
-  bpCompany: ModelSubscriptionStringInput
-  earliestEntryTime: ModelSubscriptionStringInput
-  latestEntryTime: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
   updatedAt: ModelSubscriptionStringInput
   and: [ModelSubscriptionTimeSheetFilterInput]
@@ -2584,7 +2640,6 @@ input ModelEmpRequisitionFilterInput {
   reqName: ModelStringInput
   requestorID: ModelStringInput
   approverID: ModelStringInput
-  requestDate: ModelStringInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
   and: [ModelEmpRequisitionFilterInput]
@@ -2607,7 +2662,6 @@ input ModelEmpRequisitionConditionInput {
   reqName: ModelStringInput
   requestorID: ModelStringInput
   approverID: ModelStringInput
-  requestDate: ModelStringInput
   and: [ModelEmpRequisitionConditionInput]
   or: [ModelEmpRequisitionConditionInput]
   not: ModelEmpRequisitionConditionInput
@@ -2631,7 +2685,6 @@ input CreateEmpRequisitionInput {
   reqName: String
   requestorID: String
   approverID: String
-  requestDate: String
 }
 
 input UpdateEmpRequisitionInput {
@@ -2650,7 +2703,6 @@ input UpdateEmpRequisitionInput {
   reqName: String
   requestorID: String
   approverID: String
-  requestDate: String
 }
 
 input DeleteEmpRequisitionInput {
@@ -2673,7 +2725,6 @@ input ModelSubscriptionEmpRequisitionFilterInput {
   reqName: ModelSubscriptionStringInput
   requestorID: ModelSubscriptionStringInput
   approverID: ModelSubscriptionStringInput
-  requestDate: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
   updatedAt: ModelSubscriptionStringInput
   and: [ModelSubscriptionEmpRequisitionFilterInput]
@@ -2792,83 +2843,6 @@ input ModelSubscriptionWeldingInfoFilterInput {
   or: [ModelSubscriptionWeldingInfoFilterInput]
 }
 
-type ModelBastingPaintConnection @aws_api_key @aws_iam {
-  items: [BastingPaint]!
-  nextToken: String
-}
-
-input ModelBastingPaintFilterInput {
-  id: ModelIDInput
-  empID: ModelStringInput
-  blastingRemarks: ModelStringInput
-  blastingEndDate: ModelStringInput
-  blastingStartDate: ModelStringInput
-  blastingBadgeNo: ModelStringInput
-  blastingQulifiExp: ModelStringInput
-  blastingUpload: ModelStringInput
-  createdAt: ModelStringInput
-  updatedAt: ModelStringInput
-  and: [ModelBastingPaintFilterInput]
-  or: [ModelBastingPaintFilterInput]
-  not: ModelBastingPaintFilterInput
-}
-
-input ModelBastingPaintConditionInput {
-  empID: ModelStringInput
-  blastingRemarks: ModelStringInput
-  blastingEndDate: ModelStringInput
-  blastingStartDate: ModelStringInput
-  blastingBadgeNo: ModelStringInput
-  blastingQulifiExp: ModelStringInput
-  blastingUpload: ModelStringInput
-  and: [ModelBastingPaintConditionInput]
-  or: [ModelBastingPaintConditionInput]
-  not: ModelBastingPaintConditionInput
-  createdAt: ModelStringInput
-  updatedAt: ModelStringInput
-}
-
-input CreateBastingPaintInput {
-  id: ID
-  empID: String!
-  blastingRemarks: String
-  blastingEndDate: String
-  blastingStartDate: String
-  blastingBadgeNo: String
-  blastingQulifiExp: String
-  blastingUpload: [AWSJSON]
-}
-
-input UpdateBastingPaintInput {
-  id: ID!
-  empID: String
-  blastingRemarks: String
-  blastingEndDate: String
-  blastingStartDate: String
-  blastingBadgeNo: String
-  blastingQulifiExp: String
-  blastingUpload: [AWSJSON]
-}
-
-input DeleteBastingPaintInput {
-  id: ID!
-}
-
-input ModelSubscriptionBastingPaintFilterInput {
-  id: ModelSubscriptionIDInput
-  empID: ModelSubscriptionStringInput
-  blastingRemarks: ModelSubscriptionStringInput
-  blastingEndDate: ModelSubscriptionStringInput
-  blastingStartDate: ModelSubscriptionStringInput
-  blastingBadgeNo: ModelSubscriptionStringInput
-  blastingQulifiExp: ModelSubscriptionStringInput
-  blastingUpload: ModelSubscriptionStringInput
-  createdAt: ModelSubscriptionStringInput
-  updatedAt: ModelSubscriptionStringInput
-  and: [ModelSubscriptionBastingPaintFilterInput]
-  or: [ModelSubscriptionBastingPaintFilterInput]
-}
-
 type ModelTrainingReqConnection @aws_api_key @aws_iam {
   items: [TrainingReq]!
   nextToken: String
@@ -2882,13 +2856,13 @@ input ModelTrainingReqFilterInput {
   medicalExpiry: ModelStringInput
   medicalAppointDate: ModelStringInput
   medicalReport: ModelStringInput
-  courseCode: ModelStringInput
-  courseName: ModelStringInput
-  company: ModelStringInput
   traineeSD: ModelStringInput
   traineeED: ModelStringInput
   traineeStatus: ModelStringInput
   traineeCourseFee: ModelStringInput
+  courseCode: ModelStringInput
+  courseName: ModelStringInput
+  company: ModelStringInput
   mediRequired: ModelBooleanInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
@@ -2904,13 +2878,13 @@ input ModelTrainingReqConditionInput {
   medicalExpiry: ModelStringInput
   medicalAppointDate: ModelStringInput
   medicalReport: ModelStringInput
-  courseCode: ModelStringInput
-  courseName: ModelStringInput
-  company: ModelStringInput
   traineeSD: ModelStringInput
   traineeED: ModelStringInput
   traineeStatus: ModelStringInput
   traineeCourseFee: ModelStringInput
+  courseCode: ModelStringInput
+  courseName: ModelStringInput
+  company: ModelStringInput
   mediRequired: ModelBooleanInput
   and: [ModelTrainingReqConditionInput]
   or: [ModelTrainingReqConditionInput]
@@ -2927,13 +2901,13 @@ input CreateTrainingReqInput {
   medicalExpiry: String
   medicalAppointDate: String
   medicalReport: [AWSJSON]
-  courseCode: [String]
-  courseName: [String]
-  company: [String]
   traineeSD: String
   traineeED: String
   traineeStatus: String
   traineeCourseFee: String
+  courseCode: [String]
+  courseName: [String]
+  company: [String]
   mediRequired: Boolean
 }
 
@@ -2945,13 +2919,13 @@ input UpdateTrainingReqInput {
   medicalExpiry: String
   medicalAppointDate: String
   medicalReport: [AWSJSON]
-  courseCode: [String]
-  courseName: [String]
-  company: [String]
   traineeSD: String
   traineeED: String
   traineeStatus: String
   traineeCourseFee: String
+  courseCode: [String]
+  courseName: [String]
+  company: [String]
   mediRequired: Boolean
 }
 
@@ -2967,13 +2941,13 @@ input ModelSubscriptionTrainingReqFilterInput {
   medicalExpiry: ModelSubscriptionStringInput
   medicalAppointDate: ModelSubscriptionStringInput
   medicalReport: ModelSubscriptionStringInput
-  courseCode: ModelSubscriptionStringInput
-  courseName: ModelSubscriptionStringInput
-  company: ModelSubscriptionStringInput
   traineeSD: ModelSubscriptionStringInput
   traineeED: ModelSubscriptionStringInput
   traineeStatus: ModelSubscriptionStringInput
   traineeCourseFee: ModelSubscriptionStringInput
+  courseCode: ModelSubscriptionStringInput
+  courseName: ModelSubscriptionStringInput
+  company: ModelSubscriptionStringInput
   mediRequired: ModelSubscriptionBooleanInput
   createdAt: ModelSubscriptionStringInput
   updatedAt: ModelSubscriptionStringInput
@@ -4257,8 +4231,6 @@ input ModelEmpLeaveDetailsFilterInput {
   sickLeaveDate: ModelStringInput
   hospLeave: ModelStringInput
   pervAnnualLeaveBal: ModelStringInput
-  sickLeaveTaken: ModelStringInput
-  remainAnnualLeave: ModelStringInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
   and: [ModelEmpLeaveDetailsFilterInput]
@@ -4282,8 +4254,6 @@ input ModelEmpLeaveDetailsConditionInput {
   sickLeaveDate: ModelStringInput
   hospLeave: ModelStringInput
   pervAnnualLeaveBal: ModelStringInput
-  sickLeaveTaken: ModelStringInput
-  remainAnnualLeave: ModelStringInput
   and: [ModelEmpLeaveDetailsConditionInput]
   or: [ModelEmpLeaveDetailsConditionInput]
   not: ModelEmpLeaveDetailsConditionInput
@@ -4308,8 +4278,6 @@ input CreateEmpLeaveDetailsInput {
   sickLeaveDate: String
   hospLeave: String
   pervAnnualLeaveBal: String
-  sickLeaveTaken: String
-  remainAnnualLeave: String
 }
 
 input UpdateEmpLeaveDetailsInput {
@@ -4329,8 +4297,6 @@ input UpdateEmpLeaveDetailsInput {
   sickLeaveDate: String
   hospLeave: String
   pervAnnualLeaveBal: String
-  sickLeaveTaken: String
-  remainAnnualLeave: String
 }
 
 input DeleteEmpLeaveDetailsInput {
@@ -4354,8 +4320,6 @@ input ModelSubscriptionEmpLeaveDetailsFilterInput {
   sickLeaveDate: ModelSubscriptionStringInput
   hospLeave: ModelSubscriptionStringInput
   pervAnnualLeaveBal: ModelSubscriptionStringInput
-  sickLeaveTaken: ModelSubscriptionStringInput
-  remainAnnualLeave: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
   updatedAt: ModelSubscriptionStringInput
   and: [ModelSubscriptionEmpLeaveDetailsFilterInput]
@@ -5555,7 +5519,7 @@ input CreateEducationDetailsInput {
   tempID: String!
   crime: String
   crimeDesc: String
-  emgDetails: [AWSJSON!]
+  emgDetails: [AWSJSON]
   noExperience: String
   empStatement: String
   desc: String
@@ -5580,7 +5544,7 @@ input UpdateEducationDetailsInput {
   tempID: String
   crime: String
   crimeDesc: String
-  emgDetails: [AWSJSON!]
+  emgDetails: [AWSJSON]
   noExperience: String
   empStatement: String
   desc: String
@@ -5751,7 +5715,7 @@ input CreatePersonalDetailsInput {
   gender: String
   lang: String
   marital: String
-  name: String!
+  name: String
   nationality: String
   otherNation: String
   otherRace: String
@@ -5763,7 +5727,7 @@ input CreatePersonalDetailsInput {
   presentAddress: String
   permanentAddress: String
   profilePhoto: String
-  position: String!
+  position: String
   race: String
   religion: String
   status: String
@@ -6082,8 +6046,8 @@ input ModelLeaveStatusFilterInput {
   empStatus: ModelStringInput
   empDate: ModelStringInput
   empRemarks: ModelStringInput
-  selectedFrom: ModelStringInput
   selectedTo: ModelStringInput
+  selectedFrom: ModelStringInput
   startDate: ModelStringInput
   endDate: ModelStringInput
   createdAt: ModelStringInput
@@ -6115,8 +6079,8 @@ input ModelLeaveStatusConditionInput {
   empStatus: ModelStringInput
   empDate: ModelStringInput
   empRemarks: ModelStringInput
-  selectedFrom: ModelStringInput
   selectedTo: ModelStringInput
+  selectedFrom: ModelStringInput
   startDate: ModelStringInput
   endDate: ModelStringInput
   and: [ModelLeaveStatusConditionInput]
@@ -6149,8 +6113,8 @@ input CreateLeaveStatusInput {
   empStatus: String
   empDate: AWSDateTime
   empRemarks: String
-  selectedFrom: String
   selectedTo: String
+  selectedFrom: String
   startDate: AWSDate
   endDate: AWSDate
 }
@@ -6178,8 +6142,8 @@ input UpdateLeaveStatusInput {
   empStatus: String
   empDate: AWSDateTime
   empRemarks: String
-  selectedFrom: String
   selectedTo: String
+  selectedFrom: String
   startDate: AWSDate
   endDate: AWSDate
 }
@@ -6211,8 +6175,8 @@ input ModelSubscriptionLeaveStatusFilterInput {
   empStatus: ModelSubscriptionStringInput
   empDate: ModelSubscriptionStringInput
   empRemarks: ModelSubscriptionStringInput
-  selectedFrom: ModelSubscriptionStringInput
   selectedTo: ModelSubscriptionStringInput
+  selectedFrom: ModelSubscriptionStringInput
   startDate: ModelSubscriptionStringInput
   endDate: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
