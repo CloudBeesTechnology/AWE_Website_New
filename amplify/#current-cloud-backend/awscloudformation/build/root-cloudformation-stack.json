@@ -202,7 +202,7 @@
     "apiaweadininprod": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-prod-954b8-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-dev-0d7e6-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "Parameters": {
           "AppSyncApiName": "aweadininprod",
           "DynamoDBBillingMode": "PAY_PER_REQUEST",
@@ -213,16 +213,16 @@
           "unauthRoleName": {
             "Ref": "UnauthRoleName"
           },
-          "S3DeploymentBucket": "amplify-aweadininprod-prod-954b8-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/f29488850d75c98f974bb870ddc1a3196dfc022d",
-          "env": "prod"
+          "S3DeploymentBucket": "amplify-aweadininprod-dev-0d7e6-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/935ebcf018692b342a55edde4dd420f8bc72333f",
+          "env": "dev"
         }
       }
     },
     "authaweadininprod215ef038": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-prod-954b8-deployment/amplify-cfn-templates/auth/aweadininprod215ef038-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-dev-0d7e6-deployment/amplify-cfn-templates/auth/aweadininprod215ef038-cloudformation-template.json",
         "Parameters": {
           "identityPoolName": "aweadininprod215ef038_identitypool_215ef038",
           "allowUnauthenticatedIdentities": false,
@@ -242,14 +242,14 @@
           "aliasAttributes": "",
           "userpoolClientGenerateSecret": false,
           "userpoolClientRefreshTokenValidity": 30,
-          "userpoolClientWriteAttributes": "",
-          "userpoolClientReadAttributes": "",
+          "userpoolClientWriteAttributes": "email",
+          "userpoolClientReadAttributes": "email",
           "userpoolClientLambdaRole": "aweadi215ef038_userpoolclient_lambda_role",
           "userpoolClientSetAttributes": false,
           "sharedId": "215ef038",
           "resourceName": "aweadininprod215ef038",
           "authSelections": "identityPoolAndUserPool",
-          "useDefault": "manual",
+          "useDefault": "default",
           "userPoolGroupList": "",
           "serviceName": "Cognito",
           "usernameCaseSensitive": false,
@@ -268,19 +268,14 @@
           },
           "breakCircularDependency": true,
           "dependsOn": "",
-          "userPoolGroups": false,
-          "adminQueries": false,
-          "thirdPartyAuth": false,
-          "authProviders": "",
-          "hostedUI": false,
-          "env": "prod"
+          "env": "dev"
         }
       }
     },
     "storageaweAdininProd": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-prod-954b8-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-aweadininprod-dev-0d7e6-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "Parameters": {
           "bucketName": "aweadininprod2024",
           "selectedGuestPermissions": "",
@@ -306,7 +301,7 @@
           "s3PermissionsAuthenticatedUploads": "s3:PutObject",
           "s3PermissionsGuestPublic": "DISALLOW",
           "s3PermissionsGuestUploads": "DISALLOW",
-          "env": "prod"
+          "env": "dev"
         }
       }
     },
