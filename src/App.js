@@ -43,17 +43,17 @@ export const App = () => {
       </Helmet>
       <Navbar />
       <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/checkingUpload" Component={CheckingUpload} />
-        {/* <Route path="/ourWorkForce" Component={OurWorkForce} /> */}
-        <Route path="/about" Component={About} />
-        <Route path="/ourVision" Component={OurVision} />
-        <Route path="/values" Component={AboutValues} />
-        <Route path="/ourMission" Component={AboutOurMission} />
-        <Route path="/OurService" Component={AboutService} />
-        <Route path="/contact" Component={Contact} />
-        {/* <Route path="/gallery" Component={Gallery} />
-        <Route path="/images" Component={ImageGrid} /> */}
+        <Route path="/" element={<Home/>} />
+        <Route path="/checkingUpload" element={<CheckingUpload/>} />
+        {/* <Route path="/ourWorkForce" element={<OurWorkForce/>} /> */}
+        <Route path="/about" element={<About/>} />
+        <Route path="/ourVision" element={<OurVision/>} />
+        <Route path="/values" element={<AboutValues/>} />
+        <Route path="/ourMission" element={<AboutOurMission/>} />
+        <Route path="/OurService" element={<AboutService/>} />
+        <Route path="/contact" element={<Contact/>} />
+        {/* <Route path="/gallery" element={<Gallery/>} />
+        <Route path="/images" element={<ImageGrid/>} /> */}
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/images/lti" element={<ImageGrid images={workersSlides} title="25 MILLION HOURS WITHOUT LTI" color="#F93131" />} />
         <Route path="/images/chairman" element={<ImageGrid images={chairmanSlides} title="CHAIRMAN 90TH BIRTHDAY 2022" color="#53FB5E" />} />
@@ -61,15 +61,15 @@ export const App = () => {
         <Route path="/images/his-majesty-77" element={<ImageGrid images={hisMajesty77Slides} title="HIS MAJESTY 77TH BIRTHDAY 2023" color="#F148E5" />} />
         <Route path="/images/hlp" element={<ImageGrid images={hlpSlides} title="HLP 2024" color="#C9C900" />} />
         <Route path="/images/his-majesty-78" element={<ImageGrid images={hisMajesty78Slides} title="HIS MAJESTY 78TH BIRTHDAY 2024" color="#F36B21" />} />
-        <Route path="/applyJob" Component={CareerSection} />
-        <Route path="/addCandidates" Component={AddCandidates}>
+        <Route path="/applyJob" element={<CareerSection/>} />
+        <Route path="/addCandidates" element={<AddCandidates/>}>
           <Route index element={<ApplicantDetails />} />
           <Route path="personalDetails" element={<PersonalDetails />} />
           <Route path="educationDetails" element={<EducationDetails />} />
           <Route path="otherDetails" element={<OtherDetails />} />
         </Route>
-        <Route path="/organization" Component={Organization} />
-        <Route path="/certification" Component={Achievements} />
+        <Route path="/organization" element={<Organization/>} />
+        <Route path="/certification" element={<Achievements/>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {!hideNavbar.includes(location.pathname) && <Footer />}
