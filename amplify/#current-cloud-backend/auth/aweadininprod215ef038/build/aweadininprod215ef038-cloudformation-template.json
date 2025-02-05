@@ -106,6 +106,21 @@
     },
     "dependsOn": {
       "Type": "CommaDelimitedList"
+    },
+    "userPoolGroups": {
+      "Type": "String"
+    },
+    "adminQueries": {
+      "Type": "String"
+    },
+    "thirdPartyAuth": {
+      "Type": "String"
+    },
+    "authProviders": {
+      "Type": "CommaDelimitedList"
+    },
+    "hostedUI": {
+      "Type": "String"
     }
   },
   "Conditions": {

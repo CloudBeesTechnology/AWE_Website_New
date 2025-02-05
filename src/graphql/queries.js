@@ -61,9 +61,9 @@ export const getKeyValueStore = /* GraphQL */ `
       termiNotifProbDD
       resignNotifConfDD
       termiNotifConfDD
-      workPermitDD
       insuHSDD
       insuClaimDD
+      permitWorkDD
       createdAt
       updatedAt
       __typename
@@ -93,9 +93,51 @@ export const listKeyValueStores = /* GraphQL */ `
         termiNotifProbDD
         resignNotifConfDD
         termiNotifConfDD
-        workPermitDD
         insuHSDD
         insuClaimDD
+        permitWorkDD
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getBastingPaint = /* GraphQL */ `
+  query GetBastingPaint($id: ID!) {
+    getBastingPaint(id: $id) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listBastingPaints = /* GraphQL */ `
+  query ListBastingPaints(
+    $filter: ModelBastingPaintFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBastingPaints(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        empID
+        blastingRemarks
+        blastingEndDate
+        blastingStartDate
+        blastingBadgeNo
+        blastingQulifiExp
+        blastingUpload
         createdAt
         updatedAt
         __typename
@@ -151,9 +193,6 @@ export const getTimeSheet = /* GraphQL */ `
       location
       mealAllow
       verify
-      bpCompany
-      earliestEntryTime
-      latestEntryTime
       createdAt
       updatedAt
       __typename
@@ -211,9 +250,6 @@ export const listTimeSheets = /* GraphQL */ `
         location
         mealAllow
         verify
-        bpCompany
-        earliestEntryTime
-        latestEntryTime
         createdAt
         updatedAt
         __typename
@@ -639,7 +675,6 @@ export const getEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
-      requestDate
       createdAt
       updatedAt
       __typename
@@ -669,7 +704,6 @@ export const listEmpRequisitions = /* GraphQL */ `
         reqName
         requestorID
         approverID
-        requestDate
         createdAt
         updatedAt
         __typename
@@ -735,48 +769,6 @@ export const listWeldingInfos = /* GraphQL */ `
     }
   }
 `;
-export const getBastingPaint = /* GraphQL */ `
-  query GetBastingPaint($id: ID!) {
-    getBastingPaint(id: $id) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listBastingPaints = /* GraphQL */ `
-  query ListBastingPaints(
-    $filter: ModelBastingPaintFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listBastingPaints(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        empID
-        blastingRemarks
-        blastingEndDate
-        blastingStartDate
-        blastingBadgeNo
-        blastingQulifiExp
-        blastingUpload
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const getTrainingReq = /* GraphQL */ `
   query GetTrainingReq($id: ID!) {
     getTrainingReq(id: $id) {
@@ -787,13 +779,13 @@ export const getTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      courseCode
+      courseName
+      company
       mediRequired
       createdAt
       updatedAt
@@ -816,13 +808,13 @@ export const listTrainingReqs = /* GraphQL */ `
         medicalExpiry
         medicalAppointDate
         medicalReport
-        courseCode
-        courseName
-        company
         traineeSD
         traineeED
         traineeStatus
         traineeCourseFee
+        courseCode
+        courseName
+        company
         mediRequired
         createdAt
         updatedAt
@@ -1504,8 +1496,6 @@ export const getEmpLeaveDetails = /* GraphQL */ `
       sickLeaveDate
       hospLeave
       pervAnnualLeaveBal
-      sickLeaveTaken
-      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -1536,8 +1526,6 @@ export const listEmpLeaveDetails = /* GraphQL */ `
         sickLeaveDate
         hospLeave
         pervAnnualLeaveBal
-        sickLeaveTaken
-        remainAnnualLeave
         createdAt
         updatedAt
         __typename
@@ -2392,8 +2380,8 @@ export const getLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
-      selectedFrom
       selectedTo
+      selectedFrom
       startDate
       endDate
       createdAt
@@ -2432,8 +2420,8 @@ export const listLeaveStatuses = /* GraphQL */ `
         empStatus
         empDate
         empRemarks
-        selectedFrom
         selectedTo
+        selectedFrom
         startDate
         endDate
         createdAt
