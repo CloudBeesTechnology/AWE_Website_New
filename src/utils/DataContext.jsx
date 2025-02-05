@@ -19,7 +19,7 @@ const DataContext = ({ children }) => {
         const responses = await Promise.all(
           queries.map(({ query }) =>
             client.graphql({ query, variables: { limit } }).catch((error) => {
-              console.error("GraphQL Error:", error);
+              // console.error("GraphQL Error:", error);
               return { data: { items: [] } }; // fallback for failed query
             })
           )
@@ -34,7 +34,7 @@ const DataContext = ({ children }) => {
 
         setDataState((prevState) => ({ ...prevState, ...newData }));
       } catch (error) {
-        console.error("Data Fetch Error:", error);
+        // console.error("Data Fetch Error:", error);
       }
     };
 

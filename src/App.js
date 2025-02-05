@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Navbar } from './Component/Navbar';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Home } from './pages/home/Home';
@@ -70,7 +70,7 @@ export const App = () => {
         </Route>
         <Route path="/organization" Component={Organization} />
         <Route path="/certification" Component={Achievements} />
-        {/* <Route path="*" element={<Navigatte to="/" />} /> */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {!hideNavbar.includes(location.pathname) && <Footer />}
       {/* <Footer/> */}
