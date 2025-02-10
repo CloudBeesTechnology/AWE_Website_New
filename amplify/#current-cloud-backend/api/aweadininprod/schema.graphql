@@ -30,6 +30,17 @@ type KeyValueStore @model @auth(rules: [{allow: public}]) {
   permitWorkDD: [String]
 }
 
+type BastingPaint @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  empID: String!
+  blastingRemarks: String
+  blastingEndDate: String
+  blastingStartDate: String
+  blastingBadgeNo: String
+  blastingQulifiExp: String
+  blastingUpload: [AWSJSON]
+}
+
 type TimeSheet @model @auth(rules: [{allow: public}]) {
   id: ID!
   date: String
@@ -74,9 +85,6 @@ type TimeSheet @model @auth(rules: [{allow: public}]) {
   location: String
   mealAllow: String
   verify: String
-  bpCompany: String
-  earliestEntryTime: String
-  latestEntryTime: String
 }
 
 type HiringJob @model @auth(rules: [{allow: public}]) {
@@ -202,7 +210,6 @@ type EmpRequisition @model @auth(rules: [{allow: public}]) {
   reqName: String
   requestorID: String
   approverID: String
-  requestDate: String
 }
 
 type WeldingInfo @model @auth(rules: [{allow: public}]) {
@@ -223,17 +230,6 @@ type WeldingInfo @model @auth(rules: [{allow: public}]) {
   weldingMaterial: String
 }
 
-type BastingPaint @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  empID: String!
-  blastingRemarks: String
-  blastingEndDate: String
-  blastingStartDate: String
-  blastingBadgeNo: String
-  blastingQulifiExp: String
-  blastingUpload: [AWSJSON]
-}
-
 type TrainingReq @model @auth(rules: [{allow: public}]) {
   id: ID!
   empID: String!
@@ -242,13 +238,13 @@ type TrainingReq @model @auth(rules: [{allow: public}]) {
   medicalExpiry: String
   medicalAppointDate: String
   medicalReport: [AWSJSON]
-  courseCode: [String]
-  courseName: [String]
-  company: [String]
   traineeSD: String
   traineeED: String
   traineeStatus: String
   traineeCourseFee: String
+  courseCode: [String]
+  courseName: [String]
+  company: [String]
   mediRequired: Boolean
 }
 
@@ -467,8 +463,6 @@ type EmpLeaveDetails @model @auth(rules: [{allow: public}]) {
   sickLeaveDate: String
   hospLeave: String
   pervAnnualLeaveBal: String
-  sickLeaveTaken: String
-  remainAnnualLeave: String
 }
 
 type TerminationInfo @model @auth(rules: [{allow: public}]) {
@@ -670,7 +664,7 @@ type EducationDetails @model @auth(rules: [{allow: public}]) {
   tempID: String!
   crime: String
   crimeDesc: String
-  emgDetails: [AWSJSON!]
+  emgDetails: [AWSJSON]
   noExperience: String
   empStatement: String
   desc: String
@@ -712,7 +706,7 @@ type PersonalDetails @model @auth(rules: [{allow: public}]) {
   gender: String
   lang: String
   marital: String
-  name: String!
+  name: String
   nationality: String
   otherNation: String
   otherRace: String
@@ -724,7 +718,7 @@ type PersonalDetails @model @auth(rules: [{allow: public}]) {
   presentAddress: String
   permanentAddress: String
   profilePhoto: String
-  position: String!
+  position: String
   race: String
   religion: String
   status: String
@@ -784,8 +778,8 @@ type LeaveStatus @model @auth(rules: [{allow: public}]) {
   empStatus: String
   empDate: AWSDateTime
   empRemarks: String
-  selectedFrom: String
   selectedTo: String
+  selectedFrom: String
   startDate: AWSDate
   endDate: AWSDate
 }

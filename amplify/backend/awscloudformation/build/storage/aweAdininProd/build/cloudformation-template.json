@@ -1,5 +1,5 @@
 {
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.12.6\",\"stackType\":\"storage-S3\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.13.1\",\"stackType\":\"storage-S3\",\"metadata\":{\"whyContinueWithGen1\":\"\"}}",
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "env": {

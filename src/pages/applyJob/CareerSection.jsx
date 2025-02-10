@@ -17,6 +17,7 @@ export const CareerSection = () => {
     if (!job.expiryDate) {
       return;
     }
+
     const normalizedDate = job?.expiryDate?.replace(/[-/]/g, "-");
     const [day, month, year] = normalizedDate.split("-");
     const expiry = new Date(year, month - 1, day);
@@ -26,6 +27,8 @@ export const CareerSection = () => {
 
     return expiry >= today;
   });
+
+  
   return (
     <section>
       <CommonBanner background={bg} title="Apply Job" />
