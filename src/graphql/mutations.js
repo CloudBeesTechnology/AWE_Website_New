@@ -15,8 +15,6 @@ export const createContractForm = /* GraphQL */ `
       genManager
       remarks
       contStatus
-      remarkHr
-      remarkGm
       createdAt
       updatedAt
       __typename
@@ -37,8 +35,6 @@ export const updateContractForm = /* GraphQL */ `
       genManager
       remarks
       contStatus
-      remarkHr
-      remarkGm
       createdAt
       updatedAt
       __typename
@@ -59,8 +55,6 @@ export const deleteContractForm = /* GraphQL */ `
       genManager
       remarks
       contStatus
-      remarkHr
-      remarkGm
       createdAt
       updatedAt
       __typename
@@ -157,6 +151,66 @@ export const deleteKeyValueStore = /* GraphQL */ `
     }
   }
 `;
+export const createBastingPaint = /* GraphQL */ `
+  mutation CreateBastingPaint(
+    $input: CreateBastingPaintInput!
+    $condition: ModelBastingPaintConditionInput
+  ) {
+    createBastingPaint(input: $input, condition: $condition) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateBastingPaint = /* GraphQL */ `
+  mutation UpdateBastingPaint(
+    $input: UpdateBastingPaintInput!
+    $condition: ModelBastingPaintConditionInput
+  ) {
+    updateBastingPaint(input: $input, condition: $condition) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteBastingPaint = /* GraphQL */ `
+  mutation DeleteBastingPaint(
+    $input: DeleteBastingPaintInput!
+    $condition: ModelBastingPaintConditionInput
+  ) {
+    deleteBastingPaint(input: $input, condition: $condition) {
+      id
+      empID
+      blastingRemarks
+      blastingEndDate
+      blastingStartDate
+      blastingBadgeNo
+      blastingQulifiExp
+      blastingUpload
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createTimeSheet = /* GraphQL */ `
   mutation CreateTimeSheet(
     $input: CreateTimeSheetInput!
@@ -206,9 +260,6 @@ export const createTimeSheet = /* GraphQL */ `
       location
       mealAllow
       verify
-      bpCompany
-      earliestEntryTime
-      latestEntryTime
       createdAt
       updatedAt
       __typename
@@ -264,9 +315,6 @@ export const updateTimeSheet = /* GraphQL */ `
       location
       mealAllow
       verify
-      bpCompany
-      earliestEntryTime
-      latestEntryTime
       createdAt
       updatedAt
       __typename
@@ -322,9 +370,6 @@ export const deleteTimeSheet = /* GraphQL */ `
       location
       mealAllow
       verify
-      bpCompany
-      earliestEntryTime
-      latestEntryTime
       createdAt
       updatedAt
       __typename
@@ -916,7 +961,6 @@ export const createEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
-      requestDate
       createdAt
       updatedAt
       __typename
@@ -944,7 +988,6 @@ export const updateEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
-      requestDate
       createdAt
       updatedAt
       __typename
@@ -972,7 +1015,6 @@ export const deleteEmpRequisition = /* GraphQL */ `
       reqName
       requestorID
       approverID
-      requestDate
       createdAt
       updatedAt
       __typename
@@ -1060,66 +1102,6 @@ export const deleteWeldingInfo = /* GraphQL */ `
     }
   }
 `;
-export const createBastingPaint = /* GraphQL */ `
-  mutation CreateBastingPaint(
-    $input: CreateBastingPaintInput!
-    $condition: ModelBastingPaintConditionInput
-  ) {
-    createBastingPaint(input: $input, condition: $condition) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateBastingPaint = /* GraphQL */ `
-  mutation UpdateBastingPaint(
-    $input: UpdateBastingPaintInput!
-    $condition: ModelBastingPaintConditionInput
-  ) {
-    updateBastingPaint(input: $input, condition: $condition) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteBastingPaint = /* GraphQL */ `
-  mutation DeleteBastingPaint(
-    $input: DeleteBastingPaintInput!
-    $condition: ModelBastingPaintConditionInput
-  ) {
-    deleteBastingPaint(input: $input, condition: $condition) {
-      id
-      empID
-      blastingRemarks
-      blastingEndDate
-      blastingStartDate
-      blastingBadgeNo
-      blastingQulifiExp
-      blastingUpload
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const createTrainingReq = /* GraphQL */ `
   mutation CreateTrainingReq(
     $input: CreateTrainingReqInput!
@@ -1133,13 +1115,13 @@ export const createTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      courseCode
+      courseName
+      company
       mediRequired
       createdAt
       updatedAt
@@ -1160,13 +1142,13 @@ export const updateTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      courseCode
+      courseName
+      company
       mediRequired
       createdAt
       updatedAt
@@ -1187,13 +1169,13 @@ export const deleteTrainingReq = /* GraphQL */ `
       medicalExpiry
       medicalAppointDate
       medicalReport
-      courseCode
-      courseName
-      company
       traineeSD
       traineeED
       traineeStatus
       traineeCourseFee
+      courseCode
+      courseName
+      company
       mediRequired
       createdAt
       updatedAt
@@ -2141,8 +2123,6 @@ export const createEmpLeaveDetails = /* GraphQL */ `
       sickLeaveDate
       hospLeave
       pervAnnualLeaveBal
-      sickLeaveTaken
-      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -2171,8 +2151,6 @@ export const updateEmpLeaveDetails = /* GraphQL */ `
       sickLeaveDate
       hospLeave
       pervAnnualLeaveBal
-      sickLeaveTaken
-      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -2201,8 +2179,6 @@ export const deleteEmpLeaveDetails = /* GraphQL */ `
       sickLeaveDate
       hospLeave
       pervAnnualLeaveBal
-      sickLeaveTaken
-      remainAnnualLeave
       createdAt
       updatedAt
       __typename
@@ -3404,8 +3380,8 @@ export const createLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
-      selectedFrom
       selectedTo
+      selectedFrom
       startDate
       endDate
       createdAt
@@ -3442,8 +3418,8 @@ export const updateLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
-      selectedFrom
       selectedTo
+      selectedFrom
       startDate
       endDate
       createdAt
@@ -3480,8 +3456,8 @@ export const deleteLeaveStatus = /* GraphQL */ `
       empStatus
       empDate
       empRemarks
-      selectedFrom
       selectedTo
+      selectedFrom
       startDate
       endDate
       createdAt
