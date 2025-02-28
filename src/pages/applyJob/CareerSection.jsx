@@ -78,8 +78,8 @@ export const CareerSection = () => {
                     <div className="flex justify-evenly items-center">
                       <p className="font-bold text-lg mt-2">{val?.jobTitle}</p>
                     </div>
-                    <h4 className="font-semibold">
-                      Description:{" "}
+                    <h4 className="font-semibold text-[16px]">
+                      Description :{" "}
                       <span className="font-normal text-sm">
                         {val?.jobContent}
                       </span>
@@ -87,17 +87,17 @@ export const CareerSection = () => {
 
                     <div className="">
                       <p className="py-1 px-2 text-sm">
-                        <span className="text-sm">Experience:</span>{" "}
+                        <span className="font-medium text-[15px]">Experience : </span>
                         {val?.exper}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Location: {val?.location}
+                        <span className="font-medium text-[15px]">Location :</span> {val?.location}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Posted On: {val?.startDate}
+                      <span className="font-medium text-[15px]"> Posted On :</span> {val?.startDate}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Apply Until: {val?.expiryDate}
+                      <span className="font-medium text-[15px]"> Apply Until :</span> {val?.expiryDate}
                       </p>
                     </div>
                     <section className="flex items-center justify-evenly">
