@@ -75,7 +75,7 @@ export const HomeNewEvent = () => {
 
       <div className='flex flex-col sm:flex-row items-center justify-evenly w-full gap-2 lg:gap-10 my-2 lg:my-10'>
         {/* Left Image Section */}
-        <div className="flex justify-center w-full sm:w-[380px] lg:w-[600px] h-[300px] sm:h-[490px] overflow-hidden cursor-pointer">
+        <div className="flex justify-center w-full sm:w-[380px] lg:w-[600px] h-[250px] sm:h-[600px] overflow-hidden cursor-pointer">
           <img
             src={selectedEvent.image}
             alt={selectedEvent.name}
