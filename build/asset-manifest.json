@@ -1,9 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.7fecc9e3.css",
-    "main.js": "/static/js/main.cccd8e8f.js",
+    "main.css": "/static/css/main.e259dae4.css",
+    "main.js": "/static/js/main.14cd5974.js",
     "static/js/453.aa966ee3.chunk.js": "/static/js/453.aa966ee3.chunk.js",
-    "static/media/Head Office HLP 2024.JPG": "/static/media/Head Office HLP 2024.baa664943f6550024b98.JPG",
     "static/media/Home3.jpg": "/static/media/Home3.d036b9ee4be5bf9ad586.jpg",
     "static/media/Organization.jpg": "/static/media/Organization.80d6a0b2d10336f8f540.jpg",
     "static/media/Celebrating Hari Raya 2024.jpg": "/static/media/Celebrating Hari Raya 2024.74928cd52ce8af333c13.jpg",
@@ -23,7 +22,6 @@
     "static/media/certificate17.jpg": "/static/media/certificate17.0c67d5c9d7116d2e653b.jpg",
     "static/media/Bottom 10.jpeg": "/static/media/Bottom 10.d88d91be0e1fa0e79bef.jpeg",
     "static/media/Home2.jpg": "/static/media/Home2.a239b0045acd8ac1510e.jpg",
-    "static/media/The 40th National Day Celebration of Negara Brunei Darussalam.png": "/static/media/The 40th National Day Celebration of Negara Brunei Darussalam.4988c426030933c3f285.png",
     "static/media/ValuesNew.jpg": "/static/media/ValuesNew.20c02d0af792357e1a5b.jpg",
     "static/media/certificate21.jpg": "/static/media/certificate21.a90053c0588e197c4a3e.jpg",
     "static/media/Fabrication & Erection of Structural Steel.jpg": "/static/media/Fabrication & Erection of Structural Steel.2c5294281f730a4d3df9.jpg",
@@ -42,8 +40,10 @@
     "static/media/contact1.png": "/static/media/contact1.d9016b4ae0141ede99ff.png",
     "static/media/certificate10.jpg": "/static/media/certificate10.c48cd364368b3fc337b1.jpg",
     "static/media/teamTwo.png": "/static/media/teamTwo.605fe3145f3eaadc72c8.png",
+    "static/media/SafetySpotlight2.jpg": "/static/media/SafetySpotlight2.90ec91b120b41897b630.jpg",
     "static/media/ServicesNew.jpg": "/static/media/ServicesNew.608667293c9fc1122da6.jpg",
     "static/media/HariRaya_1.jpg": "/static/media/HariRaya_1.3704cda9f50805112f04.jpg",
+    "static/media/SafetySpotlight.jpeg": "/static/media/SafetySpotlight.3038909c6ada52645a65.jpeg",
     "static/media/Rotating Equipment Overhauls.jpg": "/static/media/Rotating Equipment Overhauls.4c950b832e2a89cd6015.jpg",
     "static/media/Flange Management Services.jpg": "/static/media/Flange Management Services.8c818797911a7d3a8bc7.jpg",
     "static/media/aboutUS.jpg": "/static/media/aboutUS.9e43ceac8fe743cdb4c4.jpg",
@@ -60,14 +60,13 @@
     "static/media/image6.png": "/static/media/image6.662ea0c86c1367ae6008.png",
     "static/media/Bottom 12.jpeg": "/static/media/Bottom 12.2926393905b6597745bc.jpeg",
     "static/media/certificate6.jpeg": "/static/media/certificate6.97b105900a803bbb4dcf.jpeg",
-    "static/media/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy.jpeg": "/static/media/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy.ff52ac9cc8850c29ee99.jpeg",
+    "static/media/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.jpeg": "/static/media/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.ff52ac9cc8850c29ee99.jpeg",
     "static/media/certificate4.jpeg": "/static/media/certificate4.15c646deadf023c6e1f4.jpeg",
     "static/media/certificate8.jpeg": "/static/media/certificate8.95ec3d028345857b83e9.jpeg",
     "static/media/Machining.jpg": "/static/media/Machining.979ac061d7059c69ae5b.jpg",
     "static/media/certificate7.jpeg": "/static/media/certificate7.3b0dac30530c771119bf.jpeg",
     "static/media/certificate5.jpeg": "/static/media/certificate5.35caacf18de531b399d9.jpeg",
     "static/media/logo.png": "/static/media/logo.d552b150183f7ac370ee.png",
-    "static/media/Happy Chinese New Year 2024.jpg": "/static/media/Happy Chinese New Year 2024.8bbbf34e68d11f54d9d8.jpg",
     "static/media/applyJob-1.jpeg": "/static/media/applyJob-1.f00576509d43baba5f0e.jpeg",
     "static/media/certificate9.jpeg": "/static/media/certificate9.6a5446edb5e72002526b.jpeg",
     "static/media/certificate12.jpeg": "/static/media/certificate12.1cb19e801eaf946d5620.jpeg",
@@ -84,14 +83,14 @@
     "static/media/logo-with-name.svg": "/static/media/logo-with-name.6e4b84aaac0206a1a03d20e311194b46.svg",
     "static/media/linkedinNew.png": "/static/media/linkedinNew.17e919bb623c20be8b80.png",
     "static/media/fbNew.png": "/static/media/fbNew.a5def58db1e9c1b38269.png",
-    "static/media/Vector.svg": "/static/media/Vector.e90c407219aae1b209f91a5ca3412428.svg",
+    "static/media/Vector.svg": "/static/media/Vector.771a0becff0fb5e67b0c4def207734a2.svg",
     "index.html": "/index.html",
-    "main.7fecc9e3.css.map": "/static/css/main.7fecc9e3.css.map",
-    "main.cccd8e8f.js.map": "/static/js/main.cccd8e8f.js.map",
+    "main.e259dae4.css.map": "/static/css/main.e259dae4.css.map",
+    "main.14cd5974.js.map": "/static/js/main.14cd5974.js.map",
     "453.aa966ee3.chunk.js.map": "/static/js/453.aa966ee3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7fecc9e3.css",
-    "static/js/main.cccd8e8f.js"
+    "static/css/main.e259dae4.css",
+    "static/js/main.14cd5974.js"
   ]
 }

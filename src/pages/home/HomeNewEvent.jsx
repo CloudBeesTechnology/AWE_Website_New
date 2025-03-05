@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TiTickOutline } from "react-icons/ti";
 
-import slide1 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy.jpeg";
-import slide2 from "../../assets/home/Events/Celebrating Hari Raya 2024.jpg";
-import slide3 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.JPG";
-import slide4 from "../../assets/home/Events/Happy Chinese New Year 2024.jpg";
-import slide5 from "../../assets/home/Events/Head Office HLP 2024.JPG";
-import slide6 from "../../assets/home/Events/The 40th National Day Celebration of Negara Brunei Darussalam.png";
+import slide1 from "../../assets/home/Events/SafetySpotlight.jpeg";
+import slide2 from "../../assets/home/Events/SafetySpotlight2.jpg";
+import slide3 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.jpeg";
+import slide4 from "../../assets/home/Events/Celebrating Hari Raya 2024.jpg";
+import slide5 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.JPG";
+
 
 export const HomeNewEvent = () => {
   const events = [
-    { name: '25 Million Safe Man-Hours Without Lost Time Injury (LTI)', image: slide1, link: '/images/lti' },
-    { name: 'Celebrating Hari Raya 2024', image: slide2, link: '/images/hari-raya' },
-    { name: 'Happy 78th Birthday to His Majesty Sultan of Brunei', image: slide3, link: '/images/his-majesty-78' },
-    { name: 'Happy Chinese New Year 2024', image: slide4 },
-    { name: 'Head Office HLP 2024', image: slide5, link: '/images/hlp' },
-    { name: 'The 40th National Day Celebration of Negara Brunei Darussalam', image: slide6 },
+    { name: 'Safety Spotlight Bulletin #1', image: slide1, link: '/images/lti' },
+    { name: 'Safety Spotlight Bulletin #2', image: slide2 },
+    { name: '25 Million Safe Man-Hours Without Lost Time Injury (LTI)', image:slide3 },
+    { name: 'Celebrating Hari Raya 2024', image:slide4 },
+    { name: 'Happy 78th Birthday to His Majesty Sultan of Brunei', image:slide5 },
+
   ];
 
   const [selectedEvent, setSelectedEvent] = useState(events[0]);
