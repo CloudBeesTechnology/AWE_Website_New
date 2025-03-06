@@ -83,9 +83,9 @@ body {
   background: linear-gradient(to top right, #EEDAD9, #f3D3D3 );
 }
 .select-custom {
-  /* background: url('./assets/drop.png') no-repeat; */
+  background: url('./assets/drop.png') no-repeat;
   background-position: right 5% center;
-  background-color: #F5F7FB;
+  background-color: white;
   background-size: 18px 18px; /* Adjust size if needed */
   appearance: none; /* Remove default arrow */
 }

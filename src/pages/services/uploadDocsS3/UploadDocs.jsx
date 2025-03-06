@@ -44,25 +44,13 @@ export const uploadDocs = async (
 
           return updatedUploads;
         });
-      } else if (
-        fileType === "profilePhoto" ||
-        fileType === "inducBriefUp" ||
-        fileType === "uploadJobDetails"
-      ) {
+      } {
         setUploadedDocs((prevState) => ({
           ...prevState,
           [fileType]: fileUrl,
         }));
-      } else {
-        setUploadedDocs((prev) => ({
-          ...prev,
-          [fileType]: [
-            ...(prev[fileType] || []),
-            { upload: fileUrl, date: uploadDate },
-          ],
-        }));
-      }
-    // }
+      } 
+   
   } catch (error) {
     console.log(`Error uploading ${fileType}:`, error);
   }

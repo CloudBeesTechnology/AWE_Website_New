@@ -3,12 +3,12 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CandidatesSchema } from "../../services/Validation";
 import { generateClient } from "aws-amplify/api";
-import { uploadData } from "aws-amplify/storage";
 import { GoUpload } from "react-icons/go"; // Ensure this import is correct
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { listPersonalDetails } from "../../../graphql/queries";
 import { createEducationDetails, createPersonalDetails } from "../../../graphql/mutations";
+import { uploadDocs } from "../../services/uploadDocsS3/UploadDocs";
+import { SpinLogo } from "../../../utils/SpinLogo";
 
 const client = generateClient();
 
@@ -16,8 +16,21 @@ export const OtherDetails = () => {
   const location = useLocation();
   const navigatingEducationData = location.state?.FormData;
   console.log("Received form data:", navigatingEducationData);
-  const [latestTempIDData, setLatesTempIDData] = useState("");
+  const [notification, setNotification] = useState(false);
+  const [showTitle, setShowTitle] = useState("");
 
+  // const [latestTempIDData, setLatesTempIDData] = useState("");
+  const [uploadedFileNames, setUploadedFileNames] = useState({
+    uploadResume: null,
+    uploadCertificate: null,
+    uploadPp: null,
+  });
+  
+  const [uploadedDocs, setUploadedDocs] = useState({
+    uploadResume: null,
+    uploadCertificate: null,
+    uploadPp: null,
+  });
   const [formData, setFormData] = useState(null);
 
   useEffect(()=>{
@@ -37,39 +50,28 @@ export const OtherDetails = () => {
   } = useForm({
     resolver: yupResolver(CandidatesSchema),
     defaultValues: {
-      perInterviewStatus: "no",
-      perInterviewDescription: '',
+      perIS: "no",
+      perIDesc: "",
     },
   });
 
 
-  const getTotalCount = async () => {
-    try {
-      const result = await client.graphql({
-        query: listPersonalDetails,
-      });
-      const items = result?.data?.listPersonalDetails?.items || [];
-      return items.length; // Return the count of all entries
-    } catch (error) {
-      console.error("Error fetching total count:", error);
-      return 0; // Return 0 if there's an error
+  const handleFileChange = async (e, fieldName) => {
+    const selectedFile = e.target.files[0];
+    const personName = navigatingEducationData?.tempID;
+
+    if (selectedFile) {
+      setValue(fieldName, selectedFile); // Set file in React Hook Form
+  
+      await uploadDocs(selectedFile, fieldName, setUploadedDocs, personName);
+  
+      // Optionally update UI with file name
+      setUploadedFileNames((prev) => ({
+        ...prev,
+        [fieldName]: selectedFile.name,
+      }));
     }
   };
-
-  const generateNextTempID = (totalCount) => {
-    const nextNumber = totalCount + 1;
-    const nextTempID = `TEMP${String(nextNumber).padStart(3, "0")}`;
-    return nextTempID;
-  };
-
-  useEffect(() => {
-    const fetchNextTempID = async () => {
-      const totalCount = await getTotalCount();
-      const nextTempID = generateNextTempID(totalCount);
-      setLatesTempIDData(nextTempID); // Set the generated ID
-    };
-    fetchNextTempID();
-  }, []);
 
   const onSubmit = async (data) => {
     console.log("Form Data:", data);
@@ -77,44 +79,36 @@ export const OtherDetails = () => {
     try {
       // Merging stored form data
       const updatedValue = { ...data };
-      const storedData = { ...updatedValue, ...navigatingEducationData };
+      const storedData = { 
+        ...updatedValue, 
+        ...navigatingEducationData,
+        status:"Active",
+        uploadResume: uploadedDocs.uploadResume,
+        uploadCertificate: uploadedDocs.uploadCertificate,
+        uploadPp: uploadedDocs.uploadPp,
+      };
   
       // First set of data (Education & Other Details)
       const totalData = {
-        tempID: latestTempIDData,
+        tempID: storedData.tempID,
         crime: storedData.crime || "",
-        crimeDesc: storedData.crime === "Yes" ? storedData.crimeDescription || "" : "",
+        crimeDesc: storedData.crimeDesc,
         emgDetails:
-          storedData.emergencyContact?.map((contact) => ({
-            name: contact.name,
-            relationship: contact.relationship,
-            address: contact.address,
-            phoneNumber: contact.phoneNumber,
-            bloodGroup: contact.bloodGroup,
-          })) || [],
-        noExperience: storedData.noExperience || "",
+          [storedData.emgDetails] || [],
+        // noExperience: storedData.noExperience || "",
         empStatement: storedData.empStatement || "",
-        desc: storedData.description || "",
+        desc: storedData.desc || "",
         disease: storedData.disease || "",
-        diseaseDesc: storedData.disease === "Yes" ? storedData.diseaseDescription || "" : "",
+        diseaseDesc: storedData.diseaseDesc,
         liquor: storedData.liquor || "",
-        liquorDesc: storedData.liquor === "Yes" ? storedData.liquorDescription || "" : "",
+        liquorDesc: storedData.liquorDesc,
         noticePeriod: storedData.noticePeriod || "",
-        perIS: storedData.perInterviewStatus || "",
-        perIDesc: storedData.perInterviewStatus === "yes" ? storedData.perInterviewDescription || "" : "",
+        perIS: storedData.perIS || "",
+        perIDesc:  storedData.perIDesc ,
         referees:
-          storedData.referees?.map((referee) => ({
-            name: referee.name,
-            address: referee.address,
-            phoneNumber: referee.phoneNumber,
-            profession: referee.profession,
-          })) || [],
+          [storedData.referees] || [],
         relatives:
-          storedData.relatives?.map((relative) => ({
-            name: relative.name,
-            position: relative.position,
-            relationship: relative.relationship,
-          })) || [],
+          [storedData.relatives] || [],
         salaryExpectation: storedData.salaryExpectation || "",
         supportInfo: storedData.supportInfo || "",
         uploadResume: storedData.uploadResume || "",
@@ -124,43 +118,43 @@ export const OtherDetails = () => {
   
       // Second set of data (Personal & Work Details)
       const totalData1 = {
-        tempID: latestTempIDData,
+        tempID: storedData.tempID,
         age: storedData.age || "",
         alternateNo: storedData.alternateNo || "",
-        agent: storedData.agent || "",
-        bwnIcNo: storedData.icNo || "",
-        bwnIcExpiry: storedData.icExpiry || "",
-        bwnIcColour: storedData.icColour || "",
+        // agent: storedData.agent || "",
+        bwnIcNo: storedData.bwnIcNo || "",
+        bwnIcExpiry: storedData.bwnIcExpiry || "",
+        bwnIcColour: storedData.bwnIcColour || "",
         contactNo: storedData.contactNo || "",
         cob: storedData.countryOfBirth || "",
-        contractType: storedData.contractType || "",
+        // contractType: storedData.contractType || "",
         chinese: storedData.chinese || "",
         dob: storedData.dateOfBirth || "",
-        driveLic: storedData.drivingLicense || "",
+        driveLic: storedData.driveLic || "",
         email: storedData.email || "",
-        empType: storedData.employeeType || "",
-        eduDetails: storedData.educationDetails || [],
-        familyDetails: storedData.familyDetails || [],
+        // empType: storedData.employeeType || "",
+        eduDetails: [storedData.eduDetails] || [],
+        familyDetails: [storedData.familyDetails] || [],
         gender: storedData.gender || "",
-        lang: storedData.language || "",
+        lang: storedData.lang || "",
         marital: storedData.marital || "",
         name: storedData.name || "",
         nationality: storedData.nationality || "",
         otherNation: storedData.otherNationality || "",
         otherRace: storedData.otherRace || "",
         otherReligion: storedData.otherReligion || "",
-        ppNo: storedData.passportNo || "",
-        ppIssued: storedData.passportIssued || "",
-        ppExpiry: storedData.passportExpiry || "",
-        ppDestinate: storedData.passportDestination || "",
+        ppNo: storedData.ppNo || "",
+        ppIssued: storedData.ppIssued || "",
+        ppExpiry: storedData.ppExpiry || "",
+        ppDestinate: storedData.ppDestinate || "",
         presentAddress: storedData.presentAddress || "",
         permanentAddress: storedData.permanentAddress || "",
-        profilePhoto: storedData.profilePhoto || "",
+        profilePhoto: storedData.uploadedDocs || "",
         position: storedData.position || "",
         race: storedData.race || "",
         religion: storedData.religion || "",
         status: storedData.status || "",
-        workExperience: storedData.workExperience || [],
+        workExperience: [storedData.workExperience] || [],
       };
   
       console.log("Personal & Work Data:", totalData1);
@@ -177,158 +171,20 @@ export const OtherDetails = () => {
           variables: { input: totalData },
         }),
       ]);
-  
-      console.log("Successfully submitted data!");
-  
-      // Clearing localStorage only after successful submission
+      console.log("Successfully submitted data!"); 
       localStorage.removeItem("applicantFormData");
       localStorage.removeItem("personalFormData");
       localStorage.removeItem("educationFormData");
       localStorage.removeItem("otherFormData");
-  
+    setShowTitle("Application Details successfully");
+        setNotification(true);
     } catch (error) {
       console.error("Error executing GraphQL requests:", error);
       throw error;
     }
   };
   
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-
-  //   try {
-  //     const updatedValue = {
-  //       ...data,
  
-  //     };
-  //     // console.log(updatedValue);
-  //     const storedData = {
-  //       ...updatedValue,
-  //       ...navigatingEducationData,
-  //     };
-  //     // console.log(storedData);
-
-  //     const totalData = {
-  //       profilePhoto:storedData.profilePhoto,
-  //       position: storedData.position,
-  //       contractType: storedData.contractType,
-  //       employeeType: storedData.employeeType,
-  //       name: storedData.name,
-  //       chinese: storedData.chinese,
-  //       gender: storedData.gender,
-  //       dateOfBirth: storedData.dateOfBirth,
-  //       age: storedData.age,
-  //       email: storedData.email,
-  //       countryOfBirth: storedData.countryOfBirth,
-  //       nationality: storedData.nationality,
-  //       otherNationality: storedData.otherNationality,
-  //       marital: storedData.marital,
-  //       race: storedData.race,
-  //       otherRace: storedData.otherRace,
-  //       religion: storedData.religion,
-  //       otherReligion: storedData.otherReligion,
-
-  //       // personalDetails
-  //       icNo: storedData.icNo,
-  //       icExpiry: storedData.icExpiry,
-  //       icColour: storedData.icColour,
-  //       passportNo: storedData.passportNo,
-  //       alternateNo: storedData.alternateNo,
-  //       passportIssued: storedData.passportIssued,
-  //       passportExpiry: storedData.passportExpiry,
-  //       passportDestination: storedData.passportDestination,
-  //       contactNo: storedData.contactNo,
-  //       presentAddress: storedData.presentAddress,
-  //       permanentAddress: storedData.permanentAddress,
-  //       drivingLicense: storedData.drivingLicense,
-  //       language: storedData.language,
-  //       familyDetails: storedData.familyDetails,
-  //       educationDetails: storedData.educationDetails,
-  //       workExperience: storedData.workExperience,
-
-  //       // educationDetails
-  //       referees:
-  //        storedData.referees?.map((referee) => ({
-  //           name: referee.name,
-  //           address: referee.address,
-  //           phoneNumber: referee.phoneNumber,
-  //           profession: referee.profession,
-  //         })) || [],
-  //       relatives:
-  //        storedData.relatives?.map((relative) => ({
-  //           name: relative.name,
-  //           position: relative.position,
-  //           relationship: relative.relationship,
-  //         })) || [],
-  //       description:storedData.description || "",
-  //       emergencyContact:
-  //        storedData.emergencyContact?.map((contact) => ({
-  //           name: contact.name,
-  //           relationship: contact.relationship,
-  //           address: contact.address,
-  //           phoneNumber: contact.phoneNumber,
-  //           bloodGroup: contact.bloodGroup,
-  //         })) || [],
-  //       disease:storedData.disease || "",
-  //       liquor:storedData.liquor || "",
-  //       crime:storedData.crime || "",
-  //       diseaseDescription:
-  //        storedData.disease === "Yes"
-  //           ?storedData.diseaseDescription || ""
-  //           : "",
-  //       liquorDescription:
-  //        storedData.liquor === "Yes"
-  //           ?storedData.liquorDescription || ""
-  //           : "",
-  //       crimeDescription:
-  //        storedData.crime === "Yes"
-  //           ?storedData.crimeDescription || ""
-  //           : "",
-
-  //       // otherDetails
-  //       salaryException: storedData.salaryException || "",
-  //       noticePeriod: storedData.noticePeriod || "",
-  //       tempID: storedData.noticePeriod || "",
-  //       perInterviewStatus: storedData.perInterviewStatus || "",
-  //       perInterviewDescription:
-  //         storedData.perInterviewStatus === "yes"
-  //           ? storedData.perInterviewDescription || ""
-  //           : "",
-  //       supportInfo: storedData.supportInfo || "",
- 
-  //     };
-
-  //     console.log(totalData);
-
-  //     // Combine all form data
-  //     const result = await client.graphql({
-  //       query: createPersonalDetails,
-  //       variables: {
-  //         input: totalData ,
-  //       },
-  //     }).then((res)=>{
-  //       console.log(res)
-
-  //     }).catch((err)=>{
-  //       console.log(err);
-  //     })
-
-  //     console.log("Successfully submitted:", result);
-
-  //     // Clear localStorage after successful submission
-  //     localStorage.removeItem('navigatingEducationData.applicationData');
-  //     localStorage.removeItem('personalDetails');
-  //     localStorage.removeItem('educationDetails');
-  //     localStorage.removeItem('updatedValue');
-  //   } catch (error) {
-  //     console.log(error);
-
-  //     console.error(
-  //       "Error submitting data to AWS:",
-  //       JSON.stringify(error, null, 2)
-  //     );
-  //   }
-  // };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="pt-5">
       {/* Salary Expected */}
@@ -336,7 +192,7 @@ export const OtherDetails = () => {
         <label className="text_size_6 mb-2">Salary Expected</label>
         <input
           type="text"
-          {...register("salaryException")}
+          {...register("salaryExpectation")}
           className="input-field"
         />
       </div>
@@ -344,7 +200,7 @@ export const OtherDetails = () => {
       {/* Termination Notice */}
       <div className="mb-4">
         <label className="text_size_6 mb-2">
-          Termination Notice for Present job (month/Date)
+          Termination Notice for Present job (Month/Date)
         </label>
         <input
           type="text"
@@ -357,21 +213,7 @@ export const OtherDetails = () => {
           </p>
         )}
       </div>
-      <div className="mb-4">
-        <label className="text_size_6 mb-2">
-          Termination Notice for Present job (month/Date)
-        </label>
-        <input
-          type="text"
-          {...register("tempID")}
-          className="input-field"
-        />
-        {errors.tempID && (
-          <p className="text-[red] text-xs mt-1">
-            {errors.tempID.message}
-          </p>
-        )}
-      </div>
+     
       {/* Interviewed Before */}
 <div className="mb-4">
   <label className="text_size_6">
@@ -380,7 +222,7 @@ export const OtherDetails = () => {
   <div className="flex justify-between items-center mt-2 mb-4 max-sm:flex-col">
     <div className="mt-2">
       <Controller
-        name="perInterviewStatus"
+        name="perIS"
         control={control}
         defaultValue="no" // Provide a default value
         render={({ field }) => (
@@ -410,9 +252,9 @@ export const OtherDetails = () => {
           </>
         )}
       />
-      {errors.perInterviewStatus && (
+      {errors.perIS && (
         <p className="text-[red] text-xs mt-1">
-          {errors.perInterviewStatus.message}
+          {errors.perIS.message}
         </p>
       )}
     </div>
@@ -422,22 +264,22 @@ export const OtherDetails = () => {
         If yes, please give Details
       </label>
       <Controller
-        name="perInterviewDescription"
+        name="perIDesc"
         control={control}
         defaultValue="" // Provide an initial value to avoid uncontrolled behavior
         render={({ field }) => (
           <input
             {...field}
-            disabled={watch("perInterviewStatus") !== "yes"}
+            disabled={watch("perIS") !== "yes"}
             className={`input-field ${
-              errors.perInterviewDescription ? "border-[red]" : ""
+              errors.perIDesc ? "border-[red]" : ""
             }`}
           />
         )}
       />
-      {errors.perInterviewDescription && (
+      {errors.perIDesc && (
         <p className="text-[red] text-xs mt-4">
-          {errors.perInterviewDescription.message}
+          {errors.perIDesc.message}
         </p>
       )}
     </div>
@@ -456,19 +298,102 @@ export const OtherDetails = () => {
         ></textarea>
       </div>
 
+  {/* File Uploads */}
+  <div className="my-5 ">
+        <label className="text_size_6">Choose file</label>
+        <div className=" grid max-sm:grid-cols-1 md:grid-cols-3 max-md:grid-cols-2 mt-3 mb-10 gap-5">
+          {/* Resume Upload */}
+          <div className="max-sm:mb-5">
+            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
+              <input
+                type="file"
+                {...register("uploadResume")}
+                onChange={(e) => handleFileChange(e, "uploadResume")}
+                className="hidden"
+                accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              />
+              <span className="ml-2 text-grey w-full font-normal flex justify-between items-center gap-10">
+              Upload Resume
+              <GoUpload />
+              </span>
+            </label>
+            {/* Display uploaded file name */}
+            {uploadedFileNames.uploadResume ? (
+              <p className="text-xs mt-1 text-grey">
+                Uploaded: {uploadedFileNames.uploadResume}
+              </p>
+            ):(  <p className="text-[red] text-xs mt-1">
+              {errors?.uploadResume?.message}
+            </p>)}   
+          </div>
+
+          {/* Certificate Upload */}
+          <div className="max-sm:mb-5">
+            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
+              <input
+                type="file"
+                {...register("uploadCertificate")}
+                onChange={(e) => handleFileChange(e, "uploadCertificate")}
+                className="hidden"
+                accept="application/pdf, image/png, image/jpeg"
+              />
+              <span className="ml-2 text-grey w-full font-normal flex justify-between items-center gap-10">
+              Qualifi Certificate
+              <GoUpload />
+              </span>
+            </label>
+            {/* Display uploaded file name */}
+            {uploadedFileNames.uploadCertificate ? (
+              <p className="text-xs mt-1 text-grey">
+                Uploaded: {uploadedFileNames.uploadCertificate}
+              </p>
+            ):(<p className="text-[red] text-xs mt-1">
+              {errors?.uploadCertificate?.message}
+            </p>)}
+        
+          </div>
+
+          {/* Passport Upload */}
+          <div className="max-sm:mb-5">
+            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
+              <input
+                type="file"
+                {...register("uploadPp")}
+                onChange={(e) => handleFileChange(e, "uploadPp")}
+                className="hidden"
+                accept="application/pdf"
+              />
+              <span className="ml-2 text-grey w-full font-normal flex justify-between items-center gap-10">
+              Upload IC / Passport
+                <GoUpload />
+              </span>
+            </label>
+            {/* Display uploaded file name */}
+            {uploadedFileNames.uploadPp ? (
+              <p className="text-xs mt-1 text-grey">
+                Uploaded: {uploadedFileNames.uploadPp}
+              </p>
+            ):(<p className="text-[red] text-xs mt-1">
+              {errors?.uploadPp?.message}
+            </p>)}
+           
+          </div>
+        </div>
+      </div>
+
       <div className="flex items-start mb-4">
         <input
           type="checkbox"
-          id="employeeStatement"
-          {...register('employeeStatement', { required: 'This field is required' })}
+          id="empStatement"
+          {...register('empStatement', { required: 'This field is required' })}
           className="w-5 h-5 border-medium_grey rounded"
         />
-        <label htmlFor="employeeStatement" className="ml-2 max-sm:text-[12px]">
+        <label htmlFor="empStatement" className="ml-2 max-sm:text-[12px]">
           I Hereby Declare that every statement made by me in this form is true and correct and I understand and agree that any false declaration made by me may be ground for termination of my contract of employment without notice.
         </label>
       </div>
-      {errors.employeeStatement && (
-        <p className="text-[red] text-sm">{errors.employeeStatement.message}</p>
+      {errors.empStatement && (
+        <p className="text-[red] text-sm">{errors.empStatement.message}</p>
       )}
 
       <div className="text-center my-10">
@@ -476,6 +401,13 @@ export const OtherDetails = () => {
           Submit
         </button>
       </div>
+      {notification && (
+          <SpinLogo
+            text={showTitle}
+            notification={notification}
+            path="/applyJob"
+          />
+        )}
     </form>
   );
 };

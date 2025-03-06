@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FaRegMinusSquare } from "react-icons/fa";
+import { CiSquarePlus } from "react-icons/ci";
 import { FiPlusSquare } from "react-icons/fi";
 import { EducationSchema } from "../../services/Validation"; // Adjust import as necessary
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,7 +12,6 @@ const client = generateClient();
 
 export const EducationDetails = () => {
   const location = useLocation();
-  const [navigateEduData,setNavigateEduData]=useState("")
   const navigatingPersonalData = location.state?.FormData;
   console.log("Received form data:", navigatingPersonalData );
   useEffect(()=>{
@@ -27,45 +28,105 @@ export const EducationDetails = () => {
   } = useForm({
     resolver: yupResolver(EducationSchema),
     defaultValues: {
-      referees: [{ name: "", address: "", telephone: "", profession: "" }],
+      referees: [{ name: "", address: "", phoneNumber: "", profession: "" }],
       relatives: [{ name: "", positionHeld: "", relationship: "" }],
-      emergencyContact: [{ name: "", relationship: "", address: "", phoneNumber: "", bloodGroup: "" }],
+      emgDetails: [
+        { name: "", 
+          relationship: "",
+          address: "", 
+          phoneNumber: "", 
+          bloodGroup: "" }],
       disease:"no",
       liquor:"no",
       crime:"no",
-      diseaseDescription: "",
-      liquorDescription: "",
-      crimeDescription: "",
+      diseaseDesc: "",
+      liquorDesc: "",
+      crimeDesc: "",
+      ...JSON.parse(localStorage.getItem("educationFormData")) || {},
 
     },
   });
   const navigate = useNavigate();
-  // const { handleNext } = useOutletContext();
-  const { fields: emergencyContact, append: appendEmergency } = useFieldArray({
+  
+  useEffect(() => {
+    const eduData = () => {
+      localStorage.removeItem("educationFormData"); // Clear data on refresh or tab close
+    };
+    window.addEventListener("beforeunload", eduData);
+    return () => {
+      window.removeEventListener("beforeunload", eduData);
+    };
+  }, []);
+
+  const {
+    fields: emgDetails,
+    append: appendEmergency,
+    remove: removeEmergency,
+  } = useFieldArray({
     control,
-    name: "emergencyContact",
+    name: "emgDetails",
   });
-  const { fields: referees, append: appendCharacterReferee } = useFieldArray({
+  const {
+    fields: referees,
+    append: appendCharacterReferee,
+    remove: removeCharacterReferee,
+  } = useFieldArray({
     control,
     name: "referees",
   });
-  const { fields: relatives, append: appendRelative } = useFieldArray({
+  const {
+    fields: relatives,
+    append: appendRelative,
+    remove: removeRelative,
+  } = useFieldArray({
     control,
     name: "relatives",
   });
 
-  // const onSubmit = handleSubmit((data) => {
-  //   console.log(data);
-  //   localStorage.setItem('educationDetails', JSON.stringify(data));
-  //   // handleNext();   
-  //   navigate("/addCandidates/otherDetails");
-  // });
+  const handleAddEmergency = () => {
+    appendEmergency({
+      name: "",
+      relationship: "",
+      address: "",
+      phoneNumber: "",
+      bloodGroup: "",
+      isNew: true,
+    });
+  };
+
+  const handleAddReferee = () => {
+    // Append a new referee object with isNew flag set to true
+    appendCharacterReferee({
+      name: "",
+      address: "",
+      phoneNumber: "",
+      profession: "",
+      isNew: true,
+    });
+  };
+
+  const handleAddRelative = () => {
+    // Append a new empty field set with isNew flag to identify it as newly added
+    appendRelative({
+      name: "",
+      positionHeld: "",
+      relationship: "",
+      isNew: true,
+    });
+  };
+
+ 
+
   const onSubmit = (data) => {
     console.log(data);
     const navigatingEduData={
       ...data,
+      emgDetails: JSON.stringify(data.emgDetails),
+      referees: JSON.stringify(data.referees),
+      relatives: JSON.stringify(data.relatives),
       ...navigatingPersonalData
-    }
+    };
+    localStorage.setItem("educationFormData", JSON.stringify(navigatingEduData));
     // console.log(navigatingEduData);
     // setNavigateEduData(navigatingEduData)
     // handleNext();
@@ -73,43 +134,20 @@ export const EducationDetails = () => {
       state: { FormData:navigatingEduData},
     });
   }
-  // const onSubmit = async (data) => {
-  // try {
-   
-  //   console.log(data);
-
-  //   // Combine all form data
-  //   const result = await client.graphql({
-  //     query: createEducation,
-  //     variables: {
-  //       input: data ,
-  //     }, 
-  //   });
-  //   console.log("Successfully submitted:hiiiiiiiii", result);
-   
-  // } catch (error) {
-  //   console.log(error);
-    
-  //   console.error(
-  //     "Error submitting data to AWS:",
-  //     JSON.stringify(error, null, 2)
-  //   );
-  // } 
-  // navigate("/addCandidates/personalDetails", {
-  //   state: { FormData: data },
-  // });
-// };
-console.log("Successfully submitted Three Data:",navigateEduData);
+ 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="">
       {/* h-screen overflow-y-auto scrollbar-hide */}
       {/* Character Referees */}
       <div className="relative mt-10">
         <label className="text_size_6 mb-3">
-          Characters Referees <span className="text-[#838383]">(Names of relatives should not be given)</span>
+          Characters Referees{" "}
+          <span className="text-[#838383]">
+            (Names of relatives should not be given)
+          </span>
         </label>
         {referees.map((referee, index) => (
-          <div key={referee.id} className="grid sm:grid-cols-2 md:grid-cols-4 gap-2 mb-7">
+          <div key={referee.id} className="grid max-md:grid-cols-2 md:grid-cols-2 max-sm:grid-cols-1 lg:grid-cols-4 max-sm: gap-2 mb-7">
             <Controller
               name={`referees.${index}.name`}
               control={control}
@@ -117,7 +155,7 @@ console.log("Successfully submitted Three Data:",navigateEduData);
                 <input
                   {...field}
                   placeholder="Name"
-                  className="input-field"
+                  className="mt-2  text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full"
                 />
               )}
             />
@@ -128,18 +166,18 @@ console.log("Successfully submitted Three Data:",navigateEduData);
                 <input
                   {...field}
                   placeholder="Address"
-                  className="input-field"
+                  className="mt-2  text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full"
                 />
               )}
             />
             <Controller
-              name={`referees.${index}.telephone`}
+              name={`referees.${index}.phoneNumber`}
               control={control}
               render={({ field }) => (
                 <input
                   {...field}
-                  placeholder="Telephone"
-                  className="input-field"
+                  placeholder="phoneNumber"
+                  className="mt-2 text_size_7  p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
                 />
               )}
             />
@@ -150,26 +188,37 @@ console.log("Successfully submitted Three Data:",navigateEduData);
                 <input
                   {...field}
                   placeholder="Profession"
-                  className="input-field"
+                  className="mt-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full"
                 />
               )}
             />
+            {referee.isNew && (
+              <button
+                type="button"
+                onClick={() => removeCharacterReferee(index)} // Remove specific field set
+                className="absolute top-15 -right-7 text-medium_grey text-[18px]"
+              >
+                <FaRegMinusSquare />
+              </button>
+            )}
           </div>
         ))}
         <button
           type="button"
-          onClick={() => appendCharacterReferee({ name: "", address: "", telephone: "", profession: "" })}
+          onClick={handleAddReferee} // Add a new referee with isNew: true
           className="absolute top-11 -right-7 text-medium_grey text-[18px]"
         >
-          <FiPlusSquare />
+          <CiSquarePlus />
         </button>
       </div>
 
       {/* Relatives Employed by the Company */}
       <div className="relative">
-        <label className="text_size_6 mb-3">Relatives Employed by the company</label>
+        <label className="text_size_6 mb-3">
+          Relatives Employed by the company
+        </label>
         {relatives.map((relative, index) => (
-          <div key={relative.id} className="grid sm:grid-cols-3 gap-4 mb-7">
+          <div key={relative.id} className="grid max-sm:grid-cols-1 max-md:grid-cols-2 md:grid-cols-3 gap-4 mb-7">
             <Controller
               name={`relatives.${index}.name`}
               control={control}
@@ -177,7 +226,7 @@ console.log("Successfully submitted Three Data:",navigateEduData);
                 <input
                   {...field}
                   placeholder="Name"
-                  className="input-field"
+                  className="mt-2  text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full"
                 />
               )}
             />
@@ -188,7 +237,7 @@ console.log("Successfully submitted Three Data:",navigateEduData);
                 <input
                   {...field}
                   placeholder="Position Held"
-                  className="input-field"
+                  className="mt-2  text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full"
                 />
               )}
             />
@@ -199,18 +248,28 @@ console.log("Successfully submitted Three Data:",navigateEduData);
                 <input
                   {...field}
                   placeholder="Relationship"
-                  className="input-field"
+                  className="mt-2  text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full"
                 />
               )}
             />
+
+            {relative.isNew && (
+              <button
+                type="button"
+                onClick={() => removeRelative(index)} // Remove specific field set
+                className="absolute top-15 -right-7 text-medium_grey text-[18px]"
+              >
+                <FaRegMinusSquare /> {/* Minus icon */}
+              </button>
+            )}
           </div>
         ))}
         <button
           type="button"
-          onClick={() => appendRelative({ name: "", positionHeld: "", relationship: "" })}
+          onClick={handleAddRelative}
           className="absolute top-11 -right-7 text-medium_grey text-[18px]"
         >
-          <FiPlusSquare />
+          <CiSquarePlus />
         </button>
       </div>
 
@@ -218,122 +277,130 @@ console.log("Successfully submitted Three Data:",navigateEduData);
       <div>
         <label className="text_size_6 mb-3">Brief Description of Present Duties</label>
         <Controller
-          name="description"
+          name="desc"
           control={control}
           render={({ field }) => (
-            <textarea
+            <input
               {...field}
               className="resize-none input-field"
               rows="3"
-            ></textarea>
+            />
           )}
         />
       </div>
 
       {/* Emergency Contact */}
-      <div className="mb-4 relative text_size_6">
+      <div className="mb-4 mt-5 relative text_size_6">
         <label className="block mb-1">In Case of Accident / Emergency</label>
-        {emergencyContact.map((emergency, index) => (
-          <div key={emergency.id} className="grid sm:grid-cols-3 md:grid-cols-5 gap-3 mb-2">
+        {emgDetails.map((emergency, index) => (
+          <div key={emergency.id} className="grid max-sm:grid-cols-1 max-md:grid-cols-2 md:grid-cols-5 gap-3 mb-2">
             <Controller
-              name={`emergencyContact.${index}.name`}
+              name={`emgDetails.${index}.name`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
                   <input
                     {...field}
                     placeholder="Name of Person notify"
-                    className="resize-none input-field"
+                    className="resize-none text_size_9 mt-2   p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
                   />
-                  {errors.emergencyContact?.[index]?.name && (
+                  {errors.emgDetails?.[index]?.name && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.emergencyContact[index].name.message}
+                      {errors.emgDetails[index].name.message}
                     </p>
                   )}
                 </div>
               )}
             />
             <Controller
-              name={`emergencyContact.${index}.relationship`}
+              name={`emgDetails.${index}.relationship`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
                   <input
                     {...field}
                     placeholder="Relationship"
-                    className="input-field"
+                    className="mt-2 p-2.5 text_size_9  bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
                   />
-                  {errors.emergencyContact?.[index]?.relationship && (
+                  {errors.emgDetails?.[index]?.relationship && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.emergencyContact[index].relationship.message}
+                      {errors.emgDetails[index].relationship.message}
                     </p>
                   )}
                 </div>
               )}
             />
             <Controller
-              name={`emergencyContact.${index}.address`}
+              name={`emgDetails.${index}.address`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
                   <input
                     {...field}
                     placeholder="Address"
-                    className="input-field"
-                 
+                    className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
                   />
-                  {errors.emergencyContact?.[index]?.address && (
+                  {errors.emgDetails?.[index]?.address && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.emergencyContact[index].address.message}
+                      {errors.emgDetails[index].address.message}
                     </p>
                   )}
                 </div>
               )}
             />
             <Controller
-              name={`emergencyContact.${index}.phoneNumber`}
+              name={`emgDetails.${index}.phoneNumber`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
                   <input
                     {...field}
                     placeholder="Contant Number"
-                    className="input-field"
+                    className=" mt-2 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded text_size_9"
                   />
-                  {errors.emergencyContact?.[index]?.phoneNumber && (
+                  {errors.emgDetails?.[index]?.phoneNumber && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.emergencyContact[index].phoneNumber.message}
+                      {errors.emgDetails[index].phoneNumber.message}
                     </p>
                   )}
                 </div>
               )}
             />
             <Controller
-              name={`emergencyContact.${index}.bloodGroup`}
+              name={`emgDetails.${index}.bloodGroup`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
                   <input
                     {...field}
                     placeholder="Blood Group"
-                    className=" input-field"
+                    className=" mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
                   />
-                  {errors.emergencyContact?.[index]?.bloodGroup && (
+                  {errors.emgDetails?.[index]?.bloodGroup && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.emergencyContact[index].bloodGroup.message}
+                      {errors.emgDetails[index].bloodGroup.message}
                     </p>
                   )}
                 </div>
               )}
             />
+            {emergency.isNew && (
+              <button
+                type="button"
+                onClick={() => removeEmergency(index)} // Remove specific field set
+                className="absolute top-15 -right-7 text-medium_grey text-[18px]"
+              >
+                <FaRegMinusSquare /> {/* Minus icon */}
+              </button>
+            )}
           </div>
         ))}
         <button
           type="button"
-          onClick={() => appendEmergency({ name: "", relationship: "", address: "", phoneNumber: "", bloodGroup: "" })}
+          onClick={handleAddEmergency}
           className="absolute top-11 -right-7 text-medium_grey text-[18px]"
         >
-          <FiPlusSquare />
+          <CiSquarePlus />
         </button>
       </div>
 
@@ -398,27 +465,27 @@ console.log("Successfully submitted Three Data:",navigateEduData);
 
             {/* Conditional Description Input */}
             <div className="items-center max-sm:mt-4">
-              <label htmlFor={`${section.field}Description`} className="text_size_7  text-[#C7C7C7]">
+              <label htmlFor={`${section.field}Desc`} className="text_size_7  text-[#868686] px-2">
                 If yes, please provide details
               </label>
               <Controller
-                name={`${section.field}Description`}
+                name={`${section.field}Desc`}
                 control={control}
                 defaultValue="" // Set initial value
                 render={({ field }) => (
                   <input
-                    id={`${section.field}Description`}
+                    id={`${section.field}Desc`}
                     {...field}
                     className={`w-full sm:w-[450px] mt-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded ${
-                      errors[`${section.field}Description`] ? "border-red-500" : ""
+                      errors[`${section.field}Desc`] ? "border-red-500" : ""
                     }`}
                     disabled={watch(section.field) !== "yes"} // Disable when "No" is selected
                   />
                 )}
               />
-              {errors[`${section.field}Description`] && (
+              {errors[`${section.field}Desc`] && (
                 <p className="text-[red] text-xs mt-4">
-                  {errors[`${section.field}Description`]?.message}
+                  {errors[`${section.field}Desc`]?.message}
                 </p>
               )}
             </div>
