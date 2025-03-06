@@ -48,7 +48,11 @@ export const App = () => {
 
     // Clear localStorage if the current path is NOT in allowedPaths
     if (!allowedPaths.includes(location.pathname)) {
-      localStorage.clear();
+      // localStorage.clear();
+      localStorage.removeItem("applicantFormData");
+  localStorage.removeItem("personalFormData");
+  localStorage.removeItem("educationFormData");
+  localStorage.removeItem("otherFormData");
     }
   }, [location.pathname]);
   const hideNavbar = ["/applyJob", "/addCandidates", "/addCandidates/personalDetails", "/addCandidates/educationDetails", "/addCandidates/otherDetails"];

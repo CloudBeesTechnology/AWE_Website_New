@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import avatar from "../../../assets/applyJob/avatar.jpeg";
 import { ApplicantSchema } from "../../services/Validation";
 import { useLocation, useNavigate } from "react-router-dom";
-import { uploadDocs } from "../../services/uploadDocsS3/UploadDocs";
+import { uploadDocString } from "../../services/uploadDocsS3/UploadDocs";
 import { IoCameraOutline } from "react-icons/io5";
 import { listPersonalDetails } from "../../../graphql/queries";
 import { generateClient } from "aws-amplify/api";
@@ -97,6 +97,7 @@ export const ApplicantDetails = () => {
   }, []);
 
   // Handle file change
+  
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
 
@@ -113,7 +114,7 @@ export const ApplicantDetails = () => {
         localStorage.setItem("applicantFormData", JSON.stringify(savedData));
 
         // Handle backend storage for the file
-        uploadDocs(selectedFile, "profilePhoto", setUploadedDocs, latestTempIDData); // You will handle the backend logic in this function
+        uploadDocString(selectedFile, "profilePhoto", setUploadedDocs, latestTempIDData); // You will handle the backend logic in this function
       };
     }
   };
@@ -121,13 +122,21 @@ export const ApplicantDetails = () => {
   // Handle form submission
   const onSubmit = async (data) => {
     try {
-      console.log(data);
-      const applicationUpdate = {
-        ...data,
-        profilePhoto: profilePhoto, 
-        uploadedDocs: uploadedDocs.profilePhoto, // Backend URL of uploaded image
-        tempID: latestTempIDData,
-      };
+      // console.log(data);
+      const baseURL = "https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/";
+const applicationUpdate = {
+  ...data,
+  profilePhoto: profilePhoto, 
+  uploadedDocs: uploadedDocs.profilePhoto.replace(baseURL, ""), // Replace base URL with an empty string
+  tempID: latestTempIDData,
+};
+
+      // const applicationUpdate = {
+      //   ...data,
+      //   profilePhoto: profilePhoto, 
+      //   uploadedDocs: uploadedDocs.profilePhoto, // Backend URL of uploaded image
+      //   tempID: latestTempIDData,
+      // };
   
       localStorage.setItem("applicantFormData", JSON.stringify(applicationUpdate));
   

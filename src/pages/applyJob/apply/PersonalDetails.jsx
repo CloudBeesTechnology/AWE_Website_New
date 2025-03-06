@@ -16,7 +16,7 @@ export const PersonalDetails = () => {
   const [navigateData, setNavigateData] = useState("");
   const applicationData = location.state?.FormData;
 
-  console.log("Received form data:", applicationData);
+  // console.log("Received form data:", applicationData);
 
   useEffect(() => {
     window.scrollTo({

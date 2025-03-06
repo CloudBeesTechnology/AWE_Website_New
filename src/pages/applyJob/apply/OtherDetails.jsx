@@ -7,7 +7,7 @@ import { GoUpload } from "react-icons/go"; // Ensure this import is correct
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { createEducationDetails, createPersonalDetails } from "../../../graphql/mutations";
-import { uploadDocs } from "../../services/uploadDocsS3/UploadDocs";
+import { uploadDocString } from "../../services/uploadDocsS3/UploadDocs";
 import { SpinLogo } from "../../../utils/SpinLogo";
 
 const client = generateClient();
@@ -15,7 +15,7 @@ const client = generateClient();
 export const OtherDetails = () => {
   const location = useLocation();
   const navigatingEducationData = location.state?.FormData;
-  console.log("Received form data:", navigatingEducationData);
+  // console.log("Received form data:", navigatingEducationData);
   const [notification, setNotification] = useState(false);
   const [showTitle, setShowTitle] = useState("");
 
@@ -63,7 +63,7 @@ export const OtherDetails = () => {
     if (selectedFile) {
       setValue(fieldName, selectedFile); // Set file in React Hook Form
   
-      await uploadDocs(selectedFile, fieldName, setUploadedDocs, personName);
+      await uploadDocString(selectedFile, fieldName, setUploadedDocs, personName);
   
       // Optionally update UI with file name
       setUploadedFileNames((prev) => ({
@@ -74,18 +74,21 @@ export const OtherDetails = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
   
     try {
       // Merging stored form data
       const updatedValue = { ...data };
+
+      const baseURL = "https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/";
+      
       const storedData = { 
         ...updatedValue, 
         ...navigatingEducationData,
         status:"Active",
-        uploadResume: uploadedDocs.uploadResume,
-        uploadCertificate: uploadedDocs.uploadCertificate,
-        uploadPp: uploadedDocs.uploadPp,
+        uploadResume: uploadedDocs.uploadResume.replace(baseURL, ""),
+        uploadCertificate: uploadedDocs.uploadCertificate.replace(baseURL, ""),
+        uploadPp: uploadedDocs.uploadPp.replace(baseURL, ""),
       };
   
       // First set of data (Education & Other Details)
@@ -157,8 +160,8 @@ export const OtherDetails = () => {
         workExperience: [storedData.workExperience] || [],
       };
   
-      console.log("Personal & Work Data:", totalData1);
-      console.log("Education & Other Data:", totalData);
+      // console.log("Personal & Work Data:", totalData1);
+      // console.log("Education & Other Data:", totalData);
   
       // Execute both mutations in parallel
       await Promise.all([
@@ -171,7 +174,7 @@ export const OtherDetails = () => {
           variables: { input: totalData },
         }),
       ]);
-      console.log("Successfully submitted data!"); 
+      // console.log("Successfully submitted data!"); 
       localStorage.removeItem("applicantFormData");
       localStorage.removeItem("personalFormData");
       localStorage.removeItem("educationFormData");
@@ -304,7 +307,7 @@ export const OtherDetails = () => {
         <div className=" grid max-sm:grid-cols-1 md:grid-cols-3 max-md:grid-cols-2 mt-3 mb-10 gap-5">
           {/* Resume Upload */}
           <div className="max-sm:mb-5">
-            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
+            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-white border border-[#dedddd] rounded-md cursor-pointer">
               <input
                 type="file"
                 {...register("uploadResume")}
@@ -320,7 +323,7 @@ export const OtherDetails = () => {
             {/* Display uploaded file name */}
             {uploadedFileNames.uploadResume ? (
               <p className="text-xs mt-1 text-grey">
-                Uploaded: {uploadedFileNames.uploadResume}
+                 {uploadedFileNames.uploadResume}
               </p>
             ):(  <p className="text-[red] text-xs mt-1">
               {errors?.uploadResume?.message}
@@ -329,7 +332,7 @@ export const OtherDetails = () => {
 
           {/* Certificate Upload */}
           <div className="max-sm:mb-5">
-            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
+            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-white border border-[#dedddd] rounded-md cursor-pointer">
               <input
                 type="file"
                 {...register("uploadCertificate")}
@@ -345,7 +348,7 @@ export const OtherDetails = () => {
             {/* Display uploaded file name */}
             {uploadedFileNames.uploadCertificate ? (
               <p className="text-xs mt-1 text-grey">
-                Uploaded: {uploadedFileNames.uploadCertificate}
+                 {uploadedFileNames.uploadCertificate}
               </p>
             ):(<p className="text-[red] text-xs mt-1">
               {errors?.uploadCertificate?.message}
@@ -355,7 +358,7 @@ export const OtherDetails = () => {
 
           {/* Passport Upload */}
           <div className="max-sm:mb-5">
-            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] rounded-md cursor-pointer">
+            <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-white border border-[#dedddd] rounded-md cursor-pointer">
               <input
                 type="file"
                 {...register("uploadPp")}
@@ -371,7 +374,7 @@ export const OtherDetails = () => {
             {/* Display uploaded file name */}
             {uploadedFileNames.uploadPp ? (
               <p className="text-xs mt-1 text-grey">
-                Uploaded: {uploadedFileNames.uploadPp}
+                 {uploadedFileNames.uploadPp}
               </p>
             ):(<p className="text-[red] text-xs mt-1">
               {errors?.uploadPp?.message}

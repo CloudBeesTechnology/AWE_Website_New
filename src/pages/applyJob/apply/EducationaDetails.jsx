@@ -13,7 +13,7 @@ const client = generateClient();
 export const EducationDetails = () => {
   const location = useLocation();
   const navigatingPersonalData = location.state?.FormData;
-  console.log("Received form data:", navigatingPersonalData );
+  // console.log("Received form data:", navigatingPersonalData );
   useEffect(()=>{
     window.scrollTo({
       top:0,
@@ -118,7 +118,7 @@ export const EducationDetails = () => {
  
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const navigatingEduData={
       ...data,
       emgDetails: JSON.stringify(data.emgDetails),

@@ -1,31 +1,93 @@
 import { getCurrentUser } from "@aws-amplify/auth";
 import { uploadData, remove } from "@aws-amplify/storage";
+import axios from "axios";
+
+export const uploadDocString = async (
+  file,
+  fileType,
+  setUploadedDocs,
+  tempID,
+  index
+) => {
+  try {
+    // Encode file name for URL safety
+    const encodedFileName = encodeURIComponent(file.name);
+
+    // Construct the upload URL for API Gateway
+    const uploadUrl = `https://gnth2qx5cf.execute-api.ap-southeast-1.amazonaws.com/fileupload/aweadininprod2024954b8-prod/public%2F${fileType}%2F${tempID}%2F${encodedFileName}`;
+
+    // Upload the file using axios
+    await axios.put(uploadUrl, file)
+      .then((res) => {
+        console.log(res.data.message);
+      })
+      .catch((err) => {
+        console.error("Error uploading file:", err);
+      });
+
+    // Generate the uploaded file URL
+    const fileUrl = `https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/public/${fileType}/${tempID}/${encodedFileName}`;
+    const uploadDate = new Date().toISOString().split("T")[0];
+
+    // If index is provided, store the uploaded file in an array
+    if (typeof index === "number") {
+      setUploadedDocs((prev) => {
+        const updatedUploads = { ...prev };
+
+        // Initialize the array if it doesn't exist
+        updatedUploads[fileType] = updatedUploads[fileType] || [];
+        updatedUploads[fileType][index] =
+          updatedUploads[fileType][index] || [];
+
+        // Check if the file already exists in the array
+        const existingUpload = updatedUploads[fileType][index].find(
+          (item) => item.upload === fileUrl
+        );
+
+        if (!existingUpload) {
+          updatedUploads[fileType][index].push({
+            upload: fileUrl,
+            date: uploadDate,
+          });
+        }
+
+        console.log(updatedUploads);
+        return updatedUploads;
+        
+      });
+    } else {
+      setUploadedDocs((prevState) => ({
+        ...prevState,
+        [fileType]: fileUrl,
+      }));
+    }
+  } catch (error) {
+    console.error(`Error uploading ${fileType}:`, error);
+  }
+};
 
 export const uploadDocs = async (
   file,
   fileType,
   setUploadedDocs,
-  empID,
+  tempID,
   index
 ) => {
   try {
-    const currentUser = await getCurrentUser();
-    console.log(empID);
 
-    // if (currentUser) {
       const result = await uploadData({
-        path: `public/${fileType}/${empID}/${file.name}`,
+        
+        path: `public/${fileType}/${tempID}/${file.name}`,
         data: file,
       }).result;
+      
       const fileUrl = result.path;
-      console.log(fileUrl);
-
+ 
       const uploadDate = new Date().toISOString().split("T")[0];
 
       if (typeof index === "number") {
         setUploadedDocs((prev) => {
           const updatedUploads = { ...prev };
-
           // Initialize the array if it doesn't exist
           updatedUploads[fileType] = updatedUploads[fileType] || [];
           updatedUploads[fileType][index] =
@@ -41,23 +103,23 @@ export const uploadDocs = async (
               date: uploadDate,
             });
           }
-
           return updatedUploads;
         });
-      } {
-        setUploadedDocs((prevState) => ({
-          ...prevState,
-          [fileType]: fileUrl,
-        }));
       } 
-   
+        setUploadedDocs((prev) => ({
+          ...prev,
+          [fileType]: [
+            ...(prev[fileType] || []),
+            { upload: fileUrl, date: uploadDate },
+          ],
+        }));
+    
   } catch (error) {
-    console.log(`Error uploading ${fileType}:`, error);
+    console.log(`Error uploading ${fileType}:, error`);
   }
 };
-
 // Delete file from S3 and update state
-export const deleteDocs = async (fileUrl, fileType, setUploadedDocs, empID, index) => {
+export const deleteDocs = async (fileUrl, fileType, setUploadedDocs, tempID, index) => {
   try {
     // Delete from S3
     await remove(fileUrl);
@@ -93,76 +155,4 @@ export const deleteDocs = async (fileUrl, fileType, setUploadedDocs, empID, inde
     console.error(`Error deleting ${fileType}:`, error);
   }
 };
-// import { getCurrentUser } from "@aws-amplify/auth";
-// import { uploadData } from "@aws-amplify/storage";
 
-// export const uploadDocs = async (
-//   file,
-//   fileType,
-//   setUploadedDocs,
-//   empID,
-//   index
-// ) => {
-//   try {
-//     const currentUser = await getCurrentUser();
-//     console.log(empID);
-
-//     if (currentUser) {
-//       const result = await uploadData({
-//         path: `public/${fileType}/${empID}/${file.name}`,
-//         data: file,
-//       }).result;
-//       const fileUrl = result.path;
-//       console.log(fileUrl);
-
-//       const uploadDate = new Date().toISOString().split("T")[0];
-//       if (typeof index === "number") {
-     
-//         setUploadedDocs((prev) => {
-//           const updatedUploads = { ...prev };
-
-//           // Initialize the array if it doesn't exist yet for the given fileType
-//           updatedUploads[fileType] = updatedUploads[fileType] || [];
-
-//           // Initialize the index array if it doesn't exist yet
-//           updatedUploads[fileType][index] =
-//             updatedUploads[fileType][index] || [];
-
-//           // Avoid adding the file if it already exists
-//           const existingUpload = updatedUploads[fileType][index].find(
-//             (item) => item.upload === fileUrl
-//           );
-
-//           if (!existingUpload) {
-//             // Push the file info to the specific index of the fileType array
-//             updatedUploads[fileType][index].push({
-//               upload: fileUrl, // The uploaded file URL
-//               date: uploadDate, // The upload date
-//             });
-//           }
-
-//           return updatedUploads;
-//         });
-       
-//       } else if (fileType === "profilePhoto" || fileType === "inducBriefUp" || fileType === "uploadJobDetails") {
-//         setUploadedDocs((prevState) => ({
-//           ...prevState,
-//           [fileType]: fileUrl,
-//         }));
-//       } else {
-   
-//         console.log("not index");
-
-//         setUploadedDocs((prev) => ({
-//           ...prev,
-//           [fileType]: [
-//             ...(prev[fileType] || []),
-//             { upload: fileUrl, date: uploadDate },
-//           ],
-//         }));
-//       }
-//     }
-//   } catch (error) {
-//     console.log(`Error uploading ${fileType}:`, error);
-//   }
-// };
