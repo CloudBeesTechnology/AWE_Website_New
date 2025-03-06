@@ -68,6 +68,33 @@ export const ApplicantDetails = () => {
     };
   }, [location,setValue]);
 
+  const getTotalCount = async () => {
+    try {
+      const result = await client.graphql({
+        query: listPersonalDetails,
+      });
+      const items = result?.data?.listPersonalDetails?.items || [];
+      return items.length; // Return the count of all entries
+    } catch (error) {
+      console.error("Error fetching total count:", error);
+      return 0; // Return 0 if there's an error
+    }
+  };
+
+  const generateNextTempID = (totalCount) => {
+    const nextNumber = totalCount + 1;
+    const nextTempID = `TEMP${String(nextNumber).padStart(3, "0")}`;
+    return nextTempID;
+  };
+
+  useEffect(() => {
+    const fetchNextTempID = async () => {
+      const totalCount = await getTotalCount();
+      const nextTempID = generateNextTempID(totalCount);
+      setLatesTempIDData(nextTempID); // Set the generated ID
+    };
+    fetchNextTempID();
+  }, []);
 
   // Handle file change
   const handleFileChange = async (e) => {
@@ -90,34 +117,6 @@ export const ApplicantDetails = () => {
       };
     }
   };
-
-   const getTotalCount = async () => {
-      try {
-        const result = await client.graphql({
-          query: listPersonalDetails,
-        });
-        const items = result?.data?.listPersonalDetails?.items || [];
-        return items.length; // Return the count of all entries
-      } catch (error) {
-        console.error("Error fetching total count:", error);
-        return 0; // Return 0 if there's an error
-      }
-    };
-  
-    const generateNextTempID = (totalCount) => {
-      const nextNumber = totalCount + 1;
-      const nextTempID = `TEMP${String(nextNumber).padStart(3, "0")}`;
-      return nextTempID;
-    };
-  
-    useEffect(() => {
-      const fetchNextTempID = async () => {
-        const totalCount = await getTotalCount();
-        const nextTempID = generateNextTempID(totalCount);
-        setLatesTempIDData(nextTempID); // Set the generated ID
-      };
-      fetchNextTempID();
-    }, []);
 
   // Handle form submission
   const onSubmit = async (data) => {
