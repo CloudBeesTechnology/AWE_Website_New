@@ -14,27 +14,27 @@ const client = generateClient();
 
 export const ApplicantDetails = () => {
   const {dropDownVal} = useContext(DataSupply);
-
+  const location = useLocation();
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }, []);
+  const jobTitle = location.state?.position || localStorage.getItem("position") || "";
 
   const religionDD = dropDownVal[0]?.religionDD || [];
   const raceDD = dropDownVal[0]?.raceDD || [];
   const nationalityDD = dropDownVal[0]?.nationalityDD || [];
   
   const navigate = useNavigate();
-  const location = useLocation();
   const [uploadedDocs, setUploadedDocs] = useState({ profilePhoto: null });
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [latestTempIDData, setLatesTempIDData] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const data = location.state?.editingData;
 
-  const jobTitle = location.state?.position;
+  // const jobTitle = location.state?.position;
 
   
   const {
@@ -56,9 +56,11 @@ export const ApplicantDetails = () => {
       setProfilePhoto(savedData.profilePhoto); // Set the Base64 string as profile photo
       setValue("profilePhoto", savedData.profilePhoto);
     }
+    localStorage.setItem("position", jobTitle); // Store position for persistence
 
     const handleBeforeUnload = () => {
       localStorage.removeItem("applicantFormData");
+      localStorage.removeItem("position");
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -67,6 +69,39 @@ export const ApplicantDetails = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [location,setValue]);
+
+  // Handle file change
+  
+  const handleFileChange = async (e) => {
+    const selectedFile = e.target.files[0];
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+    ];
+
+    // Check if the file type is allowed
+    if (!allowedTypes.includes(selectedFile.type)) {
+      alert("Upload must be a image (JPG, JPEG, PNG)");
+      return;
+    }
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile); // Convert image to Base64 string
+      reader.onloadend = () => {
+        setProfilePhoto(reader.result); // Set Base64 as the profile photo
+        setValue("profilePhoto", reader.result);
+
+        // Store the Base64 profile photo in localStorage
+        const savedData = JSON.parse(localStorage.getItem("applicantFormData")) || {};
+        savedData.profilePhoto = reader.result;
+        localStorage.setItem("applicantFormData", JSON.stringify(savedData));
+
+        // Handle backend storage for the file
+        uploadDocString(selectedFile, "profilePhoto", setUploadedDocs, latestTempIDData); // You will handle the backend logic in this function
+      };
+    }
+  };
 
   const getTotalCount = async () => {
     try {
@@ -96,29 +131,6 @@ export const ApplicantDetails = () => {
     fetchNextTempID();
   }, []);
 
-  // Handle file change
-  
-  const handleFileChange = async (e) => {
-    const selectedFile = e.target.files[0];
-
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedFile); // Convert image to Base64 string
-      reader.onloadend = () => {
-        setProfilePhoto(reader.result); // Set Base64 as the profile photo
-        setValue("profilePhoto", reader.result);
-
-        // Store the Base64 profile photo in localStorage
-        const savedData = JSON.parse(localStorage.getItem("applicantFormData")) || {};
-        savedData.profilePhoto = reader.result;
-        localStorage.setItem("applicantFormData", JSON.stringify(savedData));
-
-        // Handle backend storage for the file
-        uploadDocString(selectedFile, "profilePhoto", setUploadedDocs, latestTempIDData); // You will handle the backend logic in this function
-      };
-    }
-  };
-
   // Handle form submission
   const onSubmit = async (data) => {
     try {
@@ -130,14 +142,6 @@ const applicationUpdate = {
   uploadedDocs: uploadedDocs.profilePhoto.replace(baseURL, ""), // Replace base URL with an empty string
   tempID: latestTempIDData,
 };
-
-      // const applicationUpdate = {
-      //   ...data,
-      //   profilePhoto: profilePhoto, 
-      //   uploadedDocs: uploadedDocs.profilePhoto, // Backend URL of uploaded image
-      //   tempID: latestTempIDData,
-      // };
-  
       localStorage.setItem("applicantFormData", JSON.stringify(applicationUpdate));
   
       navigate("/addCandidates/personalDetails", {
@@ -164,7 +168,8 @@ const applicationUpdate = {
                 {...register("position")}
                 type="text"
                 className="input-field"
-                value={jobTitle || ''}
+                value={jobTitle}
+                readOnly
               />
               {errors.position && (
                 <p className="text-[red] text-[13px]">

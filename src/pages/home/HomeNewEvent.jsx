@@ -54,18 +54,6 @@ export const HomeNewEvent = () => {
     });
   };
 
-  // useEffect(() => {
-  //   const isSmallScreen = window.innerWidth < 640;
-
-  //   if (isSmallScreen) {
-  //     const interval = setInterval(() => {
-  //       handleNext();
-  //     }, 8000);
-
-  //     return () => clearInterval(interval);
-  //   }
-  // }, []);
-
   return (
     <div className="screen-size  sm:mb-10 mb-14">
       <h2 className="text-black sm:my-10 mb-5 text-[20px] text-center sm:text-[34px] font-semibold relative">
@@ -120,7 +108,6 @@ export const HomeNewEvent = () => {
   );
 };
 
-
 // import React, { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import { TiTickOutline } from "react-icons/ti";
@@ -151,6 +138,17 @@ export const HomeNewEvent = () => {
 //     setSelectedEvent(event);
 //     setActiveIndex(index);
 //   };
+
+//   // const handleImageClick = () => {
+//   //   navigate(selectedEvent.link, { state: { images: [selectedEvent.image], title: selectedEvent.name } });
+//   // };
+
+  
+//   // const handleLinkClick = () => {
+//   //   if (selectedEvent.link) {
+//   //     navigate(selectedEvent.link, { state: { images: [selectedEvent.image], title: selectedEvent.name } });
+//   //   }
+//   // };
 
 //   const handleLinkClick = (event, index) => {
 //     setSelectedEvent(event); // Update the selected event
@@ -217,3 +215,4 @@ export const HomeNewEvent = () => {
 //     </div>
 //   );
 // };
+// // add that functionality for small scrrens automatic hovering links and image changingimage have to come automatically

@@ -59,7 +59,18 @@ export const OtherDetails = () => {
   const handleFileChange = async (e, fieldName) => {
     const selectedFile = e.target.files[0];
     const personName = navigatingEducationData?.tempID;
+    const allowedTypes = [
+      "application/pdf",
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+    ];
 
+    // Check if the file type is allowed
+    if (!allowedTypes.includes(selectedFile.type)) {
+      alert("Upload must be a PDF file or an image (JPG, JPEG, PNG)");
+      return;
+    }
     if (selectedFile) {
       setValue(fieldName, selectedFile); // Set file in React Hook Form
   
@@ -86,9 +97,9 @@ export const OtherDetails = () => {
         ...updatedValue, 
         ...navigatingEducationData,
         status:"Active",
-        uploadResume: uploadedDocs.uploadResume.replace(baseURL, ""),
-        uploadCertificate: uploadedDocs.uploadCertificate.replace(baseURL, ""),
-        uploadPp: uploadedDocs.uploadPp.replace(baseURL, ""),
+        uploadResume: uploadedDocs.uploadResume?.replace(baseURL, ""),
+        uploadCertificate: uploadedDocs.uploadCertificate?.replace(baseURL, ""),
+        uploadPp: uploadedDocs.uploadPp?.replace(baseURL, ""),
       };
   
       // First set of data (Education & Other Details)
@@ -175,6 +186,7 @@ export const OtherDetails = () => {
         }),
       ]);
       // console.log("Successfully submitted data!"); 
+      localStorage.removeItem("position");
       localStorage.removeItem("applicantFormData");
       localStorage.removeItem("personalFormData");
       localStorage.removeItem("educationFormData");
@@ -321,13 +333,11 @@ export const OtherDetails = () => {
               </span>
             </label>
             {/* Display uploaded file name */}
-            {uploadedFileNames.uploadResume ? (
-              <p className="text-xs mt-1 text-grey">
-                 {uploadedFileNames.uploadResume}
-              </p>
-            ):(  <p className="text-[red] text-xs mt-1">
-              {errors?.uploadResume?.message}
-            </p>)}   
+            {errors.uploadResume && (
+          <p className="text-[red] text-xs mt-1">
+            {errors.uploadResume.message}
+          </p>
+        )}
           </div>
 
           {/* Certificate Upload */}
@@ -346,14 +356,11 @@ export const OtherDetails = () => {
               </span>
             </label>
             {/* Display uploaded file name */}
-            {uploadedFileNames.uploadCertificate ? (
-              <p className="text-xs mt-1 text-grey">
-                 {uploadedFileNames.uploadCertificate}
-              </p>
-            ):(<p className="text-[red] text-xs mt-1">
-              {errors?.uploadCertificate?.message}
-            </p>)}
-        
+            {errors.uploadCertificate && (
+          <p className="text-[red] text-xs mt-1">
+            {errors.uploadCertificate.message}
+          </p>
+        )}
           </div>
 
           {/* Passport Upload */}
@@ -372,14 +379,11 @@ export const OtherDetails = () => {
               </span>
             </label>
             {/* Display uploaded file name */}
-            {uploadedFileNames.uploadPp ? (
-              <p className="text-xs mt-1 text-grey">
-                 {uploadedFileNames.uploadPp}
-              </p>
-            ):(<p className="text-[red] text-xs mt-1">
-              {errors?.uploadPp?.message}
-            </p>)}
-           
+            {errors.uploadPp && (
+          <p className="text-[red] text-xs mt-1">
+            {errors.uploadPp.message}
+          </p>
+        )}
           </div>
         </div>
       </div>

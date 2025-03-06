@@ -50,6 +50,7 @@ export const App = () => {
     if (!allowedPaths.includes(location.pathname)) {
       // localStorage.clear();
       localStorage.removeItem("applicantFormData");
+      localStorage.removeItem("position");
   localStorage.removeItem("personalFormData");
   localStorage.removeItem("educationFormData");
   localStorage.removeItem("otherFormData");

@@ -51,6 +51,8 @@ export const EducationDetails = () => {
   useEffect(() => {
     const eduData = () => {
       localStorage.removeItem("educationFormData"); // Clear data on refresh or tab close
+      localStorage.removeItem("position");
+
     };
     window.addEventListener("beforeunload", eduData);
     return () => {
@@ -476,7 +478,7 @@ export const EducationDetails = () => {
                   <input
                     id={`${section.field}Desc`}
                     {...field}
-                    className={`w-full sm:w-[450px] mt-2 text_size_7 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded ${
+                    className={`w-full sm:w-[450px] mt-2 text_size_7 p-2.5 bg-white border border-[#dedddd] text-dark_grey outline-none rounded ${
                       errors[`${section.field}Desc`] ? "border-red-500" : ""
                     }`}
                     disabled={watch(section.field) !== "yes"} // Disable when "No" is selected

@@ -6,9 +6,8 @@ export const ApplicantSchema = Yup.object({
   //   .test("fileType", "Profile photo must be a JPG or PNG file", (value) =>
   //     value ? /\.(jpg|jpeg|png)$/.test(value.name) : false
   //   ),
-    // agent: Yup.string().notRequired(),
-
-  // position: Yup.string().required("Position is mandatory"),
+  profilePhoto: Yup.string().required("Upload Photo is mandatory"),
+  position: Yup.string().required("Position is mandatory"),
   // contractType: Yup.string().required("Contract Type mandatory"),
   // employeeType: Yup.string().required("Employee Type mandatory"),
   name: Yup.string()
@@ -160,7 +159,9 @@ export const CandidatesSchema = Yup.object().shape({
     otherwise: () => Yup.string(),
   }),
   supportInfo: Yup.string(),
-
+  uploadResume: Yup.string().required("Resume is required"),
+  uploadCertificate: Yup.string().required("Certificate is required"),
+  uploadPp:Yup.string().required("Passport is required")
   // uploadResume: Yup.mixed()
   // .required("Resume is required")
   // .test("fileType", "Only PDF format is allowed for the resume", (value) => {
