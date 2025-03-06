@@ -11,11 +11,11 @@ import slide6 from "../../assets/home/Events/The 40th National Day Celebration o
 
 export const HomeNewEvent = () => {
   const events = [
-    { name: '25 Million Safe Man-Hours Without Lost Time Injury (LTI)', image: slide1, link: '/images/lti' },
+    { name: '25 Million Safe Man-Hours Without Lost Time Injury (LTI)', image: slide1,  },
     { name: 'Celebrating Hari Raya 2024', image: slide2, link: '/images/hari-raya' },
-    { name: 'Happy 78th Birthday to His Majesty Sultan of Brunei', image: slide3, link: '/images/his-majesty-78' },
+    { name: 'Happy 78th Birthday to His Majesty Sultan of Brunei', image: slide3, },
     { name: 'Happy Chinese New Year 2024', image: slide4 },
-    { name: 'Head Office HLP 2024', image: slide5, link: '/images/hlp' },
+    { name: 'Head Office HLP 2024', image: slide5, },
     { name: 'The 40th National Day Celebration of Negara Brunei Darussalam', image: slide6 },
   ];
 
