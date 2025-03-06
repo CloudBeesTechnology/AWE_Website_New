@@ -1,5 +1,5 @@
 import React from 'react';
-import slide1 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy.jpeg"
+import slide1 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.jpeg"
 
 export const LtiMillion = ({ images = [], onClick }) => {
   // Use the first image from the images array or fallback to slide1

@@ -142,9 +142,9 @@ export const Footer = () => {
                 <br />
                 Brunei Darussalam
                 <br />
-                Tel: +673 3331001
+                Tel : +673 3331001
                 <br />
-                Fax: +673 3334543
+                Fax : +673 3334543
               </address>
             </div>
           </div>
@@ -187,37 +187,7 @@ export const Footer = () => {
             </article>
 
             <article>
-              <p>Copyright © 2024 Adinin Works & Engineering Sdn Bhd</p>
-            </article>
-
-            {/* <article className="flex items-center max-sm:flex-col">
-              <span className="max-sm:text-[12px]">Developed by </span>
-              <span className="mx-2"></span>
-              <a href="https://cloudbeestech.com/">
-                {" "}
-                <img
-                  src={cbtlog}
-                  className="w-auto h-7 max-w-[300px] max-sm:w-[120px] max-h-[100px] max-sm:h-[24px]"
-                  alt="CloudBees Technologies Logo"
-                />
-              </a>
-            </article> */}
-            <article className="flex items-center max-sm:flex-col">
-              <span className="max-sm:text-[12px]">Developed by </span>
-              <span className="mx-2"></span>
-              <span className="relative group">
-                <a href="https://cloudbeestech.com/" target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={cbtlog}
-                    className="w-auto h-7 max-w-[300px] max-sm:w-[120px] max-h-[100px] max-sm:h-[24px]"
-                    alt="CloudBees Technologies Logo"
-                  />
-                </a>
-                <span className="absolute left-1/2 transform -translate-x-1/2 bottom-full mb-4 max-sm:mb-3 w-max rounded bg-gray-700 text-white text-xs p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  Visit CloudBees Tech
-                </span>
-                
-              </span>
+              <p>Copyright © 2024 Adinin Works & Engineering Sdn Bhd</p>
             </article>
           </div>
         </div>

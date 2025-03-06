@@ -175,14 +175,14 @@ const location=useLocation()
           </NavLink>
 
           <div className="center">
-            <Link
-              to="https://employee.adininworks.co/"
+            <a
+              href="https://employee.adininworks.co/"
               className="text-[16px] bg-yellow rounded-full px-2 py-2 "
               target="_blank"
-              rel="noopener noreferrer"
+              // rel="noopener noreferrer"
             >
               Employee Login
-            </Link>
+            </a>
           </div>
         </nav>
       </div>

@@ -17,6 +17,7 @@ export const CareerSection = () => {
     if (!job.expiryDate) {
       return;
     }
+
     const normalizedDate = job?.expiryDate?.replace(/[-/]/g, "-");
     const [day, month, year] = normalizedDate.split("-");
     const expiry = new Date(year, month - 1, day);
@@ -26,6 +27,7 @@ export const CareerSection = () => {
 
     return expiry >= today;
   });
+
   return (
     <section>
       <CommonBanner background={bg} title="Apply Job" />
@@ -76,8 +78,8 @@ export const CareerSection = () => {
                     <div className="flex justify-evenly items-center">
                       <p className="font-bold text-lg mt-2">{val?.jobTitle}</p>
                     </div>
-                    <h4 className="font-semibold">
-                      Description:{" "}
+                    <h4 className="font-semibold text-[16px]">
+                      Description :{" "}
                       <span className="font-normal text-sm">
                         {val?.jobContent}
                       </span>
@@ -85,35 +87,38 @@ export const CareerSection = () => {
 
                     <div className="">
                       <p className="py-1 px-2 text-sm">
-                        <span className="text-sm">Experience:</span>{" "}
+                        <span className="font-medium text-[15px]">Experience : </span>
                         {val?.exper}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Location: {val?.location}
+                        <span className="font-medium text-[15px]">Location :</span> {val?.location}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Posted On: {val?.startDate}
+                      <span className="font-medium text-[15px]"> Posted On :</span> {val?.startDate}
                       </p>
                       <p className="py-1 px-2 text-sm">
-                        Apply Until: {val?.expiryDate}
+                      <span className="font-medium text-[15px]"> Apply Until :</span> {val?.expiryDate}
                       </p>
                     </div>
                     <section className="flex items-center justify-evenly">
-                      <div >
-                        <a
-                          href={val.uploadJobDetails}
-                          className={
-                            "bg-[#FEF116] text-black center font-bold py-1 px-4 rounded"
-                          }
-                        >
-                          {val.uploadJobDetails ? "Download" : "N/A"}
-                        </a>
-                      </div>
+                      {val?.uploadJobDetails && (
+                        <div>
+                          <a
+                            href={val.uploadJobDetails}
+                            className={
+                              "border-[#FEF116] border text-black center font-semibold py-2 px-4 rounded"
+                            }
+                          >
+                            {val.uploadJobDetails ? "Download" : "N/A"}
+                          </a>
+                        </div>
+                      )}
+
                       <div className="center py-2">
                         <Link
                           to="/addCandidates"
                           state={{ position: val?.jobTitle }}
-                          className="bg-[#FEF116] text-black center font-bold py-1 px-4 rounded"
+                          className="bg-[#FEF116] text-black center font-semibold py-2 px-4 rounded"
                         >
                           APPLY JOB
                         </Link>
