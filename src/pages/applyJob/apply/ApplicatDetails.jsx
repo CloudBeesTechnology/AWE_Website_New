@@ -34,7 +34,7 @@ export const ApplicantDetails = () => {
   const [imageUrl, setImageUrl] = useState("");
   const data = location.state?.editingData;
 
-  // const jobTitle = location.state?.position;
+  const jobTitle = location.state?.position;
 
   
   const {
@@ -156,7 +156,7 @@ export const ApplicantDetails = () => {
                 {...register("position")}
                 type="text"
                 className="input-field"
-                // value={jobTitle || ''}
+                value={jobTitle || ''}
               />
               {errors.position && (
                 <p className="text-[red] text-[13px]">
