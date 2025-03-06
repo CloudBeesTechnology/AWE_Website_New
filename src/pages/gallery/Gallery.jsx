@@ -8,8 +8,11 @@ import { HisMajesty78 } from "./HisMajesty78";
 import { HLP } from "./HLP";
 import { LtiMillion } from "./LtiMillion";
 import { Chairman } from "./Chairman";
+import { Safetyday } from "./SafetyDay";
+import { Blood } from "./Blood";
 import { useNavigate } from 'react-router-dom';
-import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, demo } from "./ImageContainer";
+import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, SafetyDaySlides, BldSlides, demo } from "./ImageContainer";
+import { PiBehanceLogoDuotone } from "react-icons/pi";
 
 export const Gallery = () => {
   const navigate = useNavigate();
@@ -46,6 +49,24 @@ export const Gallery = () => {
         ) : (
           <>
             <div className="p-2">
+              <Blood
+                images={BldSlides}
+                onClick={() => navigateToImageGrid("/images/Blood")}
+                className="h-64"
+                loading={loading} 
+              />
+            </div>
+
+            <div className="p-2">
+              <Safetyday
+                images={SafetyDaySlides}
+                onClick={() => navigateToImageGrid("/images/SafetyDay")}
+                className="h-64"
+                loading={loading} 
+              />
+            </div>
+
+            <div className="p-2">
               <LtiMillion
                 images={workersSlides}
                 onClick={() => navigateToImageGrid("/images/lti")}
@@ -53,6 +74,7 @@ export const Gallery = () => {
                 loading={loading} 
               />
             </div>
+
             <div className="p-2">
               <HisMajesty78
                 images={hisMajesty78Slides}

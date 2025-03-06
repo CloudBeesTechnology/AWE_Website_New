@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TiTickOutline } from "react-icons/ti";
 
-import slide1 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy.jpeg";
-import slide2 from "../../assets/home/Events/Celebrating Hari Raya 2024.jpg";
-import slide3 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.JPG";
-import slide4 from "../../assets/home/Events/Happy Chinese New Year 2024.jpg";
-import slide5 from "../../assets/home/Events/Head Office HLP 2024.JPG";
-import slide6 from "../../assets/home/Events/The 40th National Day Celebration of Negara Brunei Darussalam.png";
+import slide1 from "../../assets/home/Events/SafetySpotlight.jpeg";
+import slide2 from "../../assets/home/Events/SafetySpotlight2.jpg";
+import slide3 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.jpeg";
+import slide4 from "../../assets/home/Events/Celebrating Hari Raya 2024.jpg";
+import slide5 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.JPG";
+
 
 export const HomeNewEvent = () => {
   const events = [
-    { name: '25 Million Safe Man-Hours Without Lost Time Injury (LTI)', image: slide1,  },
-    { name: 'Celebrating Hari Raya 2024', image: slide2, link: '/images/hari-raya' },
-    { name: 'Happy 78th Birthday to His Majesty Sultan of Brunei', image: slide3, },
-    { name: 'Happy Chinese New Year 2024', image: slide4 },
-    { name: 'Head Office HLP 2024', image: slide5, },
-    { name: 'The 40th National Day Celebration of Negara Brunei Darussalam', image: slide6 },
+    { name: 'Safety Spotlight Bulletin #1', image: slide1, link: '/images/lti' },
+    { name: 'Safety Spotlight Bulletin #2', image: slide2 },
+    { name: '25 Million Safe Man-Hours Without Lost Time Injury (LTI)', image:slide3 },
+    { name: 'Celebrating Hari Raya 2024', image:slide4 },
+    { name: 'Happy 78th Birthday to His Majesty Sultan of Brunei', image:slide5 },
+
   ];
 
   const [selectedEvent, setSelectedEvent] = useState(events[0]);
@@ -75,7 +75,7 @@ export const HomeNewEvent = () => {
 
       <div className='flex flex-col sm:flex-row items-center justify-evenly w-full gap-2 lg:gap-10 my-2 lg:my-10'>
         {/* Left Image Section */}
-        <div className="flex justify-center w-full sm:w-[380px] lg:w-[600px] h-[300px] sm:h-[490px] overflow-hidden cursor-pointer">
+        <div className="flex justify-center w-full sm:w-[380px] lg:w-[600px] h-[250px] sm:h-[600px] overflow-hidden cursor-pointer">
           <img
             src={selectedEvent.image}
             alt={selectedEvent.name}

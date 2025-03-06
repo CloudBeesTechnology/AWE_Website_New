@@ -40,15 +40,16 @@ export const ApplicantDetails = () => {
   };
 
   // Upload the profile photo to AWS and set the form value
-  const uploadProfilePhoto = async (file) => {
+  const uploadProfilePhoto = async (tempID,file) => {
     try {
       const result = await uploadData({
-        path: `uploadProfilePhoto/${file.name}`,
+        path: `uploadProfilePhoto/${tempID}/${file.name}`,
         data: file,
       }).result;
       const filePath = result.path;
       const encodedFilePath = encodeURIComponent(filePath);
-      const fileUrl = `https://awe-adinin-files-storage-1982502de-dev.s3.ap-southeast-1.amazonaws.com/${encodedFilePath}`;
+      const fileUrl = `https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/public/${encodedFilePath}`;
+      // const fileUrl = `https://awe-adinin-files-storage-1982502de-dev.s3.ap-southeast-1.amazonaws.com/${encodedFilePath}`;
       console.log("File uploaded successfully. File URL:", fileUrl);
       setProfileUpdate(fileUrl); // Store the uploaded photo URL in the state
       // setValue("profilePhoto", fileUrl); // Set the profile photo URL in the form
