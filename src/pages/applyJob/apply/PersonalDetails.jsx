@@ -5,6 +5,9 @@ import { FiPlusSquare } from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { generateClient } from "aws-amplify/api";
+import { FaRegMinusSquare } from "react-icons/fa";
+import { CiSquarePlus } from "react-icons/ci";
+
 // import { createPersona } from "../../graphql/mutations";
 const client = generateClient();
 
@@ -13,7 +16,7 @@ export const PersonalDetails = () => {
   const [navigateData, setNavigateData] = useState("");
   const applicationData = location.state?.FormData;
 
-  // console.log("Received form data:", applicationData);
+  console.log("Received form data:", applicationData);
 
   useEffect(() => {
     window.scrollTo({
@@ -28,73 +31,95 @@ export const PersonalDetails = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(PersonalSchema),
+
     defaultValues: {
-      familyDetails: [{}], // Initialize with one empty family detail
-      educationDetails: [
-        { university: "", fromDate: "", toDate: "", degree: "" },
-      ], // Initialize with one empty education detail
-      workExperience: [{}], // Initialize with one empty employment detail
+      familyDetails: [{}],
+      eduDetails: [{ university: "", fromDate: "", toDate: "", degree: "" }],
+      workExperience: [{}], 
+      ...JSON.parse(localStorage.getItem("personalFormData")) || {},
     },
+
   });
-  const { fields: familyFields, append: appendFamily } = useFieldArray({
+
+  useEffect(() => {
+    const savedData = () => {
+      localStorage.removeItem("personalFormData"); // Clear data on refresh or tab close
+    };
+    // Add event listener for unload
+    window.addEventListener("beforeunload", savedData);
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("beforeunload", savedData);
+    };
+  }, []);
+
+  const {
+    fields: familyFields,
+    append: appendFamily,
+    remove: removeFamily,
+  } = useFieldArray({
     control,
     name: "familyDetails",
   });
 
-  const { fields: educationFields, append: appendEducation } = useFieldArray({
+  const {
+    fields: educationFields,
+    append: appendEducation,
+    remove: removeEducation,
+  } = useFieldArray({
     control,
-    name: "educationDetails",
+    name: "eduDetails",
   });
 
-  const { fields: employmentFields, append: appendEmployment } = useFieldArray({
+  const {
+    fields: employmentFields,
+    append: appendEmployment,
+    remove: removeEmployment,
+  } = useFieldArray({
     control,
     name: "workExperience",
   });
+
+  const handleAddFamily = () => {
+    // Append a new empty field set with isNew flag to identify it as newly added
+    appendFamily({ isNew: true });
+  };
+  const handleAddEducation = () => {
+    // Append a new empty field set with isNew flag to identify it as newly added
+    appendEducation({ isNew: true });
+  };
+  const handleAddEmployment = () => {
+    // Append a new empty field set with isNew flag to identify it as newly added
+    appendEmployment({ isNew: true });
+  };
+
   const navigate = useNavigate();
 
   // const { handleNext } = useOutletContext();
   const onSubmit = (data) => {
     // const personalData = data;
     // console.log(data);
+    try {
+
     const navigatingData = {
       ...data,
+      eduDetails: JSON.stringify(data.eduDetails),
+      familyDetails: JSON.stringify(data.familyDetails),
+      workExperience: JSON.stringify(data.workExperience),
       ...applicationData,
     };
+    localStorage.setItem("personalFormData", JSON.stringify(navigatingData));
+
     // setNavigateData(navigatingData);
     // handleNext();
     navigate("/addCandidates/educationDetails", {
       state: { FormData: navigatingData },
-    });
+    })}catch (error) {
+      console.log(error);
+    }
     // console.log(navigatingData);
   };
-  // const onSubmit = async (data) => {
-  //   try {
 
-  //     console.log(data);
-
-  //     // // Combine all form data
-  //     // const result = await client.graphql({
-  //     //   query: createPersona,
-  //     //   variables: {
-  //     //     input: data ,
-  //     //   },
-
-  //     // });
-  //     // console.log(result);
-
-  //     // console.log("Successfully submitted:", result);
-
-  //   } catch (error) {
-  //     console.log(error);
-
-  //     // console.error(
-  //     //   "Error submitting data to AWS:",
-  //     //   JSON.stringify(error, null, 2)
-  //     // );
-  //   } navigate("/addCandidates/personalDetails", {
-  //     state: { FormData: data },
-  //   });
-  // };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto py-6">
       {/* h-screen overflow-y-auto scrollbar-hide */}
@@ -160,13 +185,13 @@ export const PersonalDetails = () => {
           <label className="block mb-1">Driving License Class</label>
           <input
             type="text"
-            {...register("drivingLicense")}
+            {...register("driveLic")}
             className="input-field"
           />
         </div>
         <div>
           <label className="block mb-1">Language Proficiency</label>
-          <select {...register("language")} className="input-field">
+          <select {...register("lang")} className="input-field select-custom">
             <option value=""></option>
             <option value="English">English</option>
             <option value="Mandarin">Mandarin</option>
@@ -174,8 +199,8 @@ export const PersonalDetails = () => {
             <option value="Tamil">Tamil</option>
             <option value="Other">Other</option>
           </select>
-          {errors.language && (
-            <p className="text-[red] text-[12px]">{errors.language.message}</p>
+          {errors.lang && (
+            <p className="text-[red] text-[12px]">{errors.lang.message}</p>
           )}
         </div>
       </div>
@@ -184,33 +209,34 @@ export const PersonalDetails = () => {
       <div className="grid sm:grid-cols-3 gap-4 mb-4 text_size_6">
         <div>
           <label className="block mb-1">Brunei I/C No</label>
-          <input type="text" {...register("icNo")} className="input-field" />
-          {errors.icNo && (
-            <p className="text-[red] text-[12px] ">{errors.icNo.message}</p>
+          <input type="text" {...register("bwnIcNo")} className="input-field" />
+          {errors.bwnIcNo && (
+            <p className="text-[red] text-[12px] ">{errors.bwnIcNo.message}</p>
           )}
         </div>
 
         <div>
           <label className="block mb-1">Brunei I/C Colour</label>
-          <select {...register("icColour")} className="input-field">
+          <select {...register("bwnIcColour")} className="input-field select-custom">
             <option value=""></option>
-            <option value="yellow">Yellow</option>
-            <option value="green">Green</option>
-            <option value="pink">Red</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Pink">Red</option>
+            <option value="Green">Green</option>
+            <option value="Purple">Purple</option>
           </select>
-          {errors.icColour && (
-            <p className="text-[red] text-[12px]">{errors.icColour.message}</p>
+          {errors.bwnIcColour && (
+            <p className="text-[red] text-[12px]">{errors.bwnIcColour.message}</p>
           )}
         </div>
         <div>
           <label className="block mb-1">Brunei I/C Expiry</label>
           <input
-            type="text"
-            {...register("icExpiry")}
+            type="date"
+            {...register("bwnIcExpiry")}
             className="input-field"
           />
-          {errors.icExpiry && (
-            <p className="text-[red] text-[12px]">{errors.icExpiry.message}</p>
+          {errors.bwnIcExpiry && (
+            <p className="text-[red] text-[12px]">{errors.bwnIcExpiry.message}</p>
           )}
         </div>
       </div>
@@ -220,38 +246,38 @@ export const PersonalDetails = () => {
           <label className="block mb-1">Passport Number</label>
           <input
             type="text"
-            {...register("passportNo")}
+            {...register("ppNo")}
             className="input-field"
           />
-          {errors.passportNo && (
+          {errors.ppNo && (
             <p className="text-[red] text-[12px] ">
-              {errors.passportNo.message}
+              {errors.ppNo.message}
             </p>
           )}
         </div>
         <div>
           <label className="block mb-1">Passport issued date</label>
           <input
-            type="text"
-            {...register("passportIssued")}
+            type="date"
+            {...register("ppIssued")}
             className="input-field"
           />
-          {errors.passportIssued && (
+          {errors.ppIssued && (
             <p className="text-[red] text-[12px]">
-              {errors.passportIssued.message}
+              {errors.ppIssued.message}
             </p>
           )}
         </div>
         <div>
           <label className="block mb-1">Passport Expiry</label>
           <input
-            type="text"
-            {...register("passportExpiry")}
+            type="date"
+            {...register("ppExpiry")}
             className="input-field"
           />
-          {errors.passportExpiry && (
+          {errors.ppExpiry && (
             <p className="text-[red] text-[12px]">
-              {errors.passportExpiry.message}
+              {errors.ppExpiry.message}
             </p>
           )}
         </div>
@@ -259,65 +285,73 @@ export const PersonalDetails = () => {
           <label className="block mb-1">Passport issued destination</label>
           <input
             type="text"
-            {...register("passportDestination")}
+            {...register("ppDestinate")}
             className="input-field"
           />
-          {errors.passportDestination && (
+          {errors.ppDestinate && (
             <p className="text-[red] text-[12px]">
-              {errors.passportDestination.message}
+              {errors.ppDestinate.message}
             </p>
           )}
         </div>
       </div>
       {/* Family Details */}
-      <div className="mb-4 relative text_size_6">
+      <div className=" mb-4 relative text_size_6">
         <label className="block mb-1">
           Particulars of Immediate Family (Spouse, Children, Parents, Brothers &
           Sisters)
         </label>
         {familyFields.map((family, index) => (
-          <div
-            key={family.id}
-            className="grid sm:grid-cols-3 md:grid-cols-5 gap-4 mb-2"
-          >
+          <div key={family.id} className="grid max-sm:grid-cols-1 max-md:grid-cols-2 md:grid-cols-5 gap-4 mb-2">
             <input
               type="text"
               {...register(`familyDetails.${index}.name`)}
               placeholder="Name"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"
               {...register(`familyDetails.${index}.relationship`)}
               placeholder="Relationship"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"
               {...register(`familyDetails.${index}.age`)}
               placeholder="Age"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"
               {...register(`familyDetails.${index}.occupation`)}
               placeholder="Occupation"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"
               {...register(`familyDetails.${index}.placeOfOccupation`)}
               placeholder="Place of Occupation"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
+            {family.isNew && (
+              <button
+                type="button"
+                onClick={() => removeFamily(index)} // Remove specific field set
+                className="absolute top-15 -right-7 text-medium_grey text-[18px]"
+              >
+                <FaRegMinusSquare /> {/* Minus icon */}
+              </button>
+            )}
           </div>
         ))}
+
         <button
           type="button"
-          onClick={() => appendFamily({})}
+          onClick={handleAddFamily}
+          // onClick={() => appendFamily({})}
           className="absolute top-11 -right-7 text-medium_grey text-[18px]"
         >
-          <FiPlusSquare />
+          <CiSquarePlus />
         </button>
       </div>
 
@@ -325,93 +359,100 @@ export const PersonalDetails = () => {
       <div className="mb-4 relative text_size_6">
         <label className="block mb-1">Education Details</label>
         {educationFields.map((education, index) => (
-          <div
-            key={education.id}
-            className="grid sm:grid-cols-2 md:grid-cols-4  gap-4 mb-2"
-          >
+          <div key={education.id} className="grid max-sm:grid-cols-1 max-md:grid-cols-2 md:grid-cols-4 gap-4 mb-2">
             <Controller
-              name={`educationDetails.${index}.university`}
+              name={`eduDetails.${index}.university`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
-                  <textarea
+                  <input
                     {...field}
                     placeholder="School / University / Professional Institute"
-                    className="resize-none input-field"
+                    className="resize-none text_size_9 mt-2 p-2.5 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
                   />
 
-                  {errors.educationDetails?.[index]?.university && (
+                  {errors.eduDetails?.[index]?.university && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.educationDetails[index].university.message}
+                      {errors.eduDetails[index].university.message}
                     </p>
                   )}
                 </div>
               )}
             />
             <Controller
-              name={`educationDetails.${index}.fromDate`}
+              name={`eduDetails.${index}.fromDate`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
-                  <textarea
+                  <input
                     {...field}
                     type="date"
                     placeholder="From Date"
-                    className="resize-none input-field"
-                  ></textarea>
-                  {errors.educationDetails?.[index]?.fromDate && (
+                    className="resize-none mt-2 p-2.5 text_size_9  bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
+                  />
+                  {errors.eduDetails?.[index]?.fromDate && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.educationDetails[index].fromDate.message}
+                      {errors.eduDetails[index].fromDate.message}
                     </p>
                   )}
                 </div>
               )}
             />
             <Controller
-              name={`educationDetails.${index}.toDate`}
+              name={`eduDetails.${index}.toDate`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
-                  <textarea
+                  <input
                     {...field}
                     type="date"
                     placeholder="To Date"
-                    className="resize-none input-field"
-                  ></textarea>
-                  {errors.educationDetails?.[index]?.toDate && (
+                    className="resize-none mt-2 p-2.5 text_size_9  bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
+                  />
+                  {errors.eduDetails?.[index]?.toDate && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.educationDetails[index].toDate.message}
+                      {errors.eduDetails[index].toDate.message}
                     </p>
                   )}
                 </div>
               )}
             />
             <Controller
-              name={`educationDetails.${index}.degree`}
+              name={`eduDetails.${index}.degree`}
               control={control}
               render={({ field }) => (
                 <div className="flex flex-col">
-                  <textarea
+                  <input
                     {...field}
                     placeholder="Highest Standard / Passed / Certificate / Degree / Professional Qualification"
-                    className="resize-none input-field"
+                    className="resize-none mt-2 p-2.5  bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded text_size_9"
                   />
-                  {errors.educationDetails?.[index]?.degree && (
+                  {errors.eduDetails?.[index]?.degree && (
                     <p className="text-[red] text-xs mt-1">
-                      {errors.educationDetails[index].degree.message}
+                      {errors.eduDetails[index].degree.message}
                     </p>
                   )}
                 </div>
               )}
             />
+            {education.isNew && (
+              <button
+                type="button"
+                onClick={() => removeEducation(index)} // Remove specific field set
+                className="absolute top-15 -right-7 text-medium_grey text-[18px]"
+              >
+                <FaRegMinusSquare /> {/* Minus icon */}
+              </button>
+            )}
           </div>
         ))}
         <button
           type="button"
-          onClick={() => appendEducation({})}
+          onClick={handleAddEducation}
+          // onClick={() => appendEducation({})}
           className="absolute top-12 -right-7 text-medium_grey text-[18px]"
         >
-          <FiPlusSquare />
+          <CiSquarePlus />
         </button>
       </div>
 
@@ -421,54 +462,62 @@ export const PersonalDetails = () => {
           Previous Employment Including Temporary Work
         </label>
         {employmentFields.map((employment, index) => (
-          <div
-            key={employment.id}
-            className="grid sm:grid-cols-3 md:grid-cols-6 gap-4 mb-2"
-          >
+          <div key={employment.id} className="grid max-sm:grid-cols-1 max-md:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-2">
             <input
               type="text"
               {...register(`workExperience.${index}.name`)}
               placeholder="Name and Address"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"
               {...register(`workExperience.${index}.position`)}
               placeholder="Position Held"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="date"
               {...register(`workExperience.${index}.from`)}
               placeholder="From"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="date"
               {...register(`workExperience.${index}.to`)}
               placeholder="To"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"
               {...register(`workExperience.${index}.salary`)}
               placeholder="Salary"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"
               {...register(`workExperience.${index}.reasonForLeaving`)}
               placeholder="Reason for Leaving"
-              className="input-field"
+              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
+
+            {employment.isNew && (
+              <button
+                type="button"
+                onClick={() => removeEmployment(index)} // Remove specific field set
+                className="absolute top-15 -right-7 text-medium_grey text-[18px]"
+              >
+                <FaRegMinusSquare /> {/* Minus icon */}
+              </button>
+            )}
           </div>
         ))}
         <button
           type="button"
-          onClick={() => appendEmployment({})}
+          onClick={handleAddEmployment}
+          // onClick={() => appendEmployment({})}
           className="absolute top-11 -right-7 text-medium_grey text-[18px]"
         >
-          <FiPlusSquare />
+          <CiSquarePlus />
         </button>
       </div>
 

@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { Navbar } from './Component/Navbar';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Home } from './pages/home/Home';
@@ -23,6 +23,7 @@ import { ImageGrid } from './pages/gallery/ImageGrid';
 import Achievements from './Component/Organization/Achievements';
 import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, SafetyDaySlides, BldSlides } from "./pages/gallery/ImageContainer"; // Ensure the correct path
 import { CheckingUpload } from './Component/CheckingUpload';
+import DataStoredContext from './utils/details/DataStoredContext';
 
 
 
@@ -34,10 +35,27 @@ export const App = () => {
     });
   }, []);
   const location = useLocation();
+  
+  const allowedPaths = [
+    "/addCandidates",
+    "/addCandidates/personalDetails",
+    "/addCandidates/educationDetails",
+    "/addCandidates/otherDetails",
+  ];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Clear localStorage if the current path is NOT in allowedPaths
+    if (!allowedPaths.includes(location.pathname)) {
+      localStorage.clear();
+    }
+  }, [location.pathname]);
   const hideNavbar = ["/applyJob", "/addCandidates", "/addCandidates/personalDetails", "/addCandidates/educationDetails", "/addCandidates/otherDetails"];
   return (
 
     <HelmetProvider>
+      <DataStoredContext>
       <Helmet>
         <link rel="canonical" href={window.location.href} />
       </Helmet>
@@ -70,12 +88,13 @@ export const App = () => {
           <Route path="educationDetails" element={<EducationDetails />} />
           <Route path="otherDetails" element={<OtherDetails />} />
         </Route>
-        <Route path="/organization" element={<Organization/>} />
-        <Route path="/certification" element={<Achievements/>} />
+        <Route path="/organization" Component={Organization} />
+        <Route path="/certification" Component={Achievements} />
         <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+        </Routes>
       {!hideNavbar.includes(location.pathname) && <Footer />}
       {/* <Footer/> */}
+      </DataStoredContext>
     </HelmetProvider>
   );
 }

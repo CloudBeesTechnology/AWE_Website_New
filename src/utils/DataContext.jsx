@@ -15,10 +15,9 @@ const DataContext = ({ children }) => {
     const fetchData = async () => {
       try {
         const queries = [{ query: listHiringJobs, key: "hiringData" }];
-        const limit = 10000;
         const responses = await Promise.all(
           queries.map(({ query }) =>
-            client.graphql({ query, variables: { limit } }).catch((error) => {
+            client.graphql({ query }).catch((error) => {
               // console.error("GraphQL Error:", error);
               return { data: { items: [] } }; // fallback for failed query
             })

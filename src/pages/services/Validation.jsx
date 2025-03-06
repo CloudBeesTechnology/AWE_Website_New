@@ -1,16 +1,16 @@
 import * as Yup from "yup";
 
 export const ApplicantSchema = Yup.object({
-  profilePhoto: Yup.mixed()
-    .required("Upload Photo is mandatory")
-    .test("fileType", "Profile photo must be a JPG or PNG file", (value) =>
-      value ? /\.(jpg|jpeg|png)$/.test(value.name) : false
-    ),
-    agent: Yup.string().notRequired(),
+  // profilePhoto: Yup.mixed()
+  //   .required("Upload Photo is mandatory")
+  //   .test("fileType", "Profile photo must be a JPG or PNG file", (value) =>
+  //     value ? /\.(jpg|jpeg|png)$/.test(value.name) : false
+  //   ),
+    // agent: Yup.string().notRequired(),
 
-  position: Yup.string().required("Position is mandatory"),
-  contractType: Yup.string().required("Contract Type mandatory"),
-  employeeType: Yup.string().required("Employee Type mandatory"),
+  // position: Yup.string().required("Position is mandatory"),
+  // contractType: Yup.string().required("Contract Type mandatory"),
+  // employeeType: Yup.string().required("Employee Type mandatory"),
   name: Yup.string()
     .min(3, "Name must be at least 3 characters")
     .required("Name is mandatory"),
@@ -45,24 +45,24 @@ export const ApplicantSchema = Yup.object({
 });
 
 export const PersonalSchema = Yup.object({
-  icNo: Yup.string()
+  bwnIcNo: Yup.string()
     .required("I/C Number is mandatory")
     .matches(
       /^\d{2}-\d{6}$/,
       "I/C Number must be in the format XX-XXXXXX, where X is a digit"
     ),
-  icExpiry: Yup.string().required("I/C Expiry is mandatory"),
-  icColour: Yup.string().required("I/C Colour is mandatory"),
-  passportNo: Yup.string().required("Passport Number is mandatory"),
+    bwnIcExpiry: Yup.string().required("I/C Expiry is mandatory"),
+  bwnIcColour: Yup.string().required("I/C Colour is mandatory"),
+  ppNo: Yup.string().required("Passport Number is mandatory"),
   alternateNo: Yup.string().notRequired(),
-  passportIssued: Yup.string().required("Passport issued is mandatory"),
-  passportExpiry: Yup.string().required("Passport Expiry is mandatory"),
-  passportDestination: Yup.string().required("Passport destination is mandatory"),
+  ppIssued: Yup.string().required("Passport issued is mandatory"),
+  ppExpiry: Yup.string().required("Passport Expiry is mandatory"),
+  ppDestinate: Yup.string().required("Passport destination is mandatory"),
   contactNo: Yup.string().required("Contact Number is mandatory"),
   presentAddress: Yup.string().required("Present Address is mandatory"),
   permanentAddress: Yup.string().required("Permanent Address is mandatory"),
-  drivingLicense: Yup.string().notRequired(),
-  language: Yup.string().required("Language is mandatory"),
+  driveLic: Yup.string().notRequired(),
+  lang: Yup.string().required("Language is mandatory"),
   familyDetails: Yup.array()
     .of(
       Yup.object().shape({
@@ -74,7 +74,7 @@ export const PersonalSchema = Yup.object({
       })
     )
     .notRequired(),
-  educationDetails: Yup.array()
+    eduDetails: Yup.array()
     .of(
       Yup.object().shape({
         university: Yup.string().required("University Name is mandatory "),
@@ -115,8 +115,8 @@ export const EducationSchema = Yup.object({
       })
     )
     .notRequired(),
-  description: Yup.string().notRequired(),
-  emergencyContact: Yup.array()
+    desc: Yup.string().notRequired(),
+    emgDetails: Yup.array()
     .of(
       Yup.object().shape({
         name: Yup.string().required("Name is mandatory"),
@@ -130,18 +130,18 @@ export const EducationSchema = Yup.object({
   disease: Yup.string().notRequired(),
   liquor: Yup.string().notRequired(),
   crime: Yup.string().notRequired(),
-  diseaseDescription: Yup.string().when("disease", {
+  diseaseDesc: Yup.string().when("disease", {
     is: (value) => value && value.trim().toLowerCase() === "yes",
     then: () =>
       Yup.string().notRequired(),
     otherwise: () => Yup.string(),
   }),
-  liquorDescription: Yup.string().when("liquor", {
+  liquorDesc: Yup.string().when("liquor", {
     is: (value) => value && value.trim().toLowerCase() === "yes",
     then: () => Yup.string().notRequired(),
     otherwise: () => Yup.string(),
   }),
-  crimeDescription: Yup.string().when("crime", {
+  crimeDesc: Yup.string().when("crime", {
     is: (value) => value && value.trim().toLowerCase() === "yes",
     then: () => Yup.string().notRequired(),
     otherwise: () => Yup.string(),
@@ -149,11 +149,11 @@ export const EducationSchema = Yup.object({
 });
 
 export const CandidatesSchema = Yup.object().shape({
-  salaryException: Yup.string().notRequired(),
+  salaryExpectation: Yup.string().notRequired(),
   noticePeriod: Yup.string().required("Notice period is required"),
-  employeeStatement: Yup.string().required("Employee Statement is required"),
-  perInterviewStatus: Yup.string().required("Interview status is required"),
-  perInterviewDescription: Yup.string().when("perInterviewStatus", {
+  empStatement: Yup.string().required("Employee Statement is required"),
+  perIS: Yup.string().required("Interview status is required"),
+  perIDesc: Yup.string().when("perInterviewStatus", {
     is: (value) => value && value.trim().toLowerCase() === "yes",
     then: () =>
       Yup.string().notRequired(),
@@ -161,31 +161,30 @@ export const CandidatesSchema = Yup.object().shape({
   }),
   supportInfo: Yup.string(),
 
- // File validation for resume (e.g., PDF only)
- uploadResume: Yup.mixed()
- .required("Resume is required")
- .test("fileType", "Only PDF format is allowed for the resume", (value) => {
-   return value && value.length > 0 && value[0].type === "application/pdf";
- }),
+  // uploadResume: Yup.mixed()
+  // .required("Resume is required")
+  // .test("fileType", "Only PDF format is allowed for the resume", (value) => {
+  //   return value && /\.(pdf)$/i.test(value.name);
+  // }),
 
-// File validation for certificate (e.g., JPG, PNG)
-uploadCertificate: Yup.mixed()
- .required("Certificate is required")
- .test("fileType", "Only JPG and PNG formats are allowed for certificates", (value) => {
-   return (
-     value && value.length > 0 &&
-     (value[0].type === "image/jpeg" || value[0].type === "image/png")
-   );
- }),
 
-// File validation for passport (e.g., JPG, PNG)
-uploadPassport: Yup.mixed()
- .required("Passport is required")
- .test("fileType", "Only JPG and PNG formats are allowed for passports", (value) => {
-   return (
-     value && value.length > 0 &&
-     (value[0].type === "image/jpeg" || value[0].type === "image/png")
-   );
- }),
+// uploadCertificate: Yup.mixed()
+//  .required("Certificate is required")
+//  .test("fileType", "Only JPG and PNG formats are allowed for certificates", (value) => {
+//    return (
+//      value && value.length > 0 &&
+//      (value[0].type === "image/jpeg" || value[0].type === "image/png")
+//    );
+//  }),
+
+// uploadPp: Yup.mixed()
+//  .required("Passport is required")
+//  .test("fileType", "Only JPG and PNG formats are allowed for passports", (value) => {
+//    return (
+//      value && value.length > 0 &&
+//      (value[0].type === "image/jpeg" || value[0].type === "image/png")
+//    );
+//  }),
+
   });
  // Define the validation schema using Yup

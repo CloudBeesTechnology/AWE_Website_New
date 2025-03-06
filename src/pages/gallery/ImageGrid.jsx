@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { Link ,useLocation} from "react-router-dom";
+import { FaChevronRight, FaChevronLeft, FaArrowLeft } from "react-icons/fa";
 
 export const ImageGrid = ({ images, title, color }) => {
     useEffect(() => {
@@ -56,12 +56,18 @@ export const ImageGrid = ({ images, title, color }) => {
   return (
     <section>
       <header>
+      <div className="w-full flex items-center justify-start gap-5 my-5 mx-12">
+        <Link to="/gallery" className="text-xl text-grey">
+          <FaArrowLeft />
+        </Link>
         <h1
-          className="px-12 mt-4 uppercase text-2xl font-semibold"
+          className="px-12 flex-1 uppercase text-2xl font-semibold"
           style={{ color }}
         >
           {title}
         </h1>
+        </div>
+        
       </header>
       <div className="px-12 max-sm:px-2 p-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {images.map((image, index) => (
