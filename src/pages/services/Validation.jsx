@@ -46,18 +46,18 @@ export const ApplicantSchema = Yup.object({
 
 export const PersonalSchema = Yup.object({
   bwnIcNo: Yup.string()
-    .required("I/C Number is mandatory")
-    .matches(
-      /^\d{2}-\d{6}$/,
-      "I/C Number must be in the format XX-XXXXXX, where X is a digit"
-    ),
-    bwnIcExpiry: Yup.string().required("I/C Expiry is mandatory"),
-  bwnIcColour: Yup.string().required("I/C Colour is mandatory"),
-  ppNo: Yup.string().required("Passport Number is mandatory"),
+  .notRequired(),
+    // .matches(
+    //   /^\d{2}-\d{6}$/,
+    //   "I/C Number must be in the format XX-XXXXXX, where X is a digit"
+    // ),
+    bwnIcExpiry: Yup.string().notRequired(),
+  bwnIcColour: Yup.string().notRequired(),
+  ppNo: Yup.string().notRequired(),
   alternateNo: Yup.string().notRequired(),
-  ppIssued: Yup.string().required("Passport issued is mandatory"),
-  ppExpiry: Yup.string().required("Passport Expiry is mandatory"),
-  ppDestinate: Yup.string().required("Passport destination is mandatory"),
+  ppIssued: Yup.string().notRequired(),
+  ppExpiry: Yup.string().notRequired(),
+  ppDestinate: Yup.string().notRequired(),
   contactNo: Yup.string().required("Contact Number is mandatory"),
   presentAddress: Yup.string().required("Present Address is mandatory"),
   permanentAddress: Yup.string().required("Permanent Address is mandatory"),

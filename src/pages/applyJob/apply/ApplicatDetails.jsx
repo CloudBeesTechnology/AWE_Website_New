@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import avatar from "../../../assets/applyJob/avatar.jpeg";
 import { ApplicantSchema } from "../../services/Validation";
 import { useLocation, useNavigate } from "react-router-dom";
-import { uploadDocs } from "../../services/uploadDocsS3/UploadDocs";
+import { uploadDocString } from "../../services/uploadDocsS3/UploadDocs";
 import { IoCameraOutline } from "react-icons/io5";
 import { listPersonalDetails } from "../../../graphql/queries";
 import { generateClient } from "aws-amplify/api";
@@ -67,70 +67,6 @@ export const ApplicantDetails = () => {
     };
   }, [location, setValue]);
 
-  // Handle file change
-  // const handleFileChange = async (e) => {
-  //   const selectedFile = e.target.files[0];
-
-  //   if (selectedFile) {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(selectedFile); // Convert image to Base64 string
-  //     reader.onloadend = () => {
-  //       setProfilePhoto(reader.result); // Set Base64 as the profile photo
-  //       setValue("profilePhoto", reader.result);
-
-  //       // Store the Base64 profile photo in localStorage
-  //       const savedData = JSON.parse(localStorage.getItem("applicantFormData")) || {};
-  //       savedData.profilePhoto = reader.result;
-  //       localStorage.setItem("applicantFormData", JSON.stringify(savedData));
-
-  //       // Handle backend storage for the file
-  //       uploadDocs(selectedFile, "profilePhoto", setUploadedDocs, latestTempIDData); // You will handle the backend logic in this function
-  //     };
-  //   }
-  // };
-  const handleFileUpload = async (e, type) => {
-    const selectedFile = e.target.files[0];
-
-    // Allowed file types
-    const allowedTypes = [
-      "application/pdf",
-      "image/jpeg",
-      "image/png",
-      "image/jpg",
-    ];
-
-    if (!selectedFile || !allowedTypes.includes(selectedFile.type)) {
-      alert("Upload must be a PDF file or an image (JPG, JPEG, PNG)");
-      return;
-    }
-
-    setValue("profilePhoto", selectedFile);
-
-    if (selectedFile) {
-      try {
-        // Indicate upload is in progress
-
-        const encodedFileName = encodeURIComponent(selectedFile.name);
-        const s3Path = `https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/public/profilePhoto/${latestTempIDData}/${encodedFileName}`;
-        setUploadedDocs(s3Path);
-        const uploadUrl = `https://gnth2qx5cf.execute-api.ap-southeast-1.amazonaws.com/fileupload/aweadininprod2024954b8-prod/public%2FprofilePhoto%2F${latestTempIDData}%2F${encodedFileName}`;
-        await axios
-          .put(uploadUrl, selectedFile)
-          .then((res) => {
-            console.log(res, "checking");
-          })
-          .catch((err) => {
-            console.log(err,"err in profilephoto");
-          });
-
-        // updateUploadingString(type, false);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-console.log(uploadedDocs);
-
   const getTotalCount = async () => {
     try {
       const result = await client.graphql({
@@ -159,16 +95,54 @@ console.log(uploadedDocs);
     fetchNextTempID();
   }, []);
 
+  // Handle file change
+
+  const handleFileChange = async (e) => {
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile); // Convert image to Base64 string
+      reader.onloadend = () => {
+        setProfilePhoto(reader.result); // Set Base64 as the profile photo
+        setValue("profilePhoto", reader.result);
+
+        // Store the Base64 profile photo in localStorage
+        const savedData =
+          JSON.parse(localStorage.getItem("applicantFormData")) || {};
+        savedData.profilePhoto = reader.result;
+        localStorage.setItem("applicantFormData", JSON.stringify(savedData));
+
+        // Handle backend storage for the file
+        uploadDocString(
+          selectedFile,
+          "profilePhoto",
+          setUploadedDocs,
+          latestTempIDData
+        ); // You will handle the backend logic in this function
+      };
+    }
+  };
+
   // Handle form submission
   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      // console.log(data);
+      const baseURL =
+        "https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/";
       const applicationUpdate = {
         ...data,
         profilePhoto: profilePhoto,
-        uploadedDocs: uploadedDocs.profilePhoto, // Backend URL of uploaded image
+        uploadedDocs: uploadedDocs.profilePhoto.replace(baseURL, ""), // Replace base URL with an empty string
         tempID: latestTempIDData,
       };
+
+      // const applicationUpdate = {
+      //   ...data,
+      //   profilePhoto: profilePhoto,
+      //   uploadedDocs: uploadedDocs.profilePhoto, // Backend URL of uploaded image
+      //   tempID: latestTempIDData,
+      // };
 
       localStorage.setItem(
         "applicantFormData",
@@ -211,8 +185,7 @@ console.log(uploadedDocs);
               id="fileInput"
               name="profilePhoto"
               accept=".jpg,.jpeg,.png"
-              onChange={handleFileUpload}
-              // onChange={handleFileChange}
+              onChange={handleFileChange}
               className="hidden"
             />
             <div className="h-[120px] max-w-[120px] relative rounded-md bg-lite_skyBlue">
