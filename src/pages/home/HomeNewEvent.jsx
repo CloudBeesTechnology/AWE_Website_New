@@ -11,7 +11,8 @@ import slide5 from "../../assets/home/Events/Happy 78th Birthday to His Majesty 
 
 export const HomeNewEvent = () => {
   const events = [
-    { name: "Safety Spotlight Bulletin #1", image: slide1, link: "/images/lti" },
+    // , link: "/images/lti"
+    { name: "Safety Spotlight Bulletin #1", image: slide1 },
     { name: "Safety Spotlight Bulletin #2", image: slide2 },
     { name: "25 Million Safe Man-Hours Without Lost Time Injury (LTI)", image: slide3 },
     { name: "Celebrating Hari Raya 2024", image: slide4 },
@@ -118,6 +119,7 @@ export const HomeNewEvent = () => {
     </div>
   );
 };
+
 
 // import React, { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
