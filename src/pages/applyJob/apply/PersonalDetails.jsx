@@ -222,7 +222,7 @@ export const PersonalDetails = () => {
           <select {...register("bwnIcColour")} className="input-field select-custom">
             <option value=""></option>
             <option value="Yellow">Yellow</option>
-            <option value="Pink">Red</option>
+            <option value="Red">Red</option>
             <option value="Green">Green</option>
             <option value="Purple">Purple</option>
           </select>
