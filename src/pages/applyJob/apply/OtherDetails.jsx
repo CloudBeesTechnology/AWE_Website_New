@@ -372,9 +372,7 @@ export const OtherDetails = () => {
             <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-white border border-[#dedddd] rounded-md cursor-pointer">
               <input
                 type="file"
-                {...register("uploadPp",{
-                  required: "This field is required.",
-                })}
+                {...register("uploadPp")}
                 onChange={(e) => handleFileChange(e, "uploadPp")}
                 className="hidden"
                 accept="application/pdf"
@@ -384,7 +382,6 @@ export const OtherDetails = () => {
                 <GoUpload />
               </span>
             </label>
-            {/* Display uploaded file name */}
             {uploadedFileNames.uploadPp ? (
               <p className="text-xs mt-1 text-grey">
                  {uploadedFileNames.uploadPp}

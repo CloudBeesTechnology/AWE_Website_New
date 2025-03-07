@@ -14,7 +14,6 @@ export const AddCandidates = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-
   const handleNext = () => {
     switch (activeTab) {
       case "applicantDetails":

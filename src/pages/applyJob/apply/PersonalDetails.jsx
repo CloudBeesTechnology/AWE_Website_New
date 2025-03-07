@@ -487,7 +487,7 @@ export const PersonalDetails = () => {
               type="date"
               {...register(`workExperience.${index}.to`)}
               placeholder="To"
-              className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
+              className="mt-2 p-2.5 max-sm-w-full text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded"
             />
             <input
               type="text"

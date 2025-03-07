@@ -160,9 +160,9 @@ export const CandidatesSchema = Yup.object().shape({
   }),
   supportInfo: Yup.string(),
 
-  uploadResume: Yup.string().required("Resume is required"),
-  uploadCertificate: Yup.string().required("Certificate is required"),
-  uploadPp:Yup.string().required("Passport is required")
+  uploadResume: Yup.mixed().notRequired(),
+  uploadCertificate: Yup.mixed().notRequired(),
+  uploadPp:Yup.mixed().notRequired()
   // uploadResume: Yup.mixed()
   // .required("Resume is required")
   // .test("fileType", "Only PDF format is allowed for the resume", (value) => {
