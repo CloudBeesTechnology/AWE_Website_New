@@ -159,6 +159,7 @@ export const CandidatesSchema = Yup.object().shape({
     otherwise: () => Yup.string(),
   }),
   supportInfo: Yup.string(),
+
   uploadResume: Yup.string().required("Resume is required"),
   uploadCertificate: Yup.string().required("Certificate is required"),
   uploadPp:Yup.string().required("Passport is required")

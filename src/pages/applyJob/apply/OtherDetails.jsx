@@ -333,11 +333,13 @@ export const OtherDetails = () => {
               </span>
             </label>
             {/* Display uploaded file name */}
-            {errors.uploadResume && (
-          <p className="text-[red] text-xs mt-1">
-            {errors.uploadResume.message}
-          </p>
-        )}
+            {uploadedFileNames.uploadResume ? (
+              <p className="text-xs mt-1 text-grey">
+                 {uploadedFileNames.uploadResume}
+              </p>
+            ):(<p className="text-[red] text-xs mt-1">
+              {errors?.uploadResume?.message}
+            </p>)}
           </div>
 
           {/* Certificate Upload */}
@@ -356,11 +358,13 @@ export const OtherDetails = () => {
               </span>
             </label>
             {/* Display uploaded file name */}
-            {errors.uploadCertificate && (
-          <p className="text-[red] text-xs mt-1">
-            {errors.uploadCertificate.message}
-          </p>
-        )}
+            {uploadedFileNames.uploadCertificate ? (
+              <p className="text-xs mt-1 text-grey">
+                 {uploadedFileNames.uploadCertificate}
+              </p>
+            ):(<p className="text-[red] text-xs mt-1">
+              {errors?.uploadCertificate?.message}
+            </p>)}
           </div>
 
           {/* Passport Upload */}
@@ -368,7 +372,9 @@ export const OtherDetails = () => {
             <label className="flex items-center px-3 py-2 text_size_7 p-2.5 bg-white border border-[#dedddd] rounded-md cursor-pointer">
               <input
                 type="file"
-                {...register("uploadPp")}
+                {...register("uploadPp",{
+                  required: "This field is required.",
+                })}
                 onChange={(e) => handleFileChange(e, "uploadPp")}
                 className="hidden"
                 accept="application/pdf"
@@ -379,11 +385,13 @@ export const OtherDetails = () => {
               </span>
             </label>
             {/* Display uploaded file name */}
-            {errors.uploadPp && (
-          <p className="text-[red] text-xs mt-1">
-            {errors.uploadPp.message}
-          </p>
-        )}
+            {uploadedFileNames.uploadPp ? (
+              <p className="text-xs mt-1 text-grey">
+                 {uploadedFileNames.uploadPp}
+              </p>
+            ):(<p className="text-[red] text-xs mt-1">
+              {errors?.uploadPp?.message}
+            </p>)}
           </div>
         </div>
       </div>
