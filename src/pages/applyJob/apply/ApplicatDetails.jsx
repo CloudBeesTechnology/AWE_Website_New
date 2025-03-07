@@ -223,7 +223,7 @@ const applicationUpdate = {
         </div>
 
         {/* Form Fields */}
-        <div className="grid w-full md:grid-cols-2 gap-x-12 gap-y-5 my-4 text_size_6">
+        <div className="grid  md:grid-cols-2 gap-x-12 gap-y-5 my-4 text_size_6">
           {[
             // { label: "Contract Type", name: "contractType",  type: "select", options: ["", "LPA","SAWP","BRUNEI"]  },
             // { label: "Agent", name: "agent", type: "text" },
@@ -240,7 +240,7 @@ const applicationUpdate = {
               type: "select",
               options: ["Male", "Female"],
             },
-            { label: "Date of Birth", name: "dateOfBirth", type:"date" },
+            { label: "Date of Birth", name: "dateOfBirth", type: "date" },
             { label: "Age", name: "age", type: "number", min: 20, max: 99 }, // Modified for age input
             { label: "Email ID", name: "email", type: "email" },
             {
@@ -301,7 +301,7 @@ const applicationUpdate = {
                 <input
                   {...register(field.name)}
                   type={field.type}
-                  // disabled={field.disabled}
+                  disabled={field.disabled}
                   min={field.min}
                   max={field.max}
                   className="input-field"

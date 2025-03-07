@@ -191,7 +191,7 @@ export const OtherDetails = () => {
       localStorage.removeItem("personalFormData");
       localStorage.removeItem("educationFormData");
       localStorage.removeItem("otherFormData");
-    setShowTitle("Application Details successfully");
+    setShowTitle("Application Details Successfully Submitted");
         setNotification(true);
     } catch (error) {
       console.error("Error executing GraphQL requests:", error);
