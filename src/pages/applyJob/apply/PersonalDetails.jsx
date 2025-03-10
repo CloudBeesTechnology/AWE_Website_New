@@ -45,7 +45,7 @@ export const PersonalDetails = () => {
     const savedData = () => {
       localStorage.removeItem("personalFormData"); // Clear data on refresh or tab close
       localStorage.removeItem("position");
-
+      localStorage.clear();
     };
     // Add event listener for unload
     window.addEventListener("beforeunload", savedData);

@@ -2,14 +2,11 @@ import { getCurrentUser } from "@aws-amplify/auth";
 import { uploadData, remove } from "@aws-amplify/storage";
 import axios from "axios";
 
-export const uploadDocString = async (
-  file,
-  fileType,
-  setUploadedDocs,
-  tempID,
-  index
-) => {
+// Function to upload file to S3
+export const uploadDocString = async (file, fileType, tempID) => {
   try {
+    if (!file) return null; // Skip if no file is provided
+
     // Encode file name for URL safety
     const encodedFileName = encodeURIComponent(file.name);
 
@@ -18,7 +15,7 @@ export const uploadDocString = async (
 
     // Upload the file using axios
     await axios.put(uploadUrl, file)
-      .then((res) => {
+          .then((res) => {
         console.log(res.data.message);
       })
       .catch((err) => {
@@ -26,45 +23,75 @@ export const uploadDocString = async (
       });
 
     // Generate the uploaded file URL
-    const fileUrl = `https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/public/${fileType}/${tempID}/${encodedFileName}`;
-    const uploadDate = new Date().toISOString().split("T")[0];
-
-    // If index is provided, store the uploaded file in an array
-    if (typeof index === "number") {
-      setUploadedDocs((prev) => {
-        const updatedUploads = { ...prev };
-
-        // Initialize the array if it doesn't exist
-        updatedUploads[fileType] = updatedUploads[fileType] || [];
-        updatedUploads[fileType][index] =
-          updatedUploads[fileType][index] || [];
-
-        // Check if the file already exists in the array
-        const existingUpload = updatedUploads[fileType][index].find(
-          (item) => item.upload === fileUrl
-        );
-
-        if (!existingUpload) {
-          updatedUploads[fileType][index].push({
-            upload: fileUrl,
-            date: uploadDate,
-          });
-        }
-
-        console.log(updatedUploads);
-        return updatedUploads;
-        
-      });
-    } else {
-      setUploadedDocs((prevState) => ({
-        ...prevState,
-        [fileType]: fileUrl,
-      }));
-    }
+    return `https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/public/${fileType}/${tempID}/${encodedFileName}`;
   } catch (error) {
     console.error(`Error uploading ${fileType}:`, error);
+    throw error;
   }
 };
+// export const uploadDocString = async (
+//   file,
+//   fileType,
+//   setUploadedDocs,
+//   tempID,
+//   index
+// ) => {
+//   try {
+//     // Encode file name for URL safety
+//     const encodedFileName = encodeURIComponent(file.name);
+
+//     // Construct the upload URL for API Gateway
+//     const uploadUrl = `https://gnth2qx5cf.execute-api.ap-southeast-1.amazonaws.com/fileupload/aweadininprod2024954b8-prod/public%2F${fileType}%2F${tempID}%2F${encodedFileName}`;
+
+//     // Upload the file using axios
+//     await axios.put(uploadUrl, file)
+//       .then((res) => {
+//         console.log(res.data.message);
+//       })
+//       .catch((err) => {
+//         console.error("Error uploading file:", err);
+//       });
+
+//     // Generate the uploaded file URL
+//     const fileUrl = `https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/public/${fileType}/${tempID}/${encodedFileName}`;
+//     const uploadDate = new Date().toISOString().split("T")[0];
+
+//     // If index is provided, store the uploaded file in an array
+//     if (typeof index === "number") {
+//       setUploadedDocs((prev) => {
+//         const updatedUploads = { ...prev };
+
+//         // Initialize the array if it doesn't exist
+//         updatedUploads[fileType] = updatedUploads[fileType] || [];
+//         updatedUploads[fileType][index] =
+//           updatedUploads[fileType][index] || [];
+
+//         // Check if the file already exists in the array
+//         const existingUpload = updatedUploads[fileType][index].find(
+//           (item) => item.upload === fileUrl
+//         );
+
+//         if (!existingUpload) {
+//           updatedUploads[fileType][index].push({
+//             upload: fileUrl,
+//             date: uploadDate,
+//           });
+//         }
+
+//         console.log(updatedUploads);
+//         return updatedUploads;
+        
+//       });
+//     } else {
+//       setUploadedDocs((prevState) => ({
+//         ...prevState,
+//         [fileType]: fileUrl,
+//       }));
+//     }
+//   } catch (error) {
+//     console.error(`Error uploading ${fileType}:`, error);
+//   }
+// };
 
 export const uploadDocs = async (
   file,

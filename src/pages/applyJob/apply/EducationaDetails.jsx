@@ -52,6 +52,7 @@ export const EducationDetails = () => {
     const eduData = () => {
       localStorage.removeItem("educationFormData"); // Clear data on refresh or tab close
       localStorage.removeItem("position");
+      localStorage.clear();
 
     };
     window.addEventListener("beforeunload", eduData);
@@ -277,19 +278,20 @@ export const EducationDetails = () => {
 
       {/* Brief Description of Present Duties */}
       <div>
-        <label className="text_size_6 mb-3">Brief Description of Present Duties</label>
-        <Controller
-          name="desc"
-          control={control}
-          render={({ field }) => (
-            <input
-              {...field}
-              className="resize-none input-field"
-              rows="3"
-            />
-          )}
-        />
-      </div>
+  <label className="text_size_6 mb-3">Brief Description of Present Duties</label>
+  <Controller
+    name="desc"
+    control={control}
+    defaultValue=""  // Set default value here
+    render={({ field }) => (
+      <input
+        {...field}
+        className="resize-none input-field"
+      />
+    )}
+  />
+</div>
+
 
       {/* Emergency Contact */}
       <div className="mb-4 mt-5 relative text_size_6">
