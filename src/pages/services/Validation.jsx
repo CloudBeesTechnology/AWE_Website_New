@@ -1,11 +1,6 @@
 import * as Yup from "yup";
 
 export const ApplicantSchema = Yup.object({
-  // profilePhoto: Yup.mixed()
-  //   .required("Upload Photo is mandatory")
-  //   .test("fileType", "Profile photo must be a JPG or PNG file", (value) =>
-  //     value ? /\.(jpg|jpeg|png)$/.test(value.name) : false
-  //   ),
   profilePhoto: Yup.string().required("Upload Photo is mandatory"),
   position: Yup.string().required("Position is mandatory"),
   // contractType: Yup.string().required("Contract Type mandatory"),
