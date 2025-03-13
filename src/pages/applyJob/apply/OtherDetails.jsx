@@ -206,8 +206,8 @@ export const OtherDetails = () => {
         status: storedData.status || "",
         workExperience: [storedData.workExperience] || [],
       };
-console.log(totalData,"11111111");
-console.log(totalData1,"22222222");
+// console.log(totalData,"11111111");
+// console.log(totalData1,"22222222");
 
       await Promise.all([
         client.graphql({
