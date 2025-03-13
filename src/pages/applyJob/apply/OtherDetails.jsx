@@ -206,8 +206,8 @@ export const OtherDetails = () => {
         status: storedData.status || "",
         workExperience: [storedData.workExperience] || [],
       };
-// console.log(totalData,"11111111");
-// console.log(totalData1,"22222222");
+console.log(totalData,"11111111");
+console.log(totalData1,"22222222");
 
       await Promise.all([
         client.graphql({
@@ -451,8 +451,8 @@ export const OtherDetails = () => {
       )}
 
       <div className="text-center my-10">
-        <button type="submit" className="primary_btn" disabled={isLoading}>
-          {isLoading ? "Submitting..." : "Submit"}
+        <button type="submit" className="primary_btn" >
+           Submit
         </button>
       </div>
       {notification && (

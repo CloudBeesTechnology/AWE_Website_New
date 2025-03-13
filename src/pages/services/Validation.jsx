@@ -199,8 +199,8 @@ export const PersonalSchema = Yup.object({
     eduDetails: Yup.array()
     .of(
       Yup.object().shape({
-        university: Yup.string().required("University Name is mandatory "),
-        fromDate: Yup.string().required("From Date is mandatory").test(
+        university: Yup.string().notRequired(),
+        fromDate: Yup.string().notRequired().test(
           "validDate",
           "Invalid date format or year must be a valid 4-digit year without leading zeros",
           (value) => {
@@ -233,7 +233,7 @@ export const PersonalSchema = Yup.object({
             return true;
           }
         ),
-        toDate: Yup.string().required("To Date is mandatory").test(
+        toDate: Yup.string().notRequired().test(
           "validDate",
           "Invalid date format or year must be a valid 4-digit year without leading zeros",
           (value) => {
@@ -266,7 +266,7 @@ export const PersonalSchema = Yup.object({
             return true;
           }
         ),
-        degree: Yup.string().required("Degree is mandatory"),
+        degree: Yup.string().notRequired(),
       })
     )
     .required("At least one education detail is mandatory"),
@@ -369,11 +369,11 @@ export const EducationSchema = Yup.object({
     emgDetails: Yup.array()
     .of(
       Yup.object().shape({
-        name: Yup.string().required("Name is mandatory"),
-        relationship: Yup.string().required("Relationship is mandatory"),
-        address: Yup.string().required("Address is mandatory"),
-        phoneNumber: Yup.string().required("Phone Number is mandatory"),
-        bloodGroup: Yup.string().required("Blood Group is mandatory"),
+        name: Yup.string().notRequired(),
+        relationship: Yup.string().notRequired(),
+        address: Yup.string().notRequired(),
+        phoneNumber: Yup.string().notRequired(),
+        bloodGroup: Yup.string().notRequired(),
       })
     )
     .required("At least one emergency contact is mandatory"),
@@ -400,7 +400,7 @@ export const EducationSchema = Yup.object({
 
 export const CandidatesSchema = Yup.object().shape({
   salaryExpectation: Yup.string().notRequired(),
-  noticePeriod: Yup.string().required("Notice period is required"),
+  noticePeriod: Yup.string().notRequired(),
   empStatement: Yup.string().required("Employee Statement is required"),
   perIS: Yup.string().required("Interview status is required"),
   perIDesc: Yup.string().when("perInterviewStatus", {
