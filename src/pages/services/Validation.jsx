@@ -269,7 +269,7 @@ export const PersonalSchema = Yup.object({
         degree: Yup.string().notRequired(),
       })
     )
-    .required("At least one education detail is mandatory"),
+    .notRequired(),
   workExperience: Yup.array().of(
     Yup.object().shape({
       fromDate: Yup.string().notRequired().test(
@@ -343,7 +343,7 @@ export const PersonalSchema = Yup.object({
       salary: Yup.string().notRequired(),
       reasonLeaving: Yup.string().notRequired(),
     })
-  ),
+  ).notRequired(),
 });
 export const EducationSchema = Yup.object({
   referees: Yup.array()
@@ -376,7 +376,7 @@ export const EducationSchema = Yup.object({
         bloodGroup: Yup.string().notRequired(),
       })
     )
-    .required("At least one emergency contact is mandatory"),
+    .notRequired(),
   disease: Yup.string().notRequired(),
   liquor: Yup.string().notRequired(),
   crime: Yup.string().notRequired(),
