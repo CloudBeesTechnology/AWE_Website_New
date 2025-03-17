@@ -21,6 +21,7 @@ export const OtherDetails = () => {
   const [showTitle, setShowTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+
   const [uploadedFileNames, setUploadedFileNames] = useState({
     uploadResume: null,
     uploadCertificate: null,
@@ -120,9 +121,10 @@ export const OtherDetails = () => {
   };
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
 
     try {
+      setIsLoading(true);
+
       const totalCount = await getTotalCount();
       const nextTempID = generateNextTempID(totalCount);
       setLatestTempIDData(nextTempID);
@@ -228,11 +230,14 @@ export const OtherDetails = () => {
 
       setShowTitle("Application Details Successfully Submitted");
       setNotification(true);
-      setTimeout(() => navigate("/applyJob"), 3000); // Redirect after 3 seconds
+      // isLoading(false);
+      // setTimeout(() => navigate("/applyJob"), 3000); // Redirect after 3 seconds
+    
     } catch (error) {
       console.error("Error during form submission:", error);
       setShowTitle("Error submitting application");
       setNotification(true);
+      // isLoading(false);
     } finally {
       setIsLoading(false);
     }
@@ -451,8 +456,8 @@ export const OtherDetails = () => {
       )}
 
       <div className="text-center my-10">
-        <button type="submit" className="primary_btn" >
-           Submit
+        <button type="submit" className="primary_btn" disabled={isLoading}>
+           {isLoading ? "Submiting..." : "Submit"}
         </button>
       </div>
       {notification && (
