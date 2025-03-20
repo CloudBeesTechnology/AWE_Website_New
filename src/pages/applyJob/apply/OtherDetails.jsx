@@ -6,7 +6,10 @@ import { generateClient } from "aws-amplify/api";
 import { GoUpload } from "react-icons/go";
 import { useLocation, useNavigate } from "react-router-dom";
 import { listPersonalDetails } from "../../../graphql/queries";
-import { createEducationDetails, createPersonalDetails } from "../../../graphql/mutations";
+import {
+  createEducationDetails,
+  createPersonalDetails,
+} from "../../../graphql/mutations";
 import { uploadDocString } from "../../services/uploadDocsS3/UploadDocs";
 import { SpinLogo } from "../../../utils/SpinLogo";
 
@@ -20,7 +23,6 @@ export const OtherDetails = () => {
   const [notification, setNotification] = useState(false);
   const [showTitle, setShowTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
 
   const [uploadedFileNames, setUploadedFileNames] = useState({
     uploadResume: null,
@@ -74,7 +76,7 @@ export const OtherDetails = () => {
         return prefixA.localeCompare(prefixB);
       });
 
-      return sortedData[sortedData.length - 1] || "TEMP0"; 
+      return sortedData[sortedData.length - 1] || "TEMP0";
     } catch (error) {
       console.error("Error fetching total count:", error);
       return "TEMP0"; // Fallback in case of error
@@ -87,13 +89,13 @@ export const OtherDetails = () => {
     const numberMatch = totalCount.match(/\d+/);
     const numberPart = numberMatch ? parseInt(numberMatch[0], 10) : 0;
     const nextNumber = numberPart + 1;
-  
+
     // Determine the length of the numeric part in the totalCount
     const numberLength = numberMatch ? numberMatch[0].length : 1;
-  
+
     // Pad the nextNumber with leading zeros to match the length of the numeric part
     const paddedNextNumber = String(nextNumber).padStart(numberLength, "0");
-  
+
     return `${prefix}${paddedNextNumber}`;
   };
 
@@ -121,7 +123,6 @@ export const OtherDetails = () => {
   };
 
   const onSubmit = async (data) => {
-
     try {
       setIsLoading(true);
 
@@ -132,21 +133,47 @@ export const OtherDetails = () => {
       const personName = nextTempID;
 
       // Upload files to S3
-      const uploadedResume = await uploadDocString(data.uploadResume, "uploadResume", personName);
-      const uploadedCertificate = await uploadDocString(data.uploadCertificate, "uploadCertificate", personName);
-      const uploadedPp = await uploadDocString(data.uploadPp, "uploadPp", personName);
-      const UpProfilePhoto = await uploadDocString(navigatingEducationData.profilePhoto, "profilePhoto", personName);
+      const uploadedResume = await uploadDocString(
+        data.uploadResume,
+        "uploadResume",
+        personName
+      );
+      const uploadedCertificate = await uploadDocString(
+        data.uploadCertificate,
+        "uploadCertificate",
+        personName
+      );
+      const uploadedPp = await uploadDocString(
+        data.uploadPp,
+        "uploadPp",
+        personName
+      );
+      const UpProfilePhoto = await uploadDocString(
+        navigatingEducationData.profilePhoto,
+        "profilePhoto",
+        personName
+      );
 
-      const baseURL = "https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/";
+      const baseURL =
+        "https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/";
+
+        const safeReplace = (url) => {
+          if (url && !url.includes("undefined")) {
+            return url.replace(baseURL, "");
+          }
+      
+          return null;
+        };
+
       const storedData = {
         tempID: nextTempID,
         ...navigatingEducationData,
         ...data,
-        profilePhoto: UpProfilePhoto?.replace(baseURL, ""),
+        profilePhoto: safeReplace(UpProfilePhoto?.replace(baseURL, "")),
         status: "Active",
-        uploadResume: uploadedResume?.replace(baseURL, ""),
-        uploadCertificate: uploadedCertificate?.replace(baseURL, ""),
-        uploadPp: uploadedPp?.replace(baseURL, ""),
+        uploadResume: safeReplace(uploadedResume?.replace(baseURL, "")),
+        uploadCertificate: safeReplace(uploadedCertificate?.replace(baseURL, "")),
+        uploadPp: safeReplace(uploadedPp?.replace(baseURL, "")),
       };
 
       const totalData = {
@@ -208,10 +235,11 @@ export const OtherDetails = () => {
         status: storedData.status || "",
         workExperience: [storedData.workExperience] || [],
       };
-// console.log(totalData,"11111111");
-// console.log(totalData1,"22222222");
 
-      await Promise.all([
+      // console.log(totalData, "Data 1");
+      // console.log(totalData1, "Data 2");
+
+      const response = await Promise.all([
         client.graphql({
           query: createPersonalDetails,
           variables: { input: totalData1 },
@@ -222,6 +250,8 @@ export const OtherDetails = () => {
         }),
       ]);
 
+      // console.log("Res",response);
+      
       localStorage.removeItem("position");
       localStorage.removeItem("applicantFormData");
       localStorage.removeItem("personalFormData");
@@ -232,7 +262,6 @@ export const OtherDetails = () => {
       setNotification(true);
       // isLoading(false);
       // setTimeout(() => navigate("/applyJob"), 3000); // Redirect after 3 seconds
-    
     } catch (error) {
       console.error("Error during form submission:", error);
       setShowTitle("Error submitting application");
@@ -311,9 +340,7 @@ export const OtherDetails = () => {
               )}
             />
             {errors.perIS && (
-              <p className="text-[red] text-xs mt-1">
-                {errors.perIS.message}
-              </p>
+              <p className="text-[red] text-xs mt-1">{errors.perIS.message}</p>
             )}
           </div>
 
@@ -448,7 +475,10 @@ export const OtherDetails = () => {
           className="w-5 h-5 border-medium_grey rounded"
         />
         <label htmlFor="empStatement" className="ml-2 max-sm:text-[12px]">
-          I Hereby Declare that every statement made by me in this form is true and correct and I understand and agree that any false declaration made by me may be ground for termination of my contract of employment without notice.
+          I Hereby Declare that every statement made by me in this form is true
+          and correct and I understand and agree that any false declaration made
+          by me may be ground for termination of my contract of employment
+          without notice.
         </label>
       </div>
       {errors.empStatement && (
@@ -457,7 +487,7 @@ export const OtherDetails = () => {
 
       <div className="text-center my-10">
         <button type="submit" className="primary_btn" disabled={isLoading}>
-           {isLoading ? "Submiting..." : "Submit"}
+          {isLoading ? "Submitting..." : "Submit"}
         </button>
       </div>
       {notification && (
@@ -470,7 +500,6 @@ export const OtherDetails = () => {
     </form>
   );
 };
-
 
 // import React, { useState } from "react";
 // import { useForm, Controller } from "react-hook-form";
@@ -503,7 +532,7 @@ export const OtherDetails = () => {
 //     uploadCertificate: null,
 //     uploadPp: null,
 //   });
-  
+
 //   const [uploadedDocs, setUploadedDocs] = useState({
 //     uploadResume: null,
 //     uploadCertificate: null,
@@ -532,7 +561,6 @@ export const OtherDetails = () => {
 //       perIDesc: "",
 //     },
 //   });
-
 
 //   const handleFileChange = async (e, fieldName) => {
 //     const selectedFile = e.target.files[0];
@@ -701,7 +729,7 @@ export const OtherDetails = () => {
 //     setIsLoading(false);
 //   }
 // };
- 
+
 //   return (
 //     <form onSubmit={handleSubmit(onSubmit)} className="pt-5">
 //       {/* Salary Expected */}
@@ -730,7 +758,7 @@ export const OtherDetails = () => {
 //           </p>
 //         )}
 //       </div>
-     
+
 //       {/* Interviewed Before */}
 // <div className="mb-4">
 //   <label className="text_size_6">
