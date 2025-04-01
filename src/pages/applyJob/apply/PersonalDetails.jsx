@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import { generateClient } from "aws-amplify/api";
 import { FaRegMinusSquare } from "react-icons/fa";
 import { CiSquarePlus } from "react-icons/ci";
-
+import { ChevronDown } from "lucide-react";
+import { FaRegWindowClose } from "react-icons/fa";
 // import { createPersona } from "../../graphql/mutations";
 const client = generateClient();
 
@@ -36,6 +37,7 @@ export const PersonalDetails = () => {
       familyDetails: [{}],
       eduDetails: [{ university: "", fromDate: "", toDate: "", degree: "" }],
       workExperience: [{}], 
+      lang:[],
       ...JSON.parse(localStorage.getItem("personalFormData")) || {},
     },
 
@@ -96,6 +98,16 @@ export const PersonalDetails = () => {
   };
 
   const navigate = useNavigate();
+  const languageOptions = [
+    { value: "English", label: "English" },
+    { value: "Mandarin", label: "Mandarin" },
+    { value: "Malay", label: "Malay" },
+    // { value: "Other", label: "Other" },
+  ];
+  const [isOpen, setIsOpen] = useState(false); // For dropdown visibility
+  const [showOtherLangInput, setShowOtherLangInput] = useState(false);
+  const [otherLanguage, setOtherLanguage] = useState("");
+
 
   // const { handleNext } = useOutletContext();
   const onSubmit = (data) => {
@@ -191,20 +203,105 @@ export const PersonalDetails = () => {
             className="input-field"
           />
         </div>
-        <div>
-          <label className="block mb-1">Language Proficiency</label>
-          <select {...register("lang")} className="input-field select-custom">
-            <option value=""></option>
-            <option value="English">English</option>
-            <option value="Mandarin">Mandarin</option>
-            <option value="Malay">Malay</option>
-            <option value="Tamil">Tamil</option>
-            <option value="Other">Other</option>
-          </select>
-          {errors.lang && (
-            <p className="text-[red] text-[12px]">{errors.lang.message}</p>
-          )}
+        <div className="relative">
+  <label className="block mb-1">Language Proficiency</label>
+
+<Controller
+  name="lang"
+  control={control}
+  render={({ field: { onChange, value } }) => {
+    const normalizedValue = Array.isArray(value) ? value : [];
+
+    // Check if "Other" is selected
+    const isOtherSelected = normalizedValue.includes("Other");
+
+    return (
+      <>
+        {/* Select Dropdown */}
+        <div
+          className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full flex items-center cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <input
+            type="text"
+            className="w-full outline-none cursor-pointer bg-transparent"
+            value={normalizedValue.join(", ")}
+            readOnly
+            placeholder="Select options"
+          />
+          <ChevronDown className="w-5 h-5 text-grey" />
         </div>
+
+        {/* Dropdown Options */}
+        {isOpen && (
+          <div className="absolute left-0 w-full mt-2 bg-white border-[#dedddd] border rounded-lg shadow-lg z-10">
+            <div className=" absolute right-5 top-5 cursor-pointer" onClick={() => setIsOpen(false)}>
+<FaRegWindowClose/>
+            </div>
+            <ul className="p-2">
+              {languageOptions.map((option) => (
+                <li key={option.value} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                  <input
+                    type="checkbox"
+                    id={`lang-${option.value}`}
+                    checked={normalizedValue.includes(option.value)}
+                    onChange={() => {
+                      let newValue = normalizedValue.includes(option.value)
+                        ? normalizedValue.filter(item => item !== option.value)
+                        : [...normalizedValue, option.value];
+
+                      onChange(newValue); // Update form field
+                    }}
+                    className="w-4 h-4"
+                  />
+                  <label htmlFor={`lang-${option.value}`} className="cursor-pointer">
+                    {option.label}
+                  </label>
+                </li>
+              ))}
+              {/* Other Language Option */}
+              <li className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+                <input
+                  type="checkbox"
+                  id="lang-other"
+                  checked={isOtherSelected}
+                  onChange={() => {
+                    if (isOtherSelected) {
+                      onChange(normalizedValue.filter(item => item !== "Other"));
+                      setOtherLanguage(""); // Reset input field
+                    } else {
+                      onChange([...normalizedValue, "Other"]);
+                    }
+                  }}
+                  className="w-4 h-4"
+                />
+                <label htmlFor="lang-other" className="cursor-pointer">
+                  Other
+                </label>
+              </li>
+            </ul>
+          </div>
+        )}
+
+        {/* Show Input Field for Other Language */}
+        {isOtherSelected && (
+          <input
+            {...register("otherLang")}
+            type="text"
+            className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full"
+            placeholder="Specify other language"
+            value={otherLanguage}
+            onChange={(e) => setOtherLanguage(e.target.value)}
+          />
+        )}
+      </>
+    );
+  }}
+/>
+
+{errors.lang && <p className="text-[red] text-[12px]">{errors.lang.message}</p>}
+{errors.otherLang && <p className="text-[red] text-[12px]">{errors.otherLang.message}</p>}
+</div>
       </div>
 
       {/* I/C No and I/C Colour */}
