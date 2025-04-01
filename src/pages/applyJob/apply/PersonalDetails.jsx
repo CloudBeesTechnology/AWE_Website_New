@@ -219,7 +219,7 @@ export const PersonalDetails = () => {
       <>
         {/* Select Dropdown */}
         <div
-          className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border border-[#dedddd] text-dark_grey outline-none rounded w-full flex items-center cursor-pointer"
+          className="mt-2 p-2.5 text_size_9 bg-lite_skyBlue border bg-white border-[#dedddd] text-dark_grey outline-none rounded w-full flex items-center cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           <input
