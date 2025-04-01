@@ -216,6 +216,7 @@ export const OtherDetails = () => {
         familyDetails: [storedData.familyDetails] || [],
         gender: storedData.gender || "",
         lang: storedData.lang || "",
+        otherLang: storedData.otherLang || "",
         marital: storedData.marital || "",
         name: storedData.name || "",
         nationality: storedData.nationality || "",
