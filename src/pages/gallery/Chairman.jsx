@@ -14,7 +14,7 @@ export const Chairman = ({ images = [], onClick }) => {
             <img
               src={imageSrc} 
               alt="Chairman 90th Birthday"
-              className="cursor-pointer shadow-lg object-cover w-full h-[220px]" // Adjust height and add margin
+              className="cursor-pointer shadow-lg object-cover w-full h-auto" // Adjust height and add margin
             />
           )}
           <div className='text-light_yellow font-bold bg-dark_gray w-full text-center h-[85px] flex items-center justify-center'>
