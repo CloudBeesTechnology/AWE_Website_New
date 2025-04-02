@@ -63,6 +63,8 @@ export const uploadDocString = async (file, fileType, tempID) => {
     throw error;
   }
 };
+
+
 // export const uploadDocString = async (
 //   file,
 //   fileType,
