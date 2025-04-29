@@ -507,7 +507,13 @@ export const OtherDetails = () => {
           {isLoading ? "Submitting..." : "Submit"}
         </button>
       </div>
- 
+      {notification && (
+        <SpinLogo
+          text={showTitle}
+          notification={notification}
+          path="/applyJob"
+        />
+      )}
     </form>
   );
 };
