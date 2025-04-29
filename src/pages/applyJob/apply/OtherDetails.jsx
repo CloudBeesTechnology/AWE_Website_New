@@ -157,13 +157,20 @@ export const OtherDetails = () => {
       const baseURL =
         "https://aweadininprod2024954b8-prod.s3.ap-southeast-1.amazonaws.com/";
 
-        const safeReplace = (url) => {
-          if (url && !url.includes("undefined")) {
-            return url.replace(baseURL, "");
-          }
-      
-          return null;
-        };
+      const safeReplace = (url) => {
+        if (url && !url.includes("undefined")) {
+          return url.replace(baseURL, "");
+        }
+
+        return null;
+      };
+
+      const currentDate = new Date().toISOString().split("T")[0];
+
+      const wrapUpload = (filePath) => {
+        const safePath = safeReplace(filePath);
+        return safePath ? [{ upload: safePath, date: currentDate }] : null;
+      };
 
       const storedData = {
         tempID: nextTempID,
@@ -171,9 +178,18 @@ export const OtherDetails = () => {
         ...data,
         profilePhoto: safeReplace(UpProfilePhoto?.replace(baseURL, "")),
         status: "Active",
-        uploadResume: safeReplace(uploadedResume?.replace(baseURL, "")),
-        uploadCertificate: safeReplace(uploadedCertificate?.replace(baseURL, "")),
-        uploadPp: safeReplace(uploadedPp?.replace(baseURL, "")),
+        // uploadResume: safeReplace(uploadedResume?.replace(baseURL, "")),
+        // uploadCertificate: safeReplace(
+        //   uploadedCertificate?.replace(baseURL, "")
+        // ),
+        // uploadPp: safeReplace(uploadedPp?.replace(baseURL, "")),
+        uploadResume: uploadedResume
+          ? JSON.stringify(wrapUpload(uploadedResume))
+          : null,
+        uploadCertificate: uploadedCertificate
+          ? JSON.stringify(wrapUpload(uploadedCertificate))
+          : null,
+        uploadPp: uploadedPp ? JSON.stringify(wrapUpload(uploadedPp)) : null,
       };
 
       const totalData = {
@@ -194,9 +210,9 @@ export const OtherDetails = () => {
         relatives: [storedData.relatives] || [],
         salaryExpectation: storedData.salaryExpectation || "",
         supportInfo: storedData.supportInfo || "",
-        uploadResume: storedData.uploadResume || "",
-        uploadCertificate: storedData.uploadCertificate || "",
-        uploadPp: storedData.uploadPp || "",
+        uploadResume: storedData.uploadResume,
+        uploadCertificate: storedData.uploadCertificate,
+        uploadPp: storedData.uploadPp,
       };
 
       const totalData1 = {
@@ -252,7 +268,7 @@ export const OtherDetails = () => {
       ]);
 
       // console.log("Res",response);
-      
+
       localStorage.removeItem("position");
       localStorage.removeItem("applicantFormData");
       localStorage.removeItem("personalFormData");
@@ -491,13 +507,7 @@ export const OtherDetails = () => {
           {isLoading ? "Submitting..." : "Submit"}
         </button>
       </div>
-      {notification && (
-        <SpinLogo
-          text={showTitle}
-          notification={notification}
-          path="/applyJob"
-        />
-      )}
+ 
     </form>
   );
 };
