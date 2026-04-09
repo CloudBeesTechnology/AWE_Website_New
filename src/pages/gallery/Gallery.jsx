@@ -10,8 +10,9 @@ import { LtiMillion } from "./LtiMillion";
 import { Chairman } from "./Chairman";
 import { Safetyday } from "./SafetyDay";
 import { Blood } from "./Blood";
+import { SafetyDay2026, Safetyday2026 } from "./SafetyDay2026";
 import { useNavigate } from 'react-router-dom';
-import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, SafetyDaySlides, BldSlides, demo } from "./ImageContainer";
+import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, SafetyDaySlides, BldSlides, SafetyDay2026Slides, demo, StDaySlides } from "./ImageContainer";
 import { PiBehanceLogoDuotone } from "react-icons/pi";
 
 export const Gallery = () => {
@@ -48,6 +49,15 @@ export const Gallery = () => {
           ))
         ) : (
           <>
+            <div className="p-2">
+              <SafetyDay2026
+                images={StDaySlides}
+                onClick={() => navigateToImageGrid("/images/SafetyDay2026")}
+                className="h-64"
+                loading={loading} 
+              />
+            </div>
+
             <div className="p-2">
               <Blood
                 images={BldSlides}
