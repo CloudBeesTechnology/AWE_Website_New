@@ -21,7 +21,7 @@ import { PersonalDetails } from './pages/applyJob/apply/PersonalDetails';
 import { useEffect } from 'react';
 import { ImageGrid } from './pages/gallery/ImageGrid';
 import Achievements from './Component/Organization/Achievements';
-import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, SafetyDaySlides, BldSlides } from "./pages/gallery/ImageContainer"; // Ensure the correct path
+import { workersSlides, chairmanSlides, hariRayaSlides, hisMajesty77Slides, hlpSlides, hisMajesty78Slides, SafetyDaySlides, BldSlides, StDaySlides } from "./pages/gallery/ImageContainer"; // Ensure the correct path
 import { CheckingUpload } from './Component/CheckingUpload';
 import DataStoredContext from './utils/details/DataStoredContext';
 
@@ -86,6 +86,7 @@ export const App = () => {
         <Route path="/images/his-majesty-78" element={<ImageGrid images={hisMajesty78Slides} title="HIS MAJESTY 78TH BIRTHDAY 2024" color="#F36B21" />} />
         <Route path="/images/SafetyDay" element={<ImageGrid images={SafetyDaySlides} title="CELEBRATION OF SAFETY DAY" color="#F36B21" />} />
         <Route path="/images/Blood" element={<ImageGrid images={BldSlides} title="Blood Donation" color="#53FB5E" />} />
+        <Route path="/images/SafetyDay2026" element={<ImageGrid images={StDaySlides} title="CELEBRATION OF SAFETY DAY 2026" color="#F36B21" />} />
         <Route path="/applyJob" element={<CareerSection/>} />
         <Route path="/addCandidates" element={<AddCandidates/>}>
           <Route index element={<ApplicantDetails />} />
