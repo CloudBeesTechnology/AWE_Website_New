@@ -311,7 +311,72 @@ export const BldSlides = [
   slide129,
   slide130,
   slide131,
-  slide132,
+  slide132,  
+]
+
+// SafetyDay2026 Slides
+const slide133 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD1.jpg"
+const slide134 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD2.jpg"
+const slide135 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD3.jpg"
+const slide136 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD4.jpg"
+const slide137 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD5.jpg"
+const slide138 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD6.jpg"
+const slide139 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD7.jpg"
+const slide140 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD8.jpg"
+const slide141 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD9.jpg"
+const slide142 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD10.jpg"
+const slide143 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD11.jpg"
+const slide144 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD12.jpg"
+const slide145 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD13.jpg"
+const slide146 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD14.jpg"
+const slide147 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD15.jpg"
+const slide148 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD16.jpg"
+const slide149 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD17.jpg"
+const slide150 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD18.jpg"
+const slide151 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD19.jpg"
+const slide152 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD20.jpg"
+const slide153 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD21.jpg"
+const slide154 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD22.jpg"
+const slide155 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD23.jpg"
+const slide156 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD24.jpg"
+const slide157 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD25.jpg"
+const slide158 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD26.jpg"
+const slide159 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD27.jpg"
+const slide160 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD28.jpg"
+const slide161 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD29.jpg"
+const slide162 = "https://commonfiles.s3.ap-southeast-1.amazonaws.com/Gallery/SafetyDay+2026/SFD30.png"
+
+export const StDaySlides = [
+  slide133,
+  slide134,
+  slide135,
+  slide136,
+  slide137,
+  slide138,
+  slide139,
+  slide140,
+  slide141,
+  slide142,
+  slide143,
+  slide144,
+  slide145,
+  slide146,
+  slide147,
+  slide148,
+  slide149,
+  slide150,
+  slide151,
+  slide152,
+  slide153,
+  slide154,
+  slide155,
+  slide156,
+  slide157,
+  slide158,
+  slide159,
+  slide160,
+  slide161,
+  slide162,
   
 ]
 
