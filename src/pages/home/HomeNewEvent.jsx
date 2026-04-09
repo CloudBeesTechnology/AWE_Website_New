@@ -3,19 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { TiTickOutline } from "react-icons/ti";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import slide1 from "../../assets/home/Events/SafetySpotlight.jpeg";
-import slide2 from "../../assets/home/Events/SafetySpotlight2.jpg";
-import slide3 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.jpeg";
-import slide4 from "../../assets/home/Events/Celebrating Hari Raya 2024.jpg";
-import slide5 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.JPG";
+import slide1 from "../../assets/home/Events/30 Million Safe Man-Hours Without Lost Time Injury (LTI).jpg";
+import slide2 from "../../assets/home/Events/SafetySpotlight.jpeg";
+import slide3 from "../../assets/home/Events/SafetySpotlight2.jpg";
+import slide4 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.jpeg";
+import slide5 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.jpg";
 
 export const HomeNewEvent = () => {
   const events = [
     // , link: "/images/lti"
-    { name: "Safety Spotlight Bulletin #1", image: slide1 },
-    { name: "Safety Spotlight Bulletin #2", image: slide2 },
-    { name: "25 Million Safe Man-Hours Without Lost Time Injury (LTI)", image: slide3 },
-    { name: "Celebrating Hari Raya 2024", image: slide4 },
+    { name: "30 Million Safe Man-Hours Without Lost Time Injury (LTI)", image: slide1 },
+    { name: "Safety Spotlight Bulletin #1", image: slide2 },
+    { name: "Safety Spotlight Bulletin #2", image: slide3 },
+    { name: "25 Million Safe Man-Hours Without Lost Time Injury (LTI)", image: slide4 },
     { name: "Happy 78th Birthday to His Majesty Sultan of Brunei", image: slide5 },
   ];
 
