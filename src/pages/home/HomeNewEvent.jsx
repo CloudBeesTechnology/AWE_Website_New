@@ -7,7 +7,7 @@ import slide1 from "../../assets/home/Events/30 Million Safe Man-Hours Without L
 import slide2 from "../../assets/home/Events/SafetySpotlight.jpeg";
 import slide3 from "../../assets/home/Events/SafetySpotlight2.jpg";
 import slide4 from "../../assets/home/Events/25 Million Safe Man-Hours Without Lost Time Injury (LTI) Copy copy.jpeg";
-import slide5 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.jpg";
+import slide5 from "../../assets/home/Events/Happy 78th Birthday to His Majesty Sultan of Brunei.JPG";
 
 export const HomeNewEvent = () => {
   const events = [
