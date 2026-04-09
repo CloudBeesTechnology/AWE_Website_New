@@ -8,7 +8,7 @@ import { HisMajesty78 } from "./HisMajesty78";
 import { HLP } from "./HLP";
 import { LtiMillion } from "./LtiMillion";
 import { Chairman } from "./Chairman";
-import { Safetyday } from "./SafetyDay";
+import { SafetyDay } from "./SafetyDay";
 import { Blood } from "./Blood";
 import { Safetyday2026 } from "./SafetyDay2026";
 import { useNavigate } from 'react-router-dom';
